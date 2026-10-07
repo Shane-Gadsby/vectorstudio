@@ -11,9 +11,10 @@ VectorStudio is a clean-room, open-source, Rust-native vector illustration app w
 Formerly **DrawCraft** (renamed 2026-10-01): old `.drawcraft` files and `"format": "drawcraft"` headers still open (`vectorcraft_format::LEGACY_EXTENSION`), and preferences migrate from the old config folder. Keep those paths working; use the new name everywhere else.
 
 ## Start every session here
-1. Read the [honest assessment in `ROADMAP.md`](ROADMAP.md#honest-assessment-2026-10-05): where we stand by dimension, **where we're lacking** (the prioritized gap list) and **where we're going**. Unless the user gives you a task, pick work from that list.
-2. Read `plan/STATUS.md` (local session notes, may lag the ROADMAP), then the task in `plan/execution-plan.md` §3 and the relevant `plan/architecture.md` section. Behaviour reference: committed in [`docs/parity/`](docs/parity) (the matrix, the shortcut and menu baselines, the feature inventory, the Image Trace spec) and in [`docs/ai-format/`](docs/ai-format); upstream's own notes under `plan/illustrator/*.md` are local-only and may be absent.
-3. Follow the autonomous operation protocol (`plan/execution-plan.md` §7): orient → plan → implement + test → verify → record → commit. Don't stop to ask unless §7 lists the decision as the user's.
+1. **Read [`docs/HANDOFF.md`](docs/HANDOFF.md)**: where the work is up to, the next tasks in order, what is blocked on the licensed VM, and which numbers to trust. Unless the user gives you a task, pick from its §3.
+2. Then [`ROADMAP.md`](ROADMAP.md#the-parity-programme-vectorstudio): the parity programme, the honest assessment by dimension and the prioritized gap list. Its score tables are upstream's self-assessment — `cargo xtask parity` is the measured figure and wins.
+3. Read `plan/STATUS.md` (local session notes, may lag the ROADMAP), then the task in `plan/execution-plan.md` §3 and the relevant `plan/architecture.md` section. Behaviour reference: committed in [`docs/parity/`](docs/parity) (the matrix, the shortcut and menu baselines, the feature inventory, the Image Trace spec) and in [`docs/ai-format/`](docs/ai-format); upstream's own notes under `plan/illustrator/*.md` are local-only and may be absent.
+4. Follow the autonomous operation protocol (`plan/execution-plan.md` §7): orient → plan → implement + test → verify → record → commit. Don't stop to ask unless §7 lists the decision as the user's.
 
 `plan/` is gitignored (local only).
 
@@ -65,4 +66,4 @@ Formerly **DrawCraft** (renamed 2026-10-01): old `.drawcraft` files and `"format
 `ROADMAP.md` (committed) is the shared picture of where VectorStudio stands. It holds status, the honest assessment (by dimension, the gap list, the direction), milestones, the parity table and time-to-parity estimates.
 - When a task lands, update it in the same PR: the milestone row, the parity-table row (score, missing items, hours), "Shipped so far", and the gap list if the gap closed or shrank.
 - Grade by behaviour against `docs/parity/matrix.csv`, not by whether a menu item exists. Prefer `cargo xtask parity` coverage to a self-assessed score; where you must estimate, err low.
-- Keep the README's Status section in step with the ROADMAP headline.
+- Keep the README's Status section in step with the ROADMAP headline, and update `docs/HANDOFF.md` when the state of play changes (what landed, what is next, what is blocked).
