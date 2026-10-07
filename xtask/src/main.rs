@@ -9,6 +9,7 @@ mod bundle;
 mod ico;
 mod layers;
 mod parity;
+mod parity_audit;
 mod stats;
 mod version;
 
@@ -25,6 +26,9 @@ commands:
   parity [--strict]
                   validate docs/parity/matrix.csv and report 1:1 reference-app coverage
                   (--strict: a `done` row must also cite a test)
+  parity --audit [--write]
+                  re-baseline the matrix against the app's real menu surface
+                  (--write: apply the conclusions that need no judgement)
   wasm            cargo check --target wasm32-unknown-unknown for the wasm-safe crates
   ci              fmt --check, clippy -D warnings, test, assets, brands, parity, layers, wasm (stops at first failure)
   corpus [--download]
@@ -42,6 +46,7 @@ fn main() -> ExitCode {
         Some("assets") => assets::run(&root()),
         Some("brands") => brands::run(&root()),
         Some("layers") => cmd_layers(),
+        Some("parity") if rest.contains(&"--audit") => parity_audit::run(&root(), rest.contains(&"--write")),
         Some("parity") => parity::run(&root(), rest.contains(&"--strict")),
         Some("wasm") => cmd_wasm(),
         Some("ci") => cmd_ci(),

@@ -55,11 +55,51 @@ pub struct Row {
     pub cells: Vec<String>,
 }
 
+fn column(col: &str) -> usize {
+    COLUMNS.iter().position(|c| *c == col).expect("known column")
+}
+
 impl Row {
-    fn get(&self, col: &str) -> &str {
-        let i = COLUMNS.iter().position(|c| *c == col).expect("known column");
-        self.cells.get(i).map_or("", String::as_str)
+    pub fn get(&self, col: &str) -> &str {
+        self.cells.get(column(col)).map_or("", String::as_str)
     }
+
+    pub fn set(&mut self, col: &str, value: &str) {
+        let i = column(col);
+        if self.cells.len() <= i {
+            self.cells.resize(i + 1, String::new());
+        }
+        self.cells[i] = value.to_owned();
+    }
+}
+
+/// A row with the required columns filled in, for tests.
+#[cfg(test)]
+pub fn test_row(overrides: &[(&str, &str)]) -> Row {
+    let mut row = Row { cells: vec![String::new(); COLUMNS.len()] };
+    for (col, v) in [("id", "X-0001"), ("scope", "in"), ("status", "planned"), ("confidence", "plan-2020")] {
+        row.set(col, v);
+    }
+    for (col, v) in overrides {
+        row.set(col, v);
+    }
+    row
+}
+
+/// One CSV field, quoted only when it has to be.
+fn quote(field: &str) -> String {
+    if field.contains([',', '"', '\n', '\r']) { format!("\"{}\"", field.replace('"', "\"\"")) } else { field.to_owned() }
+}
+
+/// `header` and `rows` back as CSV text, in the shape [`parse`] reads.
+pub fn write_csv(header: &[String], rows: &[Row]) -> String {
+    let mut out = String::new();
+    for record in std::iter::once(header).chain(rows.iter().map(|r| r.cells.as_slice())) {
+        let line: Vec<String> = record.iter().map(|f| quote(f)).collect();
+        out.push_str(&line.join(","));
+        out.push('\n');
+    }
+    out
 }
 
 /// Split one CSV line into fields, honouring `"` quoting and `""` escapes.
@@ -211,20 +251,7 @@ pub fn run(root: &Path, strict: bool) -> Result<(), String> {
 mod tests {
     use super::*;
 
-    fn row(overrides: &[(&str, &str)]) -> Row {
-        let mut cells = vec![String::new(); COLUMNS.len()];
-        let set = |cells: &mut Vec<String>, col: &str, v: &str| {
-            cells[COLUMNS.iter().position(|c| *c == col).expect("known column")] = v.to_owned();
-        };
-        set(&mut cells, "id", "X-0001");
-        set(&mut cells, "scope", "in");
-        set(&mut cells, "status", "planned");
-        set(&mut cells, "confidence", "plan-2020");
-        for (col, v) in overrides {
-            set(&mut cells, col, v);
-        }
-        Row { cells }
-    }
+    use super::test_row as row;
 
     #[test]
     fn splits_quoted_fields_with_commas_and_escapes() {
@@ -287,6 +314,25 @@ mod tests {
         assert_eq!(problems(&[row(cited)], false), Vec::<String>::new());
         let bad = problems(&[row(cited)], true);
         assert!(bad.iter().any(|b| b.contains("test_id is empty")), "{bad:?}");
+    }
+
+    #[test]
+    fn write_csv_round_trips_quotes_commas_and_newlines() {
+        let header: Vec<String> = COLUMNS.iter().map(|c| (*c).to_owned()).collect();
+        let r = row(&[("behaviour", "a, b \"quoted\"\nand a second line"), ("element", "plain")]);
+        let text = write_csv(&header, std::slice::from_ref(&r));
+        let (h, back) = parse(&text).expect("round-trips");
+        assert_eq!(h, header);
+        assert_eq!(back.len(), 1);
+        assert_eq!(back[0].get("behaviour"), "a, b \"quoted\"\nand a second line");
+        assert_eq!(back[0].get("element"), "plain");
+    }
+
+    #[test]
+    fn write_csv_leaves_the_real_matrix_byte_identical() {
+        let text = std::fs::read_to_string(crate::root().join("docs/parity/matrix.csv")).expect("readable");
+        let (header, rows) = parse(&text).expect("parses");
+        assert_eq!(write_csv(&header, &rows), text, "re-writing the matrix unchanged must not reformat it");
     }
 
     #[test]

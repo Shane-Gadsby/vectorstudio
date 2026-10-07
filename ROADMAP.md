@@ -8,6 +8,13 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 
 ## Where we are
 
+> **Parity re-baseline in progress.** The scores below are upstream's self-assessment, inherited at
+> the fork. `docs/parity/matrix.csv` is replacing them with a row-level audit against a licensed
+> Illustrator 30.1: as of 2026-10-08, **334 of 908 in-scope menu rows** are confirmed `partial`
+> (the command exists and is wired to the right menu path), 90 need no code, 20 are stubs and 495
+> have no match. Panels, tools, effects, dialogs and preferences are not audited yet. Run
+> `cargo xtask parity` for the current figure, and prefer it to any number in this table.
+
 | Dimension | Status |
 |---|---|
 | Infrastructure (engine, command registry, history, render, formats, MCP, web, packaging, tests) | **~90%** |
@@ -33,7 +40,7 @@ since 2026-10-01.
 
 | Dimension | Estimate | Evidence and what's missing |
 |---|---|---|
-| **Breadth:** menus, tools and panels exist | ~90% | 15 menu items still stubbed; every tool implemented except Touch Type; 51 panel modules |
+| **Breadth:** menus, tools and panels exist | ~90% | 32 menu entries still stubbed (measured by `cargo xtask parity --audit`, 2026-10-08; the earlier figure of 15 undercounted); every tool implemented except Touch Type; 51 panel modules |
 | **Depth:** each feature behaves like Illustrator | ~69–75% | Strong: paint, appearance and colour (M3), Pathfinder and booleans, selection, drawing, files (M4). Weak: advanced type (~45%), brushes and symbols (in progress), raster effects (~20%) |
 | **Large missing subsystems** | 0–20% | 3D & Materials (0%), Photoshop-style raster effects and the Effect Gallery (~1 of ~56 filters), SVG Filters, CJK composition (vertical type with kinsoku, tate-chu-yoko and the font's vertical metrics; ruby, mojikumi and proportional vertical metrics open), Variables (data merge), scripting |
 | **Interaction fidelity:** modifiers, cursors, small behaviours | ~30–40% | The dedicated pass hasn't started, and there has been no side-by-side session with Illustrator yet. A power user notices this first |
@@ -217,7 +224,8 @@ With 4–6 agents working on disjoint crates (as the layering allows) the wall-c
 (integration, review and shared files such as `menus.rs` serialize some work): **~55–95 h** to feature parity,
 **~80–145 h** to full parity.
 
-_Inventories (2026-10-07):_ 15 menu items still stubbed (`todo(…)` in `crates/ui-egui/src/menus.rs`); every tool
+_Inventories (2026-10-08):_ 32 menu entries still stubbed (`Item::Todo` in `crates/ui-egui/src/menus.rs`, counted by
+`cargo xtask parity --audit`; the 2026-10-07 figure of 15 undercounted); 911 menu entries wired to a command; every tool
 implemented except Touch Type; 51 panel modules; Illustrator-style live
 effects ~44/54, Photoshop-style raster effects ~1/56, 3D 0/5; ~2,840 tests; ~221k lines of Rust.
 

@@ -20,6 +20,7 @@ licensed Illustrator 30.1**, not inferred from documentation or memory.
 | [`shortcuts-default.csv`](shortcuts-default.csv) | The published default-shortcut table, for cross-checking the above. |
 | [`menu-commands-30.1.csv`](menu-commands-30.1.csv) | Every menu command and its path, probed from a licensed 30.1. |
 | [`notes-30.1.md`](notes-30.1.md) | Observations that don't fit a row yet. |
+| [`open-questions.md`](open-questions.md) | What the re-baseline proved is wrong somewhere, awaiting a licensed-VM probe. |
 | [`verification-and-sources.md`](verification-and-sources.md) | How claims get verified, the open risks, and the source list. |
 
 ## The matrix
@@ -80,12 +81,62 @@ wrote the features. The matrix is how we replace that with something auditable.
 
 ### Re-baselining against existing code
 
-The matrix currently reports `done 0/1826`, because it was written against an empty prototype while
-this codebase already implements a large part of Illustrator. Re-baselining — walking the matrix
-area by area, confirming what the engine already does, and recording `status` and `impl_ref` — is
-the **next substantial task**, and it is what converts upstream's self-assessment into a row-level
-audit. Do it by reading and running the code, never by assuming a feature is complete because a
-menu item exists.
+The matrix was written against an empty prototype, while this codebase already implements a large
+part of Illustrator, so every row started `planned`. Re-baselining replaces that with evidence.
+
+```sh
+cargo xtask parity --audit            # report what the app's real surface says about each row
+cargo xtask parity --audit --write    # apply the conclusions that need no judgement
+```
+
+The audit joins the matrix to the app's **menu tree**, dumped by
+`cargo run -p vectorcraft-ui-egui --example dump-surface`. The menu tree is the honest source for
+"does this exist": it carries the real paths and labels, and marks placed-but-unimplemented entries
+`Item::Todo`. The engine registry alone is not enough — commands the UI owns, like `file.open`,
+which needs a file picker, carry no menu path of their own.
+
+| Evidence | Conclusion |
+|---|---|
+| the row's menu path is a wired command | `partial`, with `impl_ref` = the command id and where it is defined |
+| the row's menu path is an `Item::Todo` | stays `planned` — it is in the menu but does nothing |
+| the row names a submenu that real items sit under, and specifies no field of its own | `n/a` |
+| nothing matches the path | left alone |
+
+`impl_ref` points at the definition, not a mention. A command id appears in many files — the menu
+wiring, dialogs, the control channel — so the audit looks in `crates/engine/src/cmd/` first (where
+rustfmt leaves the id as a lone literal in its `cmd!` invocation), then `UI_COMMANDS` in
+`menus.rs`, then the rest of the frontend.
+
+**The audit can never produce `done`, by design.** `partial` means *the command exists and is wired
+into the right menu path* — nothing more. It says nothing about whether the dialog's fields,
+defaults, ranges and units match 30.1, which is what 1:1 actually requires. Promoting a row to
+`done` is hand work: verify the field against the reference app, write a test, cite both.
+
+As of the first pass (2026-10-08): **334 of 908 in-scope menu rows are `partial`**, 90 rows are
+`n/a`, 20 are in the menus as stubs, and 495 found no match. The 495 are the honest backlog, and
+they are concentrated where upstream says they are — Effect (86), View (49), Type (50) — plus 175
+rows in `Menus/(path unknown)` whose source gave no menu path, which need their paths researched
+before they can be joined at all.
+
+Rows outside `element_type: menu` — panels (372), features (174), tools (136), effects (117),
+dialogs (61), preferences (39), presets (29), formats (21) — are **not yet audited**. They need
+their own joins: the panel registry, the tool list, the effect registry, the preference keys.
+
+### What the audit also checks
+
+Every row with `field: Shortcut` was verified against a licensed 30.1, so the audit compares it
+with the keys the app actually binds, folding `Cmd`→`Ctrl` and `Opt`→`Alt` and ignoring modifier
+order. On the first run: **77 agree, 2 disagree, 17 are unbound in the app.**
+
+A disagreement does **not** mean the app is wrong. It means one of the two is, and the first run
+showed that it can be either: both disagreements look like mis-extracted matrix rows rather than
+app defects. The audit also checks the matrix against itself — two rows cannot claim the same
+binding — which found 39 duplicated row pairs and no inference needed to prove it.
+
+Everything the first run raised is written up in [`open-questions.md`](open-questions.md), with
+what to probe on the VM. **Resolve those on the licensed install, never by inference from another
+implementation.** A wrong `verified` row is worse than an unverified one, because it will be
+implemented faithfully.
 
 ## Reference fixtures
 
