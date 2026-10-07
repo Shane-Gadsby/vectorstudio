@@ -8,6 +8,7 @@ mod brands;
 mod bundle;
 mod ico;
 mod layers;
+mod parity;
 mod stats;
 mod version;
 
@@ -21,8 +22,11 @@ commands:
   assets          check that every icon/image/font/asset is attributed in ASSETS.md
   brands          check that user-visible text (labels, params docs, MCP, docs, packaging) names no other vendor's products
   layers          enforce the crate dependency layering (plan/architecture.md §3)
+  parity [--strict]
+                  validate docs/parity/matrix.csv and report 1:1 reference-app coverage
+                  (--strict: a `done` row must also cite a test)
   wasm            cargo check --target wasm32-unknown-unknown for the wasm-safe crates
-  ci              fmt --check, clippy -D warnings, test, assets, brands, layers, wasm (stops at first failure)
+  ci              fmt --check, clippy -D warnings, test, assets, brands, parity, layers, wasm (stops at first failure)
   corpus [--download]
                   show where test corpora live; --download fetches PngSuite into corpus/pngsuite
   bundle          build dist/VectorCraft.app (macOS) with assets/app-icon/vectorcraft.icns
@@ -38,6 +42,7 @@ fn main() -> ExitCode {
         Some("assets") => assets::run(&root()),
         Some("brands") => brands::run(&root()),
         Some("layers") => cmd_layers(),
+        Some("parity") => parity::run(&root(), rest.contains(&"--strict")),
         Some("wasm") => cmd_wasm(),
         Some("ci") => cmd_ci(),
         Some("corpus") => cmd_corpus(rest.contains(&"--download")),
@@ -193,6 +198,7 @@ fn cmd_ci() -> Result<(), String> {
         ),
         ("assets", Box::new(|| assets::run(&root()))),
         ("brands", Box::new(|| brands::run(&root()))),
+        ("parity", Box::new(|| parity::run(&root(), false))),
         ("layers", Box::new(cmd_layers)),
         ("wasm", Box::new(cmd_wasm)),
     ];

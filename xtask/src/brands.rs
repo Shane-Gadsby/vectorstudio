@@ -9,6 +9,10 @@
 //! * every text file under `packaging/`, and under `docs/` except Markdown pages: Markdown docs
 //!   (like `README.md` and `ROADMAP.md`) may name the reference app and compare against it.
 //!
+//! Not scanned: `docs/parity/` and `research/`. Those hold the parity matrix, the shortcut and
+//! menu baselines and the research tooling, whose whole job is to record the reference app's
+//! behaviour by name. None of it reaches a user or an agent. See `docs/parity/README.md`.
+//!
 //! A line that has to keep an old name (an alias that old files or preferences still use) says
 //! `brand-ok` in a comment on that line.
 
@@ -88,8 +92,13 @@ enum Kind {
     Text,
 }
 
+/// Reference research, not user-visible text: it names the reference app on purpose.
+const RESEARCH_DIRS: &[&str] = &["docs/parity/", "research/"];
+
 fn kind_of(path: &str) -> Option<Kind> {
-    if (path.starts_with("docs/") && !path.ends_with(".md")) || path.starts_with("packaging/") {
+    if RESEARCH_DIRS.iter().any(|d| path.starts_with(d)) {
+        None
+    } else if (path.starts_with("docs/") && !path.ends_with(".md")) || path.starts_with("packaging/") {
         Some(Kind::Text)
     } else if path == "Cargo.toml" || path.ends_with("/Cargo.toml") {
         Some(Kind::Manifest)
@@ -351,6 +360,10 @@ line Pantone"; }
         assert_eq!(kind_of("crates/ui-egui/Cargo.toml"), Some(Kind::Manifest));
         assert_eq!(kind_of("docs/brand/LICENSE-brand.txt"), Some(Kind::Text));
         assert_eq!(kind_of("packaging/linux/nfpm.yaml"), Some(Kind::Text));
+        // Reference research names the reference app on purpose and reaches no user.
+        assert_eq!(kind_of("docs/parity/matrix.csv"), None);
+        assert_eq!(kind_of("docs/parity/shortcuts-30.1.csv"), None);
+        assert_eq!(kind_of("research/illustrator/probe-baseline.jsx"), None);
         for skipped in ["README.md", "ROADMAP.md", "CLAUDE.md", "AGENTS.md", ".github/workflows/release.yml", "ASSETS.md", "docs/mcp.md"] {
             assert_eq!(kind_of(skipped), None, "{skipped}");
         }

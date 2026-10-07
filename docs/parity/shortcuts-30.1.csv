@@ -1,0 +1,712 @@
+section,menu,command,key
+Tools,,Selection,V
+Tools,,Direct Selection,A
+Tools,,Group Selection,
+Tools,,Magic Wand,Y
+Tools,,Artboard,Shift+O
+Tools,,Lasso,Q
+Tools,,Pen,P
+Tools,,Add Anchor Point,=
+Tools,,Delete Anchor Point,-
+Tools,,Anchor Point,Shift+C
+Tools,,Curvature Tool,Shift+~
+Tools,,Line Segment,\
+Tools,,Arc,
+Tools,,Spiral,
+Tools,,Rectangular Grid,
+Tools,,Polar Grid,
+Tools,,Rectangle,M
+Tools,,Rounded Rectangle,
+Tools,,Ellipse,L
+Tools,,Polygon,
+Tools,,Star,
+Tools,,Flare,
+Tools,,Paintbrush,B
+Tools,,Blob Brush,Shift+B
+Tools,,Shaper Tool,Shift+N
+Tools,,Pencil,N
+Tools,,Smooth,
+Tools,,Path Eraser,
+Tools,,Symbol Sprayer,Shift+S
+Tools,,Symbol Shifter,
+Tools,,Symbol Scruncher,
+Tools,,Symbol Sizer,
+Tools,,Symbol Spinner,
+Tools,,Symbol Stainer,
+Tools,,Symbol Screener,
+Tools,,Symbol Styler,
+Tools,,Column Graph,J
+Tools,,Stacked Column Graph,
+Tools,,Bar Graph,
+Tools,,Stacked Bar Graph,
+Tools,,Line Graph,
+Tools,,Area Graph,
+Tools,,Scatter Graph,
+Tools,,Pie Graph,
+Tools,,Radar Graph,
+Tools,,Slice,Shift+K
+Tools,,Slice Selection,
+Tools,,Perspective Grid,Shift+P
+Tools,,Perspective Selection,Shift+V
+Tools,,Type,T
+Tools,,Area Type,
+Tools,,Type on a Path,
+Tools,,Vertical Type,
+Tools,,Vertical Area Type,
+Tools,,Vertical Type on a Path,
+Tools,,Touch Type,Shift+T
+Tools,,Gradient,G
+Tools,,Mesh,U
+Tools,,Shape Builder,Shift+M
+Tools,,Live Paint Bucket,K
+Tools,,Live Paint Selection,Shift+L
+Tools,,Rotate,R
+Tools,,Reflect,O
+Tools,,Scale,S
+Tools,,Shear,
+Tools,,Reshape,
+Tools,,Width,Shift+W
+Tools,,Warp,Shift+R
+Tools,,Twirl,
+Tools,,Pucker,
+Tools,,Bloat,
+Tools,,Scallop,
+Tools,,Crystallize,
+Tools,,Wrinkle,
+Tools,,Free Transform,E
+Tools,,Measure,
+Tools,,Eyedropper,I
+Tools,,Blend,W
+Tools,,Eraser,Shift+E
+Tools,,Scissors,C
+Tools,,Knife,
+Tools,,Hand,H
+Tools,,Print Tiling,
+Tools,,Rotate View Tool,Shift+H
+Tools,,Zoom,Z
+Tools,,Toggle Fill/Stroke,X
+Tools,,Default,D
+Tools,,Swap Fill/Stroke,Shift+X
+Tools,,Color,","
+Tools,,Gradient,.
+Tools,,None,/
+Tools,,Toggle Screen Mode,F
+Tools,,Show/Hide All Palettes,Tab
+Tools,,Show/Hide All But Toolbox,Shift+Tab
+Tools,,Increase Diameter,]
+Tools,,Decrease Diameter,[
+Tools,,Symbolism Tools - Increase Intensity,Shift+}
+Tools,,Symbolism Tools - Decrease Intensity,Shift+{
+Tools,,Opacity - 0%,
+Tools,,Opacity - 10%,
+Tools,,Opacity - 20%,
+Tools,,Opacity - 30%,
+Tools,,Opacity - 40%,
+Tools,,Opacity - 50%,
+Tools,,Opacity - 60%,
+Tools,,Opacity - 70%,
+Tools,,Opacity - 80%,
+Tools,,Opacity - 90%,
+Tools,,Opacity - 100%,
+Tools,,Blend Mode - Normal,
+Tools,,Blend Mode - Darken,
+Tools,,Blend Mode - Multiply,
+Tools,,Blend Mode - Color Burn,
+Tools,,Blend Mode - Lighten,
+Tools,,Blend Mode - Screen,
+Tools,,Blend Mode - Color Dodge,
+Tools,,Blend Mode - Overlay,
+Tools,,Blend Mode - Soft Light,
+Tools,,Blend Mode - Hard Light,
+Tools,,Blend Mode - Difference,
+Tools,,Blend Mode - Exclusion,
+Tools,,Blend Mode - Hue,
+Tools,,Blend Mode - Saturation,
+Tools,,Blend Mode - Color,
+Tools,,Blend Mode - Luminosity,
+Tools,,Blend Mode - Next Mode,
+Tools,,Blend Mode - Previous Mode,
+Tools,,Toggle Drawing Mode,Shift+D
+Tools,,Presentation Mode,Shift+F
+Menu Commands,File,New,Ctrl+N
+Menu Commands,File,New from Template,Shift+Ctrl+N
+Menu Commands,File,Open,Ctrl+O
+Menu Commands,File,Browse in Bridge,Alt+Ctrl+O
+Menu Commands,File,Close,Ctrl+W
+Menu Commands,File,Close All,Alt+Ctrl+W
+Menu Commands,File,Save,Ctrl+S
+Menu Commands,File,Save As,Shift+Ctrl+S
+Menu Commands,File,Save a Copy,Alt+Ctrl+S
+Menu Commands,File,Save as Template,
+Menu Commands,File,Place,Shift+Ctrl+P
+Menu Commands,File,Export,
+Menu Commands,File,Export for Screens,Alt+Ctrl+E
+Menu Commands,File,Export As,
+Menu Commands,File,Save for Web (Legacy),Alt+Shift+Ctrl+S
+Menu Commands,File,Package,Alt+Shift+Ctrl+P
+Menu Commands,File,Scripts,
+Menu Commands,File,Other Script,Ctrl+F12
+Menu Commands,File,Document Setup,Alt+Ctrl+P
+Menu Commands,File,Document Color Mode,
+Menu Commands,File,CMYK Color,
+Menu Commands,File,RGB Color,
+Menu Commands,File,File Info,Alt+Shift+Ctrl+I
+Menu Commands,File,Print,Ctrl+P
+Menu Commands,File,Exit,Ctrl+Q
+Menu Commands,Edit,Undo,Ctrl+Z
+Menu Commands,Edit,Redo,Shift+Ctrl+Z
+Menu Commands,Edit,Cut,Ctrl+X
+Menu Commands,Edit,Copy,Ctrl+C
+Menu Commands,Edit,Paste,Ctrl+V
+Menu Commands,Edit,Paste in Front,Ctrl+F
+Menu Commands,Edit,Paste in Back,Ctrl+B
+Menu Commands,Edit,Paste in Place,Shift+Ctrl+V
+Menu Commands,Edit,Paste on All Artboards,Alt+Shift+Ctrl+V
+Menu Commands,Edit,Paste without Formatting,Alt+Ctrl+V
+Menu Commands,Edit,Clear,
+Menu Commands,Edit,Find and Replace,
+Menu Commands,Edit,Find Next,
+Menu Commands,Edit,Spelling,
+Menu Commands,Edit,Check Spelling,Ctrl+I
+Menu Commands,Edit,Edit Custom Dictionary,
+Menu Commands,Edit,Edit Colors,
+Menu Commands,Edit,Recolor Artwork,
+Menu Commands,Edit,Adjust Color Balance,
+Menu Commands,Edit,Blend Front to Back,
+Menu Commands,Edit,Blend Horizontally,
+Menu Commands,Edit,Blend Vertically,
+Menu Commands,Edit,Convert to CMYK,
+Menu Commands,Edit,Convert to Grayscale,
+Menu Commands,Edit,Convert to RGB,
+Menu Commands,Edit,Invert Colors,
+Menu Commands,Edit,Overprint Black,
+Menu Commands,Edit,Saturate,
+Menu Commands,Edit,Edit Original,
+Menu Commands,Edit,Transparency Flattener Presets,
+Menu Commands,Edit,Print Presets,
+Menu Commands,Edit,Adobe PDF Presets,
+Menu Commands,Edit,Color Settings,Shift+Ctrl+K
+Menu Commands,Edit,Assign Profile,
+Menu Commands,Edit,Keyboard Shortcuts,Alt+Shift+Ctrl+K
+Menu Commands,Edit,My Settings,
+Menu Commands,Edit,Preferences,
+Menu Commands,Edit,General,Ctrl+K
+Menu Commands,Edit,Selection & Anchor Display,
+Menu Commands,Edit,Type,
+Menu Commands,Edit,Units,
+Menu Commands,Edit,Guides & Grid,
+Menu Commands,Edit,Smart Guides,
+Menu Commands,Edit,Hyphenation,
+Menu Commands,Edit,Plug-ins & Scratch Disks,
+Menu Commands,Edit,User Interface,
+Menu Commands,Edit,Appearance of Black,
+Menu Commands,Object,Transform,
+Menu Commands,Object,Transform Again,Ctrl+D
+Menu Commands,Object,Move,Shift+Ctrl+M
+Menu Commands,Object,Rotate,
+Menu Commands,Object,Reflect,
+Menu Commands,Object,Scale,
+Menu Commands,Object,Shear,
+Menu Commands,Object,Reset Bounding Box,
+Menu Commands,Object,Arrange,
+Menu Commands,Object,Bring to Front,Shift+Ctrl+]
+Menu Commands,Object,Bring Forward,Ctrl+]
+Menu Commands,Object,Send Backward,Ctrl+[
+Menu Commands,Object,Send to Back,Shift+Ctrl+[
+Menu Commands,Object,Send to Current Layer,
+Menu Commands,Object,Align,
+Menu Commands,Object,Distribute,
+Menu Commands,Object,Group,Ctrl+G
+Menu Commands,Object,Ungroup,Shift+Ctrl+G
+Menu Commands,Object,Ungroup All,Alt+Shift+G
+Menu Commands,Object,Lock,
+Menu Commands,Object,Selection,Ctrl+2
+Menu Commands,Object,All Artwork Above,
+Menu Commands,Object,Other Layers,
+Menu Commands,Object,Unlock All,Alt+Ctrl+2
+Menu Commands,Object,Hide,
+Menu Commands,Object,Selection,Ctrl+3
+Menu Commands,Object,All Artwork Above,
+Menu Commands,Object,Other Layers,
+Menu Commands,Object,Show All,Alt+Ctrl+3
+Menu Commands,Object,Expand,
+Menu Commands,Object,Expand Appearance,
+Menu Commands,Object,Rasterize,
+Menu Commands,Object,Create Gradient Mesh,
+Menu Commands,Object,Flatten Transparency,
+Menu Commands,Object,Generative,
+Menu Commands,Object,Generative Expand,
+Menu Commands,Object,Slice,
+Menu Commands,Object,Make,
+Menu Commands,Object,Release,
+Menu Commands,Object,Create from Guides,
+Menu Commands,Object,Create from Selection,
+Menu Commands,Object,Duplicate Slice,
+Menu Commands,Object,Combine Slices,
+Menu Commands,Object,Divide Slices,
+Menu Commands,Object,Delete All,
+Menu Commands,Object,Slice Options,
+Menu Commands,Object,Clip to Artboard,
+Menu Commands,Object,Path,
+Menu Commands,Object,Join,Ctrl+J
+Menu Commands,Object,Average,Alt+Ctrl+J
+Menu Commands,Object,Outline Stroke,
+Menu Commands,Object,Offset Path,
+Menu Commands,Object,Simplify,
+Menu Commands,Object,Add Anchor Points,
+Menu Commands,Object,Remove Anchor Points,
+Menu Commands,Object,Divide Objects Below,
+Menu Commands,Object,Split Into Grid,
+Menu Commands,Object,Clean Up,
+Menu Commands,Object,Shape,
+Menu Commands,Object,Convert to Shape,
+Menu Commands,Object,Expand Shape,
+Menu Commands,Object,Pattern,
+Menu Commands,Object,Make,
+Menu Commands,Object,Edit Pattern,Shift+Ctrl+F8
+Menu Commands,Object,Tile Edge Color,
+Menu Commands,Object,Intertwine,
+Menu Commands,Object,Repeat,
+Menu Commands,Object,Objects on Path,
+Menu Commands,Object,Blend,
+Menu Commands,Object,Make,Alt+Ctrl+B
+Menu Commands,Object,Release,Alt+Shift+Ctrl+B
+Menu Commands,Object,Blend Options,
+Menu Commands,Object,Expand,
+Menu Commands,Object,Replace Spine,
+Menu Commands,Object,Reverse Spine,
+Menu Commands,Object,Reverse Front to Back,
+Menu Commands,Object,Envelope Distort,
+Menu Commands,Object,Make with Warp,Alt+Shift+Ctrl+W
+Menu Commands,Object,Make with Mesh,Alt+Ctrl+M
+Menu Commands,Object,Make with Top Object,Alt+Ctrl+C
+Menu Commands,Object,Release,
+Menu Commands,Object,Envelope Options,
+Menu Commands,Object,Expand,
+Menu Commands,Object,Edit Contents,
+Menu Commands,Object,Perspective,
+Menu Commands,Object,Live Paint,
+Menu Commands,Object,Make,Alt+Ctrl+X
+Menu Commands,Object,Merge,
+Menu Commands,Object,Release,
+Menu Commands,Object,Gap Options,
+Menu Commands,Object,Expand,
+Menu Commands,Object,Mockup,
+Menu Commands,Object,Image Trace,
+Menu Commands,Object,Make,
+Menu Commands,Object,Make and Expand,
+Menu Commands,Object,Release,
+Menu Commands,Object,Expand,
+Menu Commands,Object,Text Wrap,
+Menu Commands,Object,Make,
+Menu Commands,Object,Release,
+Menu Commands,Object,Text Wrap Options,
+Menu Commands,Object,Clipping Mask,
+Menu Commands,Object,Make,Ctrl+7
+Menu Commands,Object,Release,Alt+Ctrl+7
+Menu Commands,Object,Edit Contents,
+Menu Commands,Object,Compound Path,
+Menu Commands,Object,Make,Ctrl+8
+Menu Commands,Object,Release,Alt+Shift+Ctrl+8
+Menu Commands,Object,Artboards,
+Menu Commands,Object,Convert to Artboards,
+Menu Commands,Object,Graph,
+Menu Commands,Type,Data,
+Menu Commands,Type,Design,
+Menu Commands,Type,Column,
+Menu Commands,Type,Marker,
+Menu Commands,Type,Collect For Export,
+Menu Commands,Type,Type,
+Menu Commands,Type,Glyphs,
+Menu Commands,Type,Area Type Options,
+Menu Commands,Type,Type on a Path,
+Menu Commands,Type,Rainbow,
+Menu Commands,Type,Skew,
+Menu Commands,Type,3D Ribbon,
+Menu Commands,Type,Stair Step,
+Menu Commands,Type,Gravity,
+Menu Commands,Type,Type on a Path Options,
+Menu Commands,Type,Threaded Text,
+Menu Commands,Type,Create,
+Menu Commands,Type,Release Selection,
+Menu Commands,Type,Remove Threading,
+Menu Commands,Type,Fit Headline,
+Menu Commands,Type,Find/Replace Font,
+Menu Commands,Type,Change Case,
+Menu Commands,Type,UPPERCASE,
+Menu Commands,Type,lowercase,
+Menu Commands,Type,Title Case,
+Menu Commands,Type,Sentence case,
+Menu Commands,Type,Smart Punctuation,
+Menu Commands,Type,Create Outlines,Shift+Ctrl+O
+Menu Commands,Type,Optical Margin Alignment,
+Menu Commands,Type,Insert Special Character,
+Menu Commands,Type,Symbols,
+Menu Commands,Type,Bullet,Alt+8
+Menu Commands,Type,Copyright Symbol,Alt+G
+Menu Commands,Type,Ellipsis,Alt+;
+Menu Commands,Type,Paragraph Symbol,Alt+7
+Menu Commands,Type,Registered Trademark Symbol,Alt+R
+Menu Commands,Type,Section Symbol,Alt+6
+Menu Commands,Type,Trademark Symbol,Alt+2
+Menu Commands,Type,Hyphens And Dashes,
+Menu Commands,Type,Em Dash,Alt+Shift+-
+Menu Commands,Type,En Dash,Alt+-
+Menu Commands,Type,Discretionary Hyphen,Shift+Ctrl+-
+Menu Commands,Type,Quotation Marks,
+Menu Commands,Type,Double Left Quotation Marks,Alt+[
+Menu Commands,Type,Double Right Quotation Marks,Alt+Shift+[
+Menu Commands,Type,Single Left Quotation Marks,Alt+]
+Menu Commands,Type,Single Right Quotation Marks,Alt+Shift+]
+Menu Commands,Type,Insert WhiteSpace Character,
+Menu Commands,Type,Em Space,Shift+Ctrl+M
+Menu Commands,Type,En Space,Shift+Ctrl+N
+Menu Commands,Type,Hair Space,
+Menu Commands,Type,Thin Space,Alt+Shift+Ctrl+M
+Menu Commands,Type,Insert Break Character,
+Menu Commands,Type,Forced Line Break,
+Menu Commands,Type,Show Hidden Characters,Alt+Ctrl+I
+Menu Commands,Type,Type Orientation,
+Menu Commands,Type,Horizontal,
+Menu Commands,Type,Vertical,
+Menu Commands,Type,Legacy Text,
+Menu Commands,Type,Update All Legacy Text,
+Menu Commands,Type,Update Selected Legacy Text,
+Menu Commands,Type,Hide Copies,
+Menu Commands,Type,Delete Copies,
+Menu Commands,Type,Select Copies,
+Menu Commands,Select,All,Ctrl+A
+Menu Commands,Select,All on Active Artboard,Alt+Ctrl+A
+Menu Commands,Select,Deselect,Shift+Ctrl+A
+Menu Commands,Select,Reselect,Ctrl+6
+Menu Commands,Select,Inverse,
+Menu Commands,Select,Next Object Above,Alt+Ctrl+]
+Menu Commands,Select,Next Object Below,Alt+Ctrl+[
+Menu Commands,Select,Same,
+Menu Commands,Select,Blending Mode,
+Menu Commands,Select,Fill & Stroke,
+Menu Commands,Select,Fill Color,
+Menu Commands,Select,Opacity,
+Menu Commands,Select,Stroke Color,
+Menu Commands,Select,Stroke Weight,
+Menu Commands,Select,Graphic Style,
+Menu Commands,Select,Symbol Instance,
+Menu Commands,Select,Link Block Series,
+Menu Commands,Select,Object,
+Menu Commands,Select,All on Same Layers,
+Menu Commands,Select,Direction Handles,
+Menu Commands,Select,Brush Strokes,
+Menu Commands,Select,Clipping Masks,
+Menu Commands,Select,Stray Points,
+Menu Commands,Select,All Text Objects,
+Menu Commands,Select,Save Selection,
+Menu Commands,Select,Edit Selection,
+Menu Commands,Effect,Apply Last Effect,Shift+Ctrl+E
+Menu Commands,Effect,Last Effect,Alt+Shift+Ctrl+E
+Menu Commands,Effect,Document Raster Effects Settings,
+Menu Commands,Effect,3D and Materials,
+Menu Commands,Effect,3D (Classic),
+Menu Commands,Effect,Extrude & Bevel (Classic),
+Menu Commands,Effect,Revolve (Classic),
+Menu Commands,Effect,Rotate (Classic),
+Menu Commands,Effect,Convert to Shape,
+Menu Commands,Effect,Rectangle,
+Menu Commands,Effect,Rounded Rectangle,
+Menu Commands,Effect,Ellipse,
+Menu Commands,Effect,Distort & Transform,
+Menu Commands,Effect,Free Distort,
+Menu Commands,Effect,Pucker & Bloat,
+Menu Commands,Effect,Roughen,
+Menu Commands,Effect,Transform,
+Menu Commands,Effect,Tweak,
+Menu Commands,Effect,Twist,
+Menu Commands,Effect,Zig Zag,
+Menu Commands,Effect,Path,
+Menu Commands,Effect,Offset Path,
+Menu Commands,Effect,Outline Object,
+Menu Commands,Effect,Outline Stroke,
+Menu Commands,Effect,Pathfinder,
+Menu Commands,Effect,Add,
+Menu Commands,Effect,Intersect,
+Menu Commands,Effect,Exclude,
+Menu Commands,Effect,Subtract,
+Menu Commands,Effect,Minus Back,
+Menu Commands,Effect,Divide,
+Menu Commands,Effect,Trim,
+Menu Commands,Effect,Merge,
+Menu Commands,Effect,Crop,
+Menu Commands,Effect,Outline,
+Menu Commands,Effect,Hard Mix,
+Menu Commands,Effect,Soft Mix,
+Menu Commands,Effect,Trap,
+Menu Commands,Effect,Rasterize,
+Menu Commands,Effect,Stylize,
+Menu Commands,Effect,Feather,
+Menu Commands,Effect,Inner Glow,
+Menu Commands,Effect,Outer Glow,
+Menu Commands,Effect,Scribble,
+Menu Commands,Effect,SVG Filters,
+Menu Commands,Effect,Warp,
+Menu Commands,Effect,Arc,
+Menu Commands,Effect,Arc Lower,
+Menu Commands,Effect,Arc Upper,
+Menu Commands,Effect,Arch,
+Menu Commands,Effect,Bulge,
+Menu Commands,Effect,Shell Lower,
+Menu Commands,Effect,Shell Upper,
+Menu Commands,Effect,Flag,
+Menu Commands,Effect,Wave,
+Menu Commands,Effect,Fish,
+Menu Commands,Effect,Rise,
+Menu Commands,Effect,Fisheye,
+Menu Commands,Effect,Inflate,
+Menu Commands,Effect,Squeeze,
+Menu Commands,Effect,Twist,
+Menu Commands,Effect,Effect Gallery,
+Menu Commands,Effect,Artistic,
+Menu Commands,Effect,Colored Pencil,
+Menu Commands,Effect,Cutout,
+Menu Commands,Effect,Dry Brush,
+Menu Commands,Effect,Film Grain,
+Menu Commands,Effect,Fresco,
+Menu Commands,Effect,Neon Glow,
+Menu Commands,Effect,Paint Daubs,
+Menu Commands,Effect,Palette Knife,
+Menu Commands,Effect,Plastic Wrap,
+Menu Commands,Effect,Poster Edges,
+Menu Commands,Effect,Rough Pastels,
+Menu Commands,Effect,Smudge Stick,
+Menu Commands,Effect,Sponge,
+Menu Commands,Effect,Underpainting,
+Menu Commands,Effect,Watercolor,
+Menu Commands,Effect,Blur,
+Menu Commands,Effect,Gaussian Blur,
+Menu Commands,Effect,Radial Blur,
+Menu Commands,Effect,Smart Blur,
+Menu Commands,Effect,Brush Strokes,
+Menu Commands,Effect,Accented Edges,
+Menu Commands,Effect,Angled Strokes,
+Menu Commands,Effect,Crosshatch,
+Menu Commands,Effect,Dark Strokes,
+Menu Commands,Effect,Ink Outlines,
+Menu Commands,Effect,Spatter,
+Menu Commands,Effect,Sprayed Strokes,
+Menu Commands,Effect,Sumi-e,
+Menu Commands,Effect,Distort,
+Menu Commands,Effect,Diffuse Glow,
+Menu Commands,Effect,Glass,
+Menu Commands,Effect,Ocean Ripple,
+Menu Commands,Effect,Pixelate,
+Menu Commands,Effect,Color Halftone,
+Menu Commands,Effect,Crystallize,
+Menu Commands,Effect,Mezzotint,
+Menu Commands,Effect,Pointillize,
+Menu Commands,Effect,Sketch,
+Menu Commands,Effect,Bas Relief,
+Menu Commands,Effect,Chalk & Charcoal,
+Menu Commands,Effect,Charcoal,
+Menu Commands,Effect,Chrome,
+Menu Commands,Effect,Conté Crayon,
+Menu Commands,Effect,Graphic Pen,
+Menu Commands,Effect,Halftone Pattern,
+Menu Commands,Effect,Note Paper,
+Menu Commands,Effect,Photocopy,
+Menu Commands,Effect,Plaster,
+Menu Commands,Effect,Reticulation,
+Menu Commands,Effect,Stamp,
+Menu Commands,Effect,Torn Edges,
+Menu Commands,Effect,Water Paper,
+Menu Commands,Effect,Stylize,
+Menu Commands,Effect,Glowing Edges,
+Menu Commands,Effect,Texture,
+Menu Commands,Effect,Craquelure,
+Menu Commands,Effect,Grain,
+Menu Commands,Effect,Mosaic Tiles,
+Menu Commands,Effect,Patchwork,
+Menu Commands,Effect,Stained Glass,
+Menu Commands,Effect,Texturizer,
+Menu Commands,Effect,Video,
+Menu Commands,Effect,De-Interlace,
+Menu Commands,Effect,NTSC Colors,
+Menu Commands,View,Preview,Ctrl+Y
+Menu Commands,View,GPU Preview,Ctrl+E
+Menu Commands,View,Overprint Preview,Alt+Shift+Ctrl+Y
+Menu Commands,View,Pixel Preview,Alt+Ctrl+Y
+Menu Commands,View,Proof Setup,
+Menu Commands,View,Document CMYK:,
+Menu Commands,View,Legacy Macintosh RGB (Gamma 1.8),
+Menu Commands,View,Internet Standard RGB (sRGB),
+Menu Commands,View,Monitor RGB,
+Menu Commands,View,Customize,
+Menu Commands,View,Proof Colors,
+Menu Commands,View,Zoom In,Ctrl+=
+Menu Commands,View,Zoom Out,Ctrl+-
+Menu Commands,View,Fit Artboard in Window,Ctrl+0
+Menu Commands,View,Fit All in Window,Alt+Ctrl+0
+Menu Commands,View,Rotate View,
+Menu Commands,View,180,
+Menu Commands,View,150,
+Menu Commands,View,120,
+Menu Commands,View,90,
+Menu Commands,View,60,
+Menu Commands,View,30,
+Menu Commands,View,15,
+Menu Commands,View,0,
+Menu Commands,View,-15,
+Menu Commands,View,-30,
+Menu Commands,View,-60,
+Menu Commands,View,-90,
+Menu Commands,View,-120,
+Menu Commands,View,-150,
+Menu Commands,View,-180,
+Menu Commands,View,Reset Rotate View,Shift+Ctrl+1
+Menu Commands,View,Rotate View To Selection,
+Menu Commands,View,Show Slices,
+Menu Commands,View,Lock Slices,
+Menu Commands,View,Hide Bounding Box,Shift+Ctrl+B
+Menu Commands,View,Show Transparency Grid,Shift+Ctrl+D
+Menu Commands,View,Actual Size,Ctrl+1
+Menu Commands,View,Show Live Paint Gaps,
+Menu Commands,View,Hide Gradient Annotator,Alt+Ctrl+G
+Menu Commands,View,Hide Edges,Ctrl+H
+Menu Commands,View,Perspective Grid,
+Menu Commands,View,Show Grid,Shift+Ctrl+I
+Menu Commands,View,Hide Artboards,Shift+Ctrl+H
+Menu Commands,View,Hide Print Tiling,
+Menu Commands,View,Show Template,Shift+Ctrl+W
+Menu Commands,View,Rulers,
+Menu Commands,View,Show Rulers,Ctrl+R
+Menu Commands,View,Change to Artboard Rulers,Alt+Ctrl+R
+Menu Commands,View,Show Text Threads,Shift+Ctrl+Y
+Menu Commands,View,Guides,
+Menu Commands,View,Hide Guides,Ctrl+;
+Menu Commands,View,Lock Guides,Alt+Ctrl+;
+Menu Commands,View,Make Guides,Ctrl+5
+Menu Commands,View,Release Guides,Alt+Ctrl+5
+Menu Commands,View,Clear Guides,
+Menu Commands,View,Show Grid,Ctrl+'
+Menu Commands,View,Snap to Grid,Shift+Ctrl+'
+Menu Commands,View,Snap to Point,Alt+Ctrl+'
+Menu Commands,View,Smart Guides,Ctrl+U
+Menu Commands,View,New View,
+Menu Commands,View,Edit Views,
+Menu Commands,View,Custom View 1,
+Menu Commands,View,Custom View 2,
+Menu Commands,View,Custom View 3,
+Menu Commands,View,Custom View 4,
+Menu Commands,View,Custom View 5,
+Menu Commands,View,Custom View 6,
+Menu Commands,View,Custom View 7,
+Menu Commands,View,Custom View 8,
+Menu Commands,View,Custom View 9,
+Menu Commands,View,Custom View 10,
+Menu Commands,Window,New Window,
+Menu Commands,Window,Arrange,
+Menu Commands,Window,Cascade,
+Menu Commands,Window,Tile,
+Menu Commands,Window,Workspace,
+Menu Commands,Window,"Reset ""Current Workspace""",
+Menu Commands,Window,New Workspace,
+Menu Commands,Window,Manage Workspaces,
+Menu Commands,Window,Control,
+Menu Commands,Window,Toolbars,
+Menu Commands,Window,Actions,
+Menu Commands,Window,Align,Shift+F7
+Menu Commands,Window,Appearance,Shift+F6
+Menu Commands,Window,Attributes,Ctrl+F11
+Menu Commands,Window,Brushes,F5
+Menu Commands,Window,Color,F6
+Menu Commands,Window,Color Guide,Shift+F3
+Menu Commands,Window,Document Info,
+Menu Commands,Window,Flattener Preview,
+Menu Commands,Window,Gradient,Ctrl+F9
+Menu Commands,Window,Graphic Styles,Shift+F5
+Menu Commands,Window,Info,Ctrl+F8
+Menu Commands,Window,Layers,F7
+Menu Commands,Window,Links,
+Menu Commands,Window,Magic Wand,
+Menu Commands,Window,Navigator,
+Menu Commands,Window,Pathfinder,Shift+Ctrl+F9
+Menu Commands,Window,Stroke,Ctrl+F10
+Menu Commands,Window,SVG Interactivity,
+Menu Commands,Window,Swatches,
+Menu Commands,Window,Symbols,Shift+Ctrl+F11
+Menu Commands,Window,Transform,Shift+F8
+Menu Commands,Window,Transparency,Shift+Ctrl+F10
+Menu Commands,Window,Type,
+Menu Commands,Window,Character,Ctrl+T
+Menu Commands,Window,Character Styles,
+Menu Commands,Window,Glyphs,
+Menu Commands,Window,OpenType,Alt+Shift+Ctrl+T
+Menu Commands,Window,Paragraph,Alt+Ctrl+T
+Menu Commands,Window,Paragraph Styles,
+Menu Commands,Window,Tabs,Shift+Ctrl+T
+Menu Commands,Window,Variables,
+Menu Commands,Window,Brush Libraries,
+Menu Commands,Window,Other Library,
+Menu Commands,Window,Graphic Style Libraries,
+Menu Commands,Window,Other Library,
+Menu Commands,Window,Swatch Libraries,
+Menu Commands,Window,Other Library,
+Menu Commands,Window,Symbol Libraries,
+Menu Commands,Window,Other Library,
+Menu Commands,Help,Illustrator Help,F1
+Menu Commands,Help,System Info,
+Menu Commands,Help,About Illustrator,
+Menu Commands,Other: Select,Switch Selection Tools,Ctrl+`
+Menu Commands,Other: Text,Point Size Up,Shift+Ctrl+.
+Menu Commands,Other: Text,Point Size Down,"Shift+Ctrl+,"
+Menu Commands,Other: Text,Font Size Step Up,Alt+Shift+Ctrl+.
+Menu Commands,Other: Text,Font Size Step Down,"Alt+Shift+Ctrl+,"
+Menu Commands,Other: Text,Kern Looser,Shift+Ctrl+]
+Menu Commands,Other: Text,Kern Tighter,Shift+Ctrl+[
+Menu Commands,Other: Text,Tracking,Alt+Ctrl+K
+Menu Commands,Other: Text,Clear Tracking,Alt+Ctrl+Q
+Menu Commands,Other: Text,Spacing,Alt+Shift+Ctrl+O
+Menu Commands,Other: Text,Uniform Type,Shift+Ctrl+X
+Menu Commands,Other: Text,Highlight Font,Alt+Shift+Ctrl+F
+Menu Commands,Other: Text,Highlight Font (Secondary),Alt+Shift+Ctrl+M
+Menu Commands,Other: Text,Left Align Text,Shift+Ctrl+L
+Menu Commands,Other: Text,Center Text,Shift+Ctrl+C
+Menu Commands,Other: Text,Right Align Text,Shift+Ctrl+R
+Menu Commands,Other: Text,Justify Text Left,Shift+Ctrl+J
+Menu Commands,Other: Text,Justify Text Center,
+Menu Commands,Other: Text,Justify Text Right,
+Menu Commands,Other: Text,Justify All Lines,Shift+Ctrl+F
+Menu Commands,Other: Text,Toggle Auto Hyphenation,Alt+Shift+Ctrl+H
+Menu Commands,Other: Text,Toggle Line Composer,Alt+Shift+Ctrl+C
+Menu Commands,Other: Text,Subscript,Alt+Shift+Ctrl+=
+Menu Commands,Other: Text,Superscript,Shift+Ctrl+=
+Menu Commands,Other: Text,Bold,Shift+Ctrl+b
+Menu Commands,Other: Text,Italic,Shift+Ctrl+i
+Menu Commands,Other: Text,Underline,Shift+Ctrl+u
+Menu Commands,Other: Object,Lock Others,Alt+Shift+Ctrl+2
+Menu Commands,Other: Object,Hide Others,Alt+Shift+Ctrl+3
+Menu Commands,Other: Object,Repeat Pathfinder,Ctrl+4
+Menu Commands,Other: Object,Average & Join,Alt+Shift+Ctrl+J
+Menu Commands,Other: Object,Isolate Selected Object,
+Menu Commands,Other: Object,Exit Isolation Mode,
+Menu Commands,Other: Panel,New Symbol,F8
+Menu Commands,Other: Panel,Show Color Panel (Secondary),
+Menu Commands,Other: Panel,Actions Batch,
+Menu Commands,Other: Panel,Add New Fill,Ctrl+/
+Menu Commands,Other: Panel,Add New Stroke,Alt+Ctrl+/
+Menu Commands,Other: Panel,New Graphic Style,
+Menu Commands,Other: Panel,New Layer,Ctrl+L
+Menu Commands,Other: Panel,New Layer with Dialog,Alt+Ctrl+L
+Menu Commands,Other: Panel,Update Link,
+Menu Commands,Other: Panel,New Swatch,
+Menu Commands,Other: Misc,Switch Units,Alt+Shift+Ctrl+U
+Menu Commands,Other: Misc,New File (No Dialog),Alt+Ctrl+N
+Menu Commands,Other: Misc,Help (Secondary),
+Menu Commands,Other: Misc,Undo (Secondary),
+Menu Commands,Other: Misc,Cut (Secondary),F2
+Menu Commands,Other: Misc,Copy (Secondary),F3
+Menu Commands,Other: Misc,Paste (Secondary),F4
+Menu Commands,Other: Misc,Zoom In (Secondary),Ctrl++
+Menu Commands,Other: Misc,Navigate to Next Document,Ctrl+F6
+Menu Commands,Other: Misc,Navigate to Previous Document,Shift+Ctrl+F6
+Menu Commands,Other: Misc,Navigate to Next Document Group,Alt+Ctrl+F6
+Menu Commands,Other: Misc,Navigate to Previous Document Group,Alt+Shift+Ctrl+F6
+Menu Commands,Other: Misc,Subscript (Secondary),Alt+Shift+Ctrl++
+Menu Commands,Other: Misc,Superscript (Secondary),Shift+Ctrl++

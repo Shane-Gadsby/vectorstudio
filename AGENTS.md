@@ -1,18 +1,26 @@
-# VectorCraft — instructions for agents
+# VectorStudio — instructions for agents
 
-VectorCraft is a clean-room, open-source, Rust-native vector illustration app targeting Adobe Illustrator parity (and beyond). It runs natively on macOS, Windows and Linux, and on the web via WASM. Siblings: `../photocraft` (Photoshop-class) and `../pdfcraft` (Acrobat-class); same conventions.
+VectorStudio is a clean-room, open-source, Rust-native vector illustration app whose goal is a **100% 1:1 reimplementation of Adobe Illustrator 30.1** — the same defaults, ranges, units, shortcuts and modifier behaviour, not merely the same feature list. It runs natively on macOS, Windows, Linux and FreeBSD, and on the web via WASM.
+
+**This is a fork of [`storytold/vectorcraft`](https://github.com/storytold/vectorcraft)** (MIT OR Apache-2.0), adopted 2026-10-08 — see [`docs/decisions/0001-fork-from-vectorcraft.md`](docs/decisions/0001-fork-from-vectorcraft.md) for why, and what the archived VectorSuite prototype contributed. Upstream is active, so **we track it**:
+- `git fetch upstream && git merge upstream/main` regularly; upstream's progress is ours for free.
+- **Keep merges cheap: rebrand the surface only.** Crate names (`vectorcraft_*`), module paths and every on-disk and on-the-wire identifier stay as they are. Only display strings change (app name, bundle ids, URLs, packaging, MCP server title).
+- **Format identifiers are not branding.** `%VectorCraft_BeginData` in the EPS writer, the `.vectorcraft`/`.drawcraft` extensions, `"format": "vectorcraft"` and the recovery-store layout are compatibility surfaces: renaming them strands files and recovery copies. They keep their names.
+- **Never push to `upstream`** (its push URL is disabled). Contributing back is a separate, deliberate decision.
 
 Formerly **DrawCraft** (renamed 2026-10-01): old `.drawcraft` files and `"format": "drawcraft"` headers still open (`vectorcraft_format::LEGACY_EXTENSION`), and preferences migrate from the old config folder. Keep those paths working; use the new name everywhere else.
 
 ## Start every session here
 1. Read the [honest assessment in `ROADMAP.md`](ROADMAP.md#honest-assessment-2026-10-05): where we stand by dimension, **where we're lacking** (the prioritized gap list) and **where we're going**. Unless the user gives you a task, pick work from that list.
-2. Read `plan/STATUS.md` (local session notes, may lag the ROADMAP), then the task in `plan/execution-plan.md` §3 and the relevant `plan/architecture.md` section. Behaviour reference: `plan/illustrator/*.md`.
+2. Read `plan/STATUS.md` (local session notes, may lag the ROADMAP), then the task in `plan/execution-plan.md` §3 and the relevant `plan/architecture.md` section. Behaviour reference: committed in [`docs/parity/`](docs/parity) (the matrix, the shortcut and menu baselines, the feature inventory, the Image Trace spec) and in [`docs/ai-format/`](docs/ai-format); upstream's own notes under `plan/illustrator/*.md` are local-only and may be absent.
 3. Follow the autonomous operation protocol (`plan/execution-plan.md` §7): orient → plan → implement + test → verify → record → commit. Don't stop to ask unless §7 lists the decision as the user's.
 
 `plan/` is gitignored (local only).
 
 ## Non-negotiables
-- **Clean-room.** Never read, disassemble or copy anything inside the Illustrator bundle (names/listings only). Never copy Adobe icons, artwork, presets or wording beyond feature names. Behaviour comes from public docs and black-box observation of the running app with synthetic documents only (screenshots by window id, stored under `plan/illustrator/screenshots/`, never committed). Never copy GPL/AGPL code (Inkscape, lib2geom…).
+- **Clean-room.** Never read, disassemble or copy anything inside the Illustrator bundle (names/listings only). Never copy Adobe icons, artwork, presets or wording beyond feature names. Behaviour comes from public docs and black-box observation of the running app with synthetic documents only (screenshots by window id, stored under `plan/illustrator/screenshots/`, never committed). Never copy GPL/AGPL code (Inkscape, lib2geom…), and never port Potrace (GPL) — the tracer is clean-room from Selinger's paper; VTracer (MIT) may be studied, with attribution.
+  - **Verified behaviour comes from the licensed 30.1 VM only** (`research/illustrator/`, see `research/README.md`). The Illustrator install at `../illustrator/` on the development machine is an **unlicensed repack**: never read its presets, shortcuts, resources, binaries or outputs, and never use it to make fixtures or reference outputs.
+  - **Reference `.ai` fixtures stay private.** `fixtures/ai/` and `.research/` are gitignored and must stay so: those files carry Adobe's bundled startup content and the author's user name. `cargo xtask assets` lists `.ai` as an asset extension, so an accidental commit fails the build.
 - **Assets: no Adobe iconography or images — ever (absolute rule, from the project owner).**
   - Never add, copy, trace, redraw-from, embed or ship any icon, image, artwork, cursor, preset, swatch/brush/symbol/pattern/style library, ICC profile or screenshot from Adobe products or from any other source whose licence doesn't allow it.
   - Every image, icon, font or other asset must be one of:
@@ -39,7 +47,10 @@ Formerly **DrawCraft** (renamed 2026-10-01): old `.drawcraft` files and `"format
 - **The UI is thin**: panels read engine state and act through `app.run(id, params)`. Colours come from `theme::Tokens`.
 - **Rust only** (no handwritten JS/TS). **Never break wasm** (`cargo xtask wasm`).
 - **Shared test corpora.** Real-file test oracles (Photoshop-authored PSDs, etc.) live in [`storytold/photocraft-corpus`](https://github.com/storytold/photocraft-corpus), explained in [craftrules `standards/test-corpora.md`](https://github.com/storytold/craftrules/blob/main/standards/test-corpora.md). Never commit large binary fixtures to this repo; fetch them pinned by commit and sha256-verified, as PhotoCraft does with `cargo xtask corpus`.
-- **Quality gates** before every commit: `cargo xtask ci` (fmt, clippy -D warnings including the no-panic lints, tests, layers, wasm). One task id per commit (`M2.1: pen tool`).
+- **Parity is measured by rows, not opinion.** `docs/parity/matrix.csv` is the source of truth for 1:1 behaviour (1,826 in-scope rows; 1,016 verified against a licensed 30.1). A task is "satisfy `TOOL-0112`–`TOOL-0119`", not "do the Pen tool". `cargo xtask parity` validates it and **a `done` or `partial` row must cite `impl_ref`** — coverage cannot be raised by editing a column. Check a row's `confidence` before building against it: `plan-2020` and `unverified` rows are research tasks, not specifications. Cite the row ids in the commit message. See [`docs/parity/README.md`](docs/parity/README.md).
+- **Preserve what you don't understand.** In every format reader: unknown operators, dictionary keys, versioned alternates and plugin data are kept verbatim and written back, never silently dropped. **Every reader change needs a writer change and a round-trip test.**
+- **Wire keys are never renamed.** AI dictionary keys, PSD descriptor keys, EngineData keys and the like keep their on-disk spelling. Readable names are for local variables only.
+- **Quality gates** before every commit: `cargo xtask ci` (fmt, clippy -D warnings including the no-panic lints, tests, assets, brands, parity, layers, wasm). One task id per commit (`M2.1: pen tool`).
 
 ## Running and looking at the app
 - `cargo run --release -p vectorcraft -- --control 7979 [file.svg|file.vectorcraft]` (sibling apps' agents use the same default port: if the log says it failed to bind, pick another port — otherwise your requests reach a different app).
@@ -51,7 +62,7 @@ Formerly **DrawCraft** (renamed 2026-10-01): old `.drawcraft` files and `"format
 - Parallel agents: separate `CARGO_TARGET_DIR` per agent; edit only the crates you own; write manifests atomically. Each target dir grows to ~30 GB: delete yours when you finish (a full disk fails links with `errno=28`).
 
 ## Roadmap
-`ROADMAP.md` (committed) is the shared picture of where VectorCraft stands. It holds status, the honest assessment (by dimension, the gap list, the direction), milestones, the parity table and time-to-parity estimates.
+`ROADMAP.md` (committed) is the shared picture of where VectorStudio stands. It holds status, the honest assessment (by dimension, the gap list, the direction), milestones, the parity table and time-to-parity estimates.
 - When a task lands, update it in the same PR: the milestone row, the parity-table row (score, missing items, hours), "Shipped so far", and the gap list if the gap closed or shrank.
-- Grade by behaviour against `plan/illustrator/`, not by whether a menu item exists. Scores are self-assessed, so err low.
+- Grade by behaviour against `docs/parity/matrix.csv`, not by whether a menu item exists. Prefer `cargo xtask parity` coverage to a self-assessed score; where you must estimate, err low.
 - Keep the README's Status section in step with the ROADMAP headline.

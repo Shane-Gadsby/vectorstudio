@@ -7,3 +7,9 @@ plan/
 .DS_Store
 # A craft-fonts checkout for CRAFT_FONTS_DIR (CI and release workflows check it out here)
 /craft-fonts
+
+# Illustrator 30.1 reference fixtures and raw research dumps. They carry Adobe's bundled
+# startup content and the author's user name, so they are private research only and must
+# never reach this public fork. See docs/parity/README.md ("Reference fixtures").
+/fixtures/ai/
+/.research/

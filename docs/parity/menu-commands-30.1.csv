@@ -1,0 +1,680 @@
+menu,path,command_id,key,in_30_1,path_source,note
+File,File > New,new,Ctrl+N,yes (id),ten-artai (v25),
+File,File > New from Template,newFromTemplate,Shift+Ctrl+N,yes (id),ten-artai (v25),
+File,File > Open,open,Ctrl+O,yes (id),ten-artai (v25),
+File,File > Browse in Bridge,Adobe Bridge Browse,Alt+Ctrl+O,yes (id),ten-artai (v25),
+File,File > Close,close,Ctrl+W,yes (id),ten-artai (v25),
+File,File > Save,save,Ctrl+S,yes (id),ten-artai (v25),
+File,File > Save As,saveas,Shift+Ctrl+S,yes (id),ten-artai (v25),
+File,File > Save a Copy,saveacopy,Alt+Ctrl+S,yes (id),ten-artai (v25),
+File,File > Save as Template,saveasTemplate,,yes (id),ten-artai (v25),list spells it saveastemplate
+File,File > Save for Web & Devices,Adobe AI Save For Web,Alt+Shift+Ctrl+S,yes (id),ten-artai (v25),
+File,File > Save Selected Slices,Adobe AI Save Selected Slices,,yes (id),ten-artai (v25),
+File,File > Revert,revert,,yes (id),ten-artai (v25),
+File,File > Place,AI Place,Shift+Ctrl+P,yes (id),ten-artai (v25),
+File,File > Export,export,,yes (id),ten-artai (v25),
+File,File > Export Selection,exportSelection,,yes (id),ten-artai (v25),
+File,File > Export > Export For Screens,exportForScreens,Alt+Ctrl+E,yes (id),ten-artai (v25),
+File,File > Scripts > Other Script,ai_browse_for_script,Ctrl+F12,yes (id),ten-artai (v25),
+File,File > Document Setup,document,Alt+Ctrl+P,yes (id),ten-artai (v25),
+File,File > Document Color Mode > CMYK Color,doc-color-cmyk,,yes (id),ten-artai (v25),
+File,File > Document Color Mode > RGB Color,doc-color-rgb,,yes (id),ten-artai (v25),
+File,File > File Info,File Info,Alt+Shift+Ctrl+I,yes (id),ten-artai (v25),
+File,File > Print,Print,Ctrl+P,yes (id),ten-artai (v25),
+File,File > Exit,quit,Ctrl+Q,yes (id),ten-artai (v25),
+File,File > … > Package,Package Menu Item,Alt+Shift+Ctrl+P,yes (id),shortcut export (key match),
+File,File > … > Close All,closeAll,Alt+Ctrl+W,yes (id),shortcut export (key match),
+Edit,Edit > Undo,undo,Ctrl+Z,yes (id),ten-artai (v25),
+Edit,Edit > Redo,redo,Shift+Ctrl+Z,yes (id),ten-artai (v25),
+Edit,Edit > Cut,cut,Ctrl+X,yes (id),ten-artai (v25),
+Edit,Edit > Copy,copy,Ctrl+C,yes (id),ten-artai (v25),
+Edit,Edit > Paste,paste,Ctrl+V,yes (id),ten-artai (v25),
+Edit,Edit > Paste in Front,pasteFront,Ctrl+F,yes (id),ten-artai (v25),
+Edit,Edit > Paste in Back,pasteBack,Ctrl+B,yes (id),ten-artai (v25),
+Edit,Edit > Paste in Place,pasteInPlace,Shift+Ctrl+V,yes (id),ten-artai (v25),
+Edit,Edit > Paste on All Artboards,pasteInAllArtboard,Alt+Shift+Ctrl+V,yes (id),ten-artai (v25),
+Edit,Edit > Clear,clear,,yes (id),ten-artai (v25),
+Edit,Edit > Find & Replace,Find and Replace,,yes (id),ten-artai (v25),
+Edit,Edit > Find Next,Find Next,,yes (id),ten-artai (v25),
+Edit,Edit > Check Spelling,Check Spelling,Ctrl+I,yes (id),ten-artai (v25),
+Edit,Edit > Define Pattern,Define Pattern Menu Item,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Edit,Edit > Edit Colors > Recolor Artwork,Recolor Art Dialog,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Adjust Color Balance,Adjust3,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Blend Front to Back,Colors3,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Blend Horizontally,Colors4,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Blend Vertically,Colors5,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Convert to CMYK,Colors8,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Convert to Grayscale,Colors7,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Convert to RGB,Colors9,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Invert Colors,Colors6,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Overprint Black,Overprint2,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Colors > Saturate,Saturate3,,yes (id),ten-artai (v25),
+Edit,Edit > Edit Original,EditOriginal Menu Item,,yes (id),ten-artai (v25),
+Edit,Edit > Transparency Flattener Presets,Transparency Presets,,yes (id),ten-artai (v25),
+Edit,Edit > Tracing Presets,TracingPresets,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Edit,Edit > Print Presets,Print Presets,,yes (id),ten-artai (v25),
+Edit,Edit > Adobe PDF Presets,PDF Presets,,yes (id),ten-artai (v25),
+Edit,Edit > SWF Presets,SWFPresets,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Edit,Edit > Perspective Grid Presets,PerspectiveGridPresets,,yes (id),ten-artai (v25),
+Edit,Edit > Color Settings,color,Shift+Ctrl+K,yes (id),ten-artai (v25),
+Edit,Edit > Assign Profile,assignprofile,,yes (id),ten-artai (v25),
+Edit,Edit > Keyboard Shortcuts,KBSC Menu Item,Alt+Shift+Ctrl+K,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > General,preference,Ctrl+K,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Selection & Anchor Display,selectPref,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Edit,Edit > Preferences > Type,keyboardPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Units,unitundoPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Guides & Grid,guidegridPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Smart Guides,snapPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Slices,slicePref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Hyphenation,hyphenPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > Plug-ins & Scratch Disks,pluginPref,,yes (id),ten-artai (v25),
+Edit,Edit > Preferences > User Interface,UIPref,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Edit,Edit > Preferences > File Handling & Clipboard,FileClipboardPref,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Edit,Edit > Preferences > Appearance of Black,BlackPref,,yes (id),ten-artai (v25),
+Edit,Edit > … > Paste without Formatting,pasteWithoutFormatting,Alt+Ctrl+V,yes (id),shortcut export (key match),
+Object,Object > Transform > Transform Again,transformagain,Ctrl+D,yes (id),ten-artai (v25),
+Object,Object > Transform > Move,transformmove,Shift+Ctrl+M,yes (id),ten-artai (v25),
+Object,Object > Transform > Rotate,transformrotate,,yes (id),ten-artai (v25),
+Object,Object > Transform > Reflect,transformreflect,,yes (id),ten-artai (v25),
+Object,Object > Transform > Scale,transformscale,,yes (id),ten-artai (v25),
+Object,Object > Transform > Shear,transformshear,,yes (id),ten-artai (v25),
+Object,Object > Transform Each,Transform v23,Alt+Shift+Ctrl+D,yes (id),ten-artai (v25),
+Object,Object > Transform > Reset Bounding Box,AI Reset Bounding Box,,yes (id),ten-artai (v25),
+Object,Object > Arrange > Bring to Front,sendToFront,Shift+Ctrl+],yes (id),ten-artai (v25),
+Object,Object > Arrange > Bring Forward,sendForward,Ctrl+],yes (id),ten-artai (v25),
+Object,Object > Arrange > Send Backward,sendBackward,Ctrl+[,yes (id),ten-artai (v25),
+Object,Object > Arrange > Send to Back,sendToBack,Shift+Ctrl+[,yes (id),ten-artai (v25),
+Object,Object > Arrange > Send to Current Layer,Selection Hat 2,,yes (id),ten-artai (v25),
+Object,Object > Group,group,Ctrl+G,yes (id),ten-artai (v25),
+Object,Object > Ungroup,ungroup,Shift+Ctrl+G,yes (id),ten-artai (v25),
+Object,Object > Lock > Selection,lock,Ctrl+2,yes (id),ten-artai (v25),
+Object,Object > Lock > All Artwork Above,Selection Hat 5,,yes (id),ten-artai (v25),
+Object,Object > Lock > Other Layers,Selection Hat 7,,yes (id),ten-artai (v25),
+Object,Object > Unlock All,unlockAll,Alt+Ctrl+2,yes (id),ten-artai (v25),
+Object,Object > Hide > Selection,hide,Ctrl+3,yes (id),ten-artai (v25),
+Object,Object > Hide > All Artwork Above,Selection Hat 4,,yes (id),ten-artai (v25),
+Object,Object > Hide > Other Layers,Selection Hat 6,,yes (id),ten-artai (v25),
+Object,Object > Show All,showAll,Alt+Ctrl+3,yes (id),ten-artai (v25),
+Object,Object > Expand,Expand3,,yes (id),ten-artai (v25),
+Object,Object > Expand Appearance,expandStyle,,yes (id),ten-artai (v25),
+Object,Object > Flatten Transparency,Flatten Transparency,,yes (id),ten-artai (v25),
+Object,Object > Rasterize,Rasterize 8 menu item,,yes (id),ten-artai (v25),
+Object,Object > Create Gradient Mesh,make mesh,,yes (id),ten-artai (v25),
+Object,Object > Create Object Mosaic,AI Object Mosaic Plug-in4,,yes (id),ten-artai (v25),
+Object,Object > Create Trim Marks,TrimMark v25,,yes (id),ten-artai (v25),
+Object,Object > Slice > Make,AISlice Make Slice,,yes (id),ten-artai (v25),
+Object,Object > Slice > Release,AISlice Release Slice,,yes (id),ten-artai (v25),
+Object,Object > Slice > Create from Guides,AISlice Create from Guides,,yes (id),ten-artai (v25),
+Object,Object > Slice > Create from Selection,AISlice Create from Selection,,yes (id),ten-artai (v25),
+Object,Object > Slice > Duplicate Slice,AISlice Duplicate,,yes (id),ten-artai (v25),
+Object,Object > Slice > Combine Slices,AISlice Combine,,yes (id),ten-artai (v25),
+Object,Object > Slice > Divide Slices,AISlice Divide,,yes (id),ten-artai (v25),
+Object,Object > Slice > Delete All,AISlice Delete All Slices,,yes (id),ten-artai (v25),
+Object,Object > Slice > Slice Options,AISlice Slice Options,,yes (id),ten-artai (v25),
+Object,Object > Slice > Clip to Artboard,AISlice Clip to Artboard,,yes (id),ten-artai (v25),
+Object,Object > Path > Join,join,Ctrl+J,yes (id),ten-artai (v25),
+Object,Object > Path > Average,average,Alt+Ctrl+J,yes (id),ten-artai (v25),
+Object,Object > Path > Outline Stroke,OffsetPath v22,,yes (id),ten-artai (v25),
+Object,Object > Path > Offset Path,OffsetPath v23,,yes (id),ten-artai (v25),
+Object,Object > Path > Simplify,simplify menu item,,yes (id),ten-artai (v25),
+Object,Object > Path > Add Anchor Points,Add Anchor Points2,,yes (id),ten-artai (v25),
+Object,Object > Path > Remove Anchor Points,Remove Anchor Points menu,,yes (id),ten-artai (v25),
+Object,Object > Path > Divide Objects Below,Knife Tool2,,yes (id),ten-artai (v25),
+Object,Object > Path > Split Into Grid,Rows and Columns….,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Object,Object > Path > Clean Up,cleanup menu item,,yes (id),ten-artai (v25),
+Object,Object > Blend > Make,Path Blend Make,Alt+Ctrl+B,yes (id),ten-artai (v25),
+Object,Object > Blend > Release,Path Blend Release,Alt+Shift+Ctrl+B,yes (id),ten-artai (v25),
+Object,Object > Blend > Expand,Path Blend Expand,,yes (id),ten-artai (v25),
+Object,Object > Blend > Blend Options,Path Blend Options,,yes (id),ten-artai (v25),
+Object,Object > Blend > Replace Spine,Path Blend Replace Spine,,yes (id),ten-artai (v25),
+Object,Object > Blend > Reverse Spine,Path Blend Reverse Spine,,yes (id),ten-artai (v25),
+Object,Object > Blend > Reverse Front to Back,Path Blend Reverse Stack,,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Make with Warp,Make Warp,Alt+Shift+Ctrl+W,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Make with Mesh,Create Envelope Grid,Alt+Ctrl+M,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Make with Top Object,Make Envelope,Alt+Ctrl+C,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Release,Release Envelope,,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Envelope Options,Envelope Options,,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Expand,Expand Envelope,,yes (id),ten-artai (v25),
+Object,Object > Envelope Distort > Edit Contents,Edit Envelope Contents,,yes (id),ten-artai (v25),
+Object,Object > Perspective > Attach to Active Plane,Attach to Active Plane,,yes (id),ten-artai (v25),
+Object,Object > Perspective > Release with Perspective,Release with Perspective,,yes (id),ten-artai (v25),
+Object,Object > Perspective > Move Plane to Match Object,Show Object Grid Plane,,yes (id),ten-artai (v25),
+Object,Object > Perspective > Edit Text,Edit Original Object,,yes (id),ten-artai (v25),
+Object,Object > Live Paint > Make,Make Planet X,Alt+Ctrl+X,yes (id),ten-artai (v25),
+Object,Object > Live Paint > Merge,Marge Planet X,,yes (id),ten-artai (v25),
+Object,Object > Live Paint > Release,Release Planet X,,yes (id),ten-artai (v25),
+Object,Object > Live Paint > Gap Options,Planet X Options,,yes (id),ten-artai (v25),
+Object,Object > Live Paint > Expand,Expand Planet X,,yes (id),ten-artai (v25),
+Object,Object > Text Wrap > Make,Make Text Wrap,,yes (id),ten-artai (v25),
+Object,Object > Text Wrap > Release,Release Text Wrap,,yes (id),ten-artai (v25),
+Object,Object > Text Wrap > Text Wrap Options,Text Wrap Options…,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Object,Object > Clipping Mask > Make,makeMask,Ctrl+7,yes (id),ten-artai (v25),
+Object,Object > Clipping Mask > Release,releaseMask,Alt+Ctrl+7,yes (id),ten-artai (v25),
+Object,Object > Clipping Mask > Edit Contents,editMask,,yes (id),ten-artai (v25),
+Object,Object > Compound Path > Make,compoundPath,Ctrl+8,yes (id),ten-artai (v25),
+Object,Object > Compound Path > Release,noCompoundPath,Alt+Shift+Ctrl+8,yes (id),ten-artai (v25),
+Object,Object > Artboards > Convert to Artboards,setCropMarks,,yes (id),ten-artai (v25),
+Object,Object > Artboards > Rearrange,ReArrange Artboards,,yes (id),ten-artai (v25),
+Object,Object > Artboards > Fit to Artwork Bounds,Fit Artboard to artwork bounds,,yes (id),ten-artai (v25),
+Object,Object > Artboards > Fit to Selected Art,Fit Artboard to selected Art,,yes (id),ten-artai (v25),
+Object,Object > Graph > Type,setGraphStyle,,yes (id),ten-artai (v25),
+Object,Object > Graph > Data,editGraphData,,yes (id),ten-artai (v25),
+Object,Object > Graph > Design,graphDesigns,,yes (id),ten-artai (v25),
+Object,Object > Graph > Column,setBarDesign,,yes (id),ten-artai (v25),
+Object,Object > Graph > Marker,setIconDesign,,yes (id),ten-artai (v25),
+Object,Object > Align > Horizontal Align Left,Horizontal Align Left,,yes (id),ten-artai (v25),
+Object,Object > Align > Horizontal Align Center,Horizontal Align Center,,yes (id),ten-artai (v25),
+Object,Object > Align > Horizontal Align Right,Horizontal Align Right,,yes (id),ten-artai (v25),
+Object,Object > Align > Vertical Align Top,Vertical Align Top,,yes (id),ten-artai (v25),
+Object,Object > Align > Vertical Align Center,Vertical Align Center,,yes (id),ten-artai (v25),
+Object,Object > Align > Vertical Align Bottom,Vertical Align Bottom,,yes (id),ten-artai (v25),
+Object,Object > … > Edit Pattern,Adobe Edit Pattern,Shift+Ctrl+F8,yes (id),shortcut export (key match),
+Object,Object > … > Ungroup All,ungroupAll,Alt+Shift+G,yes (id),shortcut export (key match),
+Type,Type > Glyphs,alternate glyph palette plugin,,yes (id),ten-artai (v25),
+Type,Type > Area Type Options,area-type-options,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Rainbow,Rainbow,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > 3D Ribbon,3D ribbon,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Skew,Skew,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Stair Step,Stair Step,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Gravity,Gravity,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Type on a path Options,typeOnPathOptions,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Type,Type > Type on a Path > Update Legacy Type on a Path,updateLegacyTOP,,yes (id),ten-artai (v25),
+Type,Type > Threaded Text > Create,threadTextCreate,,yes (id),ten-artai (v25),
+Type,Type > Threaded Text > Release Selection,releaseThreadedTextSelection,,yes (id),ten-artai (v25),
+Type,Type > Threaded Text > Remove Threading,removeThreading,,yes (id),ten-artai (v25),
+Type,Type > Composite Fonts,Adobe internal composite font plugin,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Type,Type > Kinsoku Shori Settings,Adobe Kinsoku Settings,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Type,Type > Mojikumi Settings,Adobe MojiKumi Settings,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Type,Type > Fit Headline,fitHeadline,,yes (id),ten-artai (v25),
+Type,Type > Create Outlines,outline,Shift+Ctrl+O,yes (id),ten-artai (v25),
+Type,Type > Find Font,Adobe Illustrator Find Font Menu Item,,yes (id),ten-artai (v25),
+Type,Type > Change Case > UPPERCASE,UpperCase Change Case Item,,yes (id),ten-artai (v25),
+Type,Type > Change Case > lowercase,LowerCase Change Case Item,,yes (id),ten-artai (v25),
+Type,Type > Change Case > Title Case,Title Case Change Case Item,,yes (id),ten-artai (v25),
+Type,Type > Change Case > Sentence case,Sentence case Change Case Item,,yes (id),ten-artai (v25),
+Type,Type > Smart Punctuation,Adobe Illustrator Smart Punctuation Menu Item,,yes (id),ten-artai (v25),
+Type,Type > Optical Margin Alignment,Adobe Optical Alignment Item,,yes (id),ten-artai (v25),
+Type,Type > Show Hidden Characters,showHiddenChar,Alt+Ctrl+I,yes (id),ten-artai (v25),
+Type,Type > Type Orientation > Horizontal,type-horizontal,,yes (id),ten-artai (v25),
+Type,Type > Type Orientation > Vertical,type-vertical,,yes (id),ten-artai (v25),
+Type,Type > … > Single Right Quotation Marks,~singleRightQuote,Alt+Shift+],yes (id),shortcut export (key match),
+Type,Type > … > Single Left Quotation Marks,~singleLeftQuote,Alt+],yes (id),shortcut export (key match),
+Type,Type > … > Double Right Quotation Marks,~doubleRightQuote,Alt+Shift+[,yes (id),shortcut export (key match),
+Type,Type > … > Double Left Quotation Marks,~doubleLeftQuote,Alt+[,yes (id),shortcut export (key match),
+Type,Type > … > Discretionary Hyphen,~discretionaryHyphen,Shift+Ctrl+-,yes (id),shortcut export (key match),
+Type,Type > … > En Dash,~enDash,Alt+-,yes (id),shortcut export (key match),
+Type,Type > … > Em Dash,~emDash,Alt+Shift+-,yes (id),shortcut export (key match),
+Type,Type > … > Trademark Symbol,~trademarkSymbol,Alt+2,yes (id),shortcut export (key match),
+Type,Type > … > Section Symbol,~sectionSymbol,Alt+6,yes (id),shortcut export (key match),
+Type,Type > … > Registered Trademark Symbol,~registeredTrademark,Alt+R,yes (id),shortcut export (key match),
+Type,Type > … > Paragraph Symbol,~paragraphSymbol,Alt+7,yes (id),shortcut export (key match),
+Type,Type > … > Ellipsis,~ellipsis,Alt+;,yes (id),shortcut export (key match),
+Type,Type > … > Copyright Symbol,~copyright,Alt+G,yes (id),shortcut export (key match),
+Type,Type > … > Bullet,~bullet,Alt+8,yes (id),shortcut export (key match),
+Select,Select > All,selectall,Ctrl+A,yes (id),ten-artai (v25),
+Select,Select > All on Active Artboard,selectallinartboard,Alt+Ctrl+A,yes (id),ten-artai (v25),
+Select,Select > Deselect,deselectall,Shift+Ctrl+A,yes (id),ten-artai (v25),
+Select,Select > Reselect,Find Reselect menu item,Ctrl+6,yes (id),ten-artai (v25),
+Select,Select > Inverse,Inverse menu item,,yes (id),ten-artai (v25),
+Select,Select > Next Object Above,Selection Hat 8,Alt+Ctrl+],yes (id),ten-artai (v25),
+Select,Select > Next Object Below,Selection Hat 9,Alt+Ctrl+[,yes (id),ten-artai (v25),
+Select,Select > Same > Appearance,Find Appearance menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Appearance Attribute,Find Appearance Attributes menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Blending Mode,Find Blending Mode menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Fill & Stroke,Find Fill & Stroke menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Fill Color,Find Fill Color menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Opacity,Find Opacity menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Stroke Color,Find Stroke Color menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Stroke Weight,Find Stroke Weight menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Graphic Style,Find Style menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Symbol Instance,Find Symbol Instance menu item,,yes (id),ten-artai (v25),
+Select,Select > Same > Link Block Series,Find Link Block Series menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > All on Same Layers,Selection Hat 3,,yes (id),ten-artai (v25),
+Select,Select > Object > Direction Handles,Selection Hat 1,,yes (id),ten-artai (v25),
+Select,Select > Object > Not Aligned to Pixel Grid,Selection Hat 12,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Select,Select > Object > Bristle Brush Strokes,Bristle Brush Strokes menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > Brush Strokes,Brush Strokes menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > Clipping Masks,Clipping Masks menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > Stray Points,Stray Points menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > Text Objects,Text Objects menu item,,yes (id),ten-artai (v25),
+Select,Select > Object > Flash Dynamic Text,Dynamic Text,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Select,Select > Object > Flash Input Text,Input Text,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Select,Select > Save Selection,Selection Hat 10,,yes (id),ten-artai (v25),
+Select,Select > Edit Selection,Selection Hat 11,,yes (id),ten-artai (v25),
+Effect,Effect > Apply Last Effect,Adobe Apply Last Effect,Shift+Ctrl+E,yes (id),ten-artai (v25),
+Effect,Effect > Last Effect,Adobe Last Effect,Alt+Shift+Ctrl+E,yes (id),ten-artai (v25),
+Effect,Effect > Document Raster Effects Settings,Live Rasterize Effect Setting,,yes (id),ten-artai (v25),
+Effect,Effect > 3D > Extrude & Bevel,Live 3DExtrude,,yes (id),ten-artai (v25),
+Effect,Effect > 3D > Revolve,Live 3DRevolve,,yes (id),ten-artai (v25),
+Effect,Effect > 3D > Rotate,Live 3DRotate,,yes (id),ten-artai (v25),
+Effect,Effect > Convert to Shape > Rectangle,Live Rectangle,,yes (id),ten-artai (v25),
+Effect,Effect > Convert to Shape > Rounded Rectangle,Live Rounded Rectangle,,yes (id),ten-artai (v25),
+Effect,Effect > Convert to Shape > Ellipse,Live Ellipse,,yes (id),ten-artai (v25),
+Effect,Effect > Crop Marks,Live Trim Marks,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Free Distort,Live Free Distort,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Pucker & Bloat,Live Pucker & Bloat,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Roughen,Live Roughen,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Transform,Live Transform,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Tweak,Live Scribble and Tweak,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Twist,Live Twist,,yes (id),ten-artai (v25),
+Effect,Effect > Distort & Transform > Zig Zag,Live Zig Zag,,yes (id),ten-artai (v25),
+Effect,Effect > Path > Offset Path,Live Offset Path,,yes (id),ten-artai (v25),
+Effect,Effect > Path > Outline Object,Live Outline Object,,yes (id),ten-artai (v25),
+Effect,Effect > Path > Outline Stroke,Live Outline Stroke,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Add,Live Pathfinder Add,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Intersect,Live Pathfinder Intersect,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Exclude,Live Pathfinder Exclude,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Subtract,Live Pathfinder Subtract,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Minus Back,Live Pathfinder Minus Back,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Divide,Live Pathfinder Divide,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Trim,Live Pathfinder Trim,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Merge,Live Pathfinder Merge,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Crop,Live Pathfinder Crop,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Outline,Live Pathfinder Outline,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Hard Mix,Live Pathfinder Hard Mix,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Soft Mix,Live Pathfinder Soft Mix,,yes (id),ten-artai (v25),
+Effect,Effect > Pathfinder > Trap,Live Pathfinder Trap,,yes (id),ten-artai (v25),
+Effect,Effect > Rasterize,Live Rasterize,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Drop Shadow,Live Adobe Drop Shadow,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Feather,Live Feather,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Inner Glow,Live Inner Glow,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > outer Glow,Live Outer Glow,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Round Corners,Live Adobe Round Corners,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Scribble,Live Scribble Fill,,yes (id),ten-artai (v25),
+Effect,Effect > SVG Filters > Apply SVG Filter,Live SVG Filters,,yes (id),ten-artai (v25),
+Effect,Effect > SVG Filters > Import SVG Filter,SVG Filter Import,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Arc,Live Deform Arc,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Arc Lower,Live Deform Arc Lower,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Arc Upper,Live Deform Arc Upper,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Arch,Live Deform Arch,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Bulge,Live Deform Bulge,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Shell Lower,Live Deform Shell Lower,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Shell Upper,Live Deform Shell Upper,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Flag,Live Deform Flag,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Wave,Live Deform Wave,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Fish,Live Deform Fish,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Rise,Live Deform Rise,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Fisheye,Live Deform Fisheye,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Inflate,Live Deform Inflate,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Squeeze,Live Deform Squeeze,,yes (id),ten-artai (v25),
+Effect,Effect > Warp > Twist,Live Deform Twist,,yes (id),ten-artai (v25),
+Effect,Effect > Effect Gallery,Live PSAdapter_plugin_GEfc,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Colored Pencil,Live PSAdapter_plugin_ClrP,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Cutout,Live PSAdapter_plugin_Ct,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Effect,Effect > Artistic > Dry Brush,Live PSAdapter_plugin_DryB,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Film Grain,Live PSAdapter_plugin_FlmG,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Fresco,Live PSAdapter_plugin_Frsc,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Neon Glow,Live PSAdapter_plugin_NGlw,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Paint Daubs,Live PSAdapter_plugin_PntD,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Palette Knife,Live PSAdapter_plugin_PltK,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Plastic Wrap,Live PSAdapter_plugin_PlsW,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Poster Edges,Live PSAdapter_plugin_PstE,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Rough Pastels,Live PSAdapter_plugin_RghP,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Smudge Stick,Live PSAdapter_plugin_SmdS,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Sponge,Live PSAdapter_plugin_Spng,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Underpainting,Live PSAdapter_plugin_Undr,,yes (id),ten-artai (v25),
+Effect,Effect > Artistic > Watercolor,Live PSAdapter_plugin_Wtrc,,yes (id),ten-artai (v25),
+Effect,Effect > Blur > Gaussian Blur,Live PSAdapter_plugin_GblR,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Effect,Effect > Blur > Radial Blur,Live PSAdapter_plugin_RdlB,,yes (id),ten-artai (v25),
+Effect,Effect > Blur > Smart Blur,Live PSAdapter_plugin_SmrB,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Accented Edges,Live PSAdapter_plugin_AccE,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Angled Strokes,Live PSAdapter_plugin_AngS,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Crosshatch,Live PSAdapter_plugin_Crsh,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Dark Strokes,Live PSAdapter_plugin_DrkS,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Ink Outlines,Live PSAdapter_plugin_InkO,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Spatter,Live PSAdapter_plugin_Spt,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Effect,Effect > Brush Strokes > Sprayed Strokes,Live PSAdapter_plugin_SprS,,yes (id),ten-artai (v25),
+Effect,Effect > Brush Strokes > Sumi-e,Live PSAdapter_plugin_Smie,,yes (id),ten-artai (v25),
+Effect,Effect > Distort > Diffuse Glow,Live PSAdapter_plugin_DfsG,,yes (id),ten-artai (v25),
+Effect,Effect > Distort > Glass,Live PSAdapter_plugin_Gls,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Effect,Effect > Distort > Ocean Ripple,Live PSAdapter_plugin_OcnR,,yes (id),ten-artai (v25),
+Effect,Effect > Pixelate > Color Halftone,Live PSAdapter_plugin_ClrH,,yes (id),ten-artai (v25),
+Effect,Effect > Pixelate > Crystallize,Live PSAdapter_plugin_Crst,,yes (id),ten-artai (v25),
+Effect,Effect > Pixelate > Mezzotint,Live PSAdapter_plugin_Mztn,,yes (id),ten-artai (v25),
+Effect,Effect > Pixelate > Pointillize,Live PSAdapter_plugin_Pntl,,yes (id),ten-artai (v25),
+Effect,Effect > Sharpen > Unsharp Mask,Live PSAdapter_plugin_USMk,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Effect,Effect > Sketch > Bas Relief,Live PSAdapter_plugin_BsRl,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Chalk & Charcoal,Live PSAdapter_plugin_ChlC,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Charcoal,Live PSAdapter_plugin_Chrc,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Chrome,Live PSAdapter_plugin_Chrm,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Cont￩ Crayon,Live PSAdapter_plugin_CntC,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Graphic Pen,Live PSAdapter_plugin_GraP,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Halftone Pattern,Live PSAdapter_plugin_HlfS,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Note Paper,Live PSAdapter_plugin_NtPr,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Photocopy,Live PSAdapter_plugin_Phtc,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Plaster,Live PSAdapter_plugin_Plst,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Reticulation,Live PSAdapter_plugin_Rtcl,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Stamp,Live PSAdapter_plugin_Stmp,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Torn Edges,Live PSAdapter_plugin_TrnE,,yes (id),ten-artai (v25),
+Effect,Effect > Sketch > Water Paper,Live PSAdapter_plugin_WtrP,,yes (id),ten-artai (v25),
+Effect,Effect > Stylize > Glowing Edges,Live PSAdapter_plugin_GlwE,,yes (id),ten-artai (v25),
+Effect,Effect > Texture > Craquelure,Live PSAdapter_plugin_Crql,,yes (id),ten-artai (v25),
+Effect,Effect > Texture > Grain,Live PSAdapter_plugin_Grn,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Effect,Effect > Texture > Mosaic Tiles,Live PSAdapter_plugin_MscT,,yes (id),ten-artai (v25),
+Effect,Effect > Texture > Patchwork,Live PSAdapter_plugin_Ptch,,yes (id),ten-artai (v25),
+Effect,Effect > Texture > Stained Glass,Live PSAdapter_plugin_StnG,,yes (id),ten-artai (v25),
+Effect,Effect > Texture > Texturizer,Live PSAdapter_plugin_Txtz,,yes (id),ten-artai (v25),
+Effect,Effect > Video > De-Interlace,Live PSAdapter_plugin_Dntr,,yes (id),ten-artai (v25),
+Effect,Effect > Video > NTSC Colors,Live PSAdapter_plugin_NTSC,,yes (id),ten-artai (v25),
+View,View > Preview,preview,Ctrl+Y,yes (id),ten-artai (v25),
+View,View > Overprint Preview,ink,Alt+Shift+Ctrl+Y,yes (id),ten-artai (v25),
+View,View > Pixel Preview,raster,Alt+Ctrl+Y,yes (id),ten-artai (v25),
+View,View > Proof Setup > Document CMYK > ,proof-document,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Legacy Macintosh RGB (Gamma 1.8),proof-mac-rgb,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Internet Standard RGB (sRGB),proof-win-rgb,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Monitor RGB,proof-monitor-rgb,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Color blindness &#8211; Protanopia-type,proof-colorblindp,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Color blindness &#8211; Deuteranopia-type,proof-colorblindd,,yes (id),ten-artai (v25),
+View,View > Proof Setup > Customize,proof-custom,,yes (id),ten-artai (v25),
+View,View > Proof Colors,proofColors,,yes (id),ten-artai (v25),
+View,View > Zoom In,zoomin,Ctrl+=,yes (id),ten-artai (v25),
+View,View > Zoom Out,zoomout,Ctrl+-,yes (id),ten-artai (v25),
+View,View > Fit Artboard in Window,fitin,Ctrl+0,yes (id),ten-artai (v25),
+View,View > Fit All in Window,fitall,Alt+Ctrl+0,yes (id),ten-artai (v25),
+View,View > Actual Size,actualsize,Ctrl+1,yes (id),ten-artai (v25),
+View,View > Hide Edges,edge,Ctrl+H,yes (id),ten-artai (v25),
+View,View > Hide Artboards,artboard,Shift+Ctrl+H,yes (id),ten-artai (v25),
+View,View > Hide Print Tiling,pagetiling,,yes (id),ten-artai (v25),
+View,View > Show Slices,AISlice Feedback Menu,,yes (id),ten-artai (v25),
+View,View > Lock Slices,AISlice Lock Menu,,yes (id),ten-artai (v25),
+View,View > Show Template,showtemplate,Shift+Ctrl+W,yes (id),ten-artai (v25),
+View,View > Rulers > Show Rulers,ruler,Ctrl+R,yes (id),ten-artai (v25),
+View,View > Rulers > Show Video Rulers,videoruler,,yes (id),ten-artai (v25),
+View,View > Rulers > Change to Global Rulers,rulerCoordinateSystem,Alt+Ctrl+R,yes (id),ten-artai (v25),
+View,View > Hide Bounding Box,AI Bounding Box Toggle,Shift+Ctrl+B,yes (id),ten-artai (v25),
+View,View > Show Transparency Grid,TransparencyGrid Menu Item,Shift+Ctrl+D,yes (id),ten-artai (v25),
+View,View > Show Text Threads,textthreads,Shift+Ctrl+Y,yes (id),ten-artai (v25),
+View,View > Hide Gradient Annotator,Gradient Feedback,Alt+Ctrl+G,yes (id),ten-artai (v25),
+View,View > Show Live Paint Gaps,Show Gaps Planet X,,yes (id),ten-artai (v25),
+View,View > Guides > Hide Guides,showguide,Ctrl+;,yes (id),ten-artai (v25),
+View,View > Guides > Lock Guides,lockguide,Alt+Ctrl+;,yes (id),ten-artai (v25),
+View,View > Guides > Make Guides,makeguide,Ctrl+5,yes (id),ten-artai (v25),
+View,View > Guides > Release Guides,releaseguide,Alt+Ctrl+5,yes (id),ten-artai (v25),
+View,View > Guides > Clear Guides,clearguide,,yes (id),ten-artai (v25),
+View,View > Smart Guides,Snapomatic on-off menu item,Ctrl+U,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Show Grid,Show Perspective Grid,Shift+Ctrl+I,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Show Rulers,Show Ruler,,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Snap to Grid,Snap to Grid,,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Lock Grid,Lock Perspective Grid,,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Lock Station Point,Lock Station Point,,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Define Grid,Define Perspective Grid,,yes (id),ten-artai (v25),
+View,View > Perspective Grid > Save Grid as Preset,Save Perspective Grid as Preset,,yes (id),ten-artai (v25),
+View,View > Show Grid,showgrid,Ctrl+',yes (id),ten-artai (v25),
+View,View > Snap to Grid,snapgrid,Shift+Ctrl+',yes (id),ten-artai (v25),
+View,View > Snap to Point,snappoint,Alt+Ctrl+',yes (id),ten-artai (v25),
+View,View > New View,newview,,yes (id),ten-artai (v25),
+View,View > Edit Views,editview,,yes (id),ten-artai (v25),
+View,View > … > Reset Rotate View,resetRotationView,Shift+Ctrl+1,yes (id),shortcut export (key match),
+View,View > … > GPU Preview,OpenGLCompositorPreview,Ctrl+E,yes (id),shortcut export (key match),
+Window,Window > New Window,newwindow,,yes (id),ten-artai (v25),
+Window,Window > Arrange > Cascade,cascade,,yes (id),ten-artai (v25),
+Window,Window > Arrange > Tile,tile,,yes (id),ten-artai (v25),
+Window,Window > Arrange > Float in Window,floatInWindow,,yes (id),ten-artai (v25),
+Window,Window > Arrange > Float All in Windows,floatAllInWindows,,yes (id),ten-artai (v25),
+Window,Window > Arrange > Consolidate All Windows,consolidateAllWindows,,yes (id),ten-artai (v25),
+Window,Window > Workspace > Save Workspace,Adobe Save Workspace,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Window,Window > Workspace > New Workspace,Adobe New Workspace,,yes (id),ten-artai (v25),
+Window,Window > Workspace > Manage Workspaces,Adobe Manage Workspace,,yes (id),ten-artai (v25),
+Window,Window > CSS Menu,CSS Menu Item,,yes (id),ten-artai (v25),
+Window,Window > Tools,AdobeBuiltInToolbox1,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Window,Window > Actions,Adobe Action Palette,,yes (id),ten-artai (v25),
+Window,Window > Align,AdobeAlignObjects2,Shift+F7,yes (id),ten-artai (v25),
+Window,Window > Appearance,Style Palette,Shift+F6,yes (id),ten-artai (v25),
+Window,Window > Artboards,Adobe Artboard Palette,,yes (id),ten-artai (v25),
+Window,Window > Attributes,internal palettes posing as plug-in menus-attributes,Ctrl+F11,yes (id),ten-artai (v25),
+Window,Window > Brushes,Adobe BrushManager Menu Item,F5,yes (id),ten-artai (v25),
+Window,Window > Color,Adobe Color Palette,F6,yes (id),ten-artai (v25),
+Window,Window > Color Guide,Adobe Harmony Palette,Shift+F3,yes (id),ten-artai (v25),
+Window,Window > Kuler Panel,Adobe Illustrator Kuler Panel,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Window,Window > Document Info,DocInfo1,,yes (id),ten-artai (v25),
+Window,Window > Flattener Preview,Adobe Flattening Preview,,yes (id),ten-artai (v25),
+Window,Window > Gradient,Adobe Gradient Palette,Ctrl+F9,yes (id),ten-artai (v25),
+Window,Window > Graphic Styles,Adobe Style Palette,Shift+F5,yes (id),ten-artai (v25),
+Window,Window > Info,internal palettes posing as plug-in menus-info,Ctrl+F8,yes (id),ten-artai (v25),
+Window,Window > Layers,AdobeLayerPalette1,F7,yes (id),ten-artai (v25),
+Window,Window > Links,Adobe LinkPalette Menu Item,,yes (id),ten-artai (v25),
+Window,Window > Magic Wand,AI Magic Wand,,yes (id),ten-artai (v25),
+Window,Window > Navigator,AdobeNavigator,,yes (id),ten-artai (v25),
+Window,Window > Pathfinder,Adobe PathfinderUI,Shift+Ctrl+F9,yes (id),ten-artai (v25),
+Window,Window > Separations Preview,Adobe Separation Preview Panel,,yes (id),ten-artai (v25),
+Window,Window > Stroke,Adobe Stroke Palette,Ctrl+F10,yes (id),ten-artai (v25),
+Window,Window > SVG Interactivity,Adobe SVG Interactivity Palette,,yes (id),ten-artai (v25),
+Window,Window > Swatches,Adobe Swatches Menu Item,,yes (id),ten-artai (v25),
+Window,Window > Symbols,Adobe Symbol Palette,Shift+Ctrl+F11,yes (id),ten-artai (v25),
+Window,Window > Transform,AdobeTransformObjects1,Shift+F8,yes (id),ten-artai (v25),
+Window,Window > Transparency,Adobe Transparency Palette Menu Item,Shift+Ctrl+F10,yes (id),ten-artai (v25),
+Window,Window > Variables,Adobe Variables Palette Menu Item,,yes (id),ten-artai (v25),
+Window,Window > Character,internal palettes posing as plug-in menus-character,Ctrl+T,yes (id),ten-artai (v25),
+Window,Window > Character Styles,Character Styles,,yes (id),ten-artai (v25),
+Window,Window > Glyphs,alternate glyph palette plugin 2,,yes (id),ten-artai (v25),
+Window,Window > OpenType,internal palettes posing as plug-in menus-opentype,Alt+Shift+Ctrl+T,yes (id),ten-artai (v25),
+Window,Window > Paragraph,internal palettes posing as plug-in menus-paragraph,Alt+Ctrl+T,yes (id),ten-artai (v25),
+Window,Window > Paragraph Styles,Adobe Paragraph Styles Palette,,yes (id),ten-artai (v25),
+Window,Window > Tabs,internal palettes posing as plug-in menus-tab,Shift+Ctrl+T,yes (id),ten-artai (v25),
+Window,Window > Other Library,Adobe Art Style Plugin Other libraries menu item,,yes (id),ten-artai (v25),
+Window,Window > Other Library,Adobe Symbol Palette Plugin Other libraries menu item,,yes (id),ten-artai (v25),
+Help,Help > Illustrator Help,helpcontent,F1,yes (id),ten-artai (v25),
+Help,Help > About Illustrator,about,,yes (id),ten-artai (v25),
+Help,Help > System Info,System Info,,yes (name),ten-artai (v25),id not in the 30.1 .kys; name is in the 30.1 shortcut export
+Other Panel,Other Panel > New Symbol,Adobe New Symbol Shortcut,F8,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Show Color Panel (Secondary),Adobe Color Palette Secondary,,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Actions Batch,Adobe Actions Batch,,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Add New Fill,Adobe New Fill Shortcut,Ctrl+/,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Add New Stroke,Adobe New Stroke Shortcut,Alt+Ctrl+/,yes (id),ten-artai (v25),
+Other Panel,Other Panel > New Graphic Style,Adobe New Style Shortcut,,yes (id),ten-artai (v25),
+Other Panel,Other Panel > New Layer,AdobeLayerPalette2,Ctrl+L,yes (id),ten-artai (v25),
+Other Panel,Other Panel > New Layer with Dialog,AdobeLayerPalette3,Alt+Ctrl+L,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Update Link,Adobe Update Link Shortcut,,yes (id),ten-artai (v25),
+Other Panel,Other Panel > Navigator Options,AdobeNavigator2,,unconfirmed,ten-artai (v25),not found in 30.1's .kys or shortcut export: removed or renamed? check the menu
+Other Panel,Other Panel > New Swatch,Adobe New Swatch Shortcut Menu,,yes (id),ten-artai (v25),
+Other: Misc,Other: Misc > … > Superscript (Secondary),~superScript2,Shift+Ctrl++,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Subscript (Secondary),~subscript2,Alt+Shift+Ctrl++,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Navigate to Previous Document Group,navigateToPreviousDocumentGroup,Alt+Shift+Ctrl+F6,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Navigate to Next Document Group,navigateToNextDocumentGroup,Alt+Ctrl+F6,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Navigate to Previous Document,navigateToPreviousDocument,Shift+Ctrl+F6,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Navigate to Next Document,navigateToNextDocument,Ctrl+F6,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Zoom In (Secondary),zoomin2,Ctrl++,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Paste (Secondary),paste2,F4,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Copy (Secondary),copy2,F3,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Cut (Secondary),cut2,F2,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > New File (No Dialog),new2,Alt+Ctrl+N,yes (id),shortcut export (key match),
+Other: Misc,Other: Misc > … > Switch Units,switchUnits,Alt+Shift+Ctrl+U,yes (id),shortcut export (key match),
+Other: Object,Other: Object > … > Average & Join,avgAndJoin,Alt+Shift+Ctrl+J,yes (id),shortcut export (key match),
+Other: Object,Other: Object > … > Repeat Pathfinder,repeatPathfinder,Ctrl+4,yes (id),shortcut export (key match),
+Other: Object,Other: Object > … > Hide Others,hide2,Alt+Shift+Ctrl+3,yes (id),shortcut export (key match),
+Other: Object,Other: Object > … > Lock Others,lock2,Alt+Shift+Ctrl+2,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Underline,~textUnderline,Shift+Ctrl+U,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Superscript,~superScript,Shift+Ctrl+=,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Subscript,~subscript,Alt+Shift+Ctrl+=,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Toggle Line Composer,toggleLineComposer,Alt+Shift+Ctrl+C,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Toggle Auto Hyphenation,toggleAutoHyphen,Alt+Shift+Ctrl+H,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Justify All Lines,justifyAll,Shift+Ctrl+F,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Justify Text Left,justify,Shift+Ctrl+J,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Right Align Text,rightAlign,Shift+Ctrl+R,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Center Text,centerAlign,Shift+Ctrl+C,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Left Align Text,leftAlign,Shift+Ctrl+L,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Highlight Font,highlightFont,Alt+Shift+Ctrl+F,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Uniform Type,clearTypeScale,Shift+Ctrl+X,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Spacing,spacing,Alt+Shift+Ctrl+O,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Clear Tracking,clearTrack,Alt+Ctrl+Q,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Tracking,tracking,Alt+Ctrl+K,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Font Size Step Down,sizeStepDown,"Alt+Shift+Ctrl+,",yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Font Size Step Up,sizeStepUp,Alt+Shift+Ctrl+.,yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Point Size Down,faceSizeDown,"Shift+Ctrl+,",yes (id),shortcut export (key match),
+Other: Text,Other: Text > … > Point Size Up,faceSizeUp,Shift+Ctrl+.,yes (id),shortcut export (key match),
+Other: Select,Other: Select > … > Switch Selection Tools,switchSelTool,Ctrl+`,yes (id),shortcut export (key match),
+,,debugPalette,Alt+Shift+Ctrl+F12,yes (id),,no menu path known
+,,undo2,,yes (id),,no menu path known
+,,helpcontent2,,yes (id),,no menu path known
+,,closeAll2,,yes (id),,no menu path known
+,,Debug Panel,Alt+Shift+Ctrl+F11,yes (id),,no menu path known
+,,exitFocus,,yes (id),,no menu path known
+,,enterFocus,,yes (id),,no menu path known
+,,~textItalic,Shift+Ctrl+I,yes (id),,text-editing context; no menu path known
+,,~textBold,Shift+Ctrl+B,yes (id),,text-editing context; no menu path known
+,,justifyRight,,yes (id),,no menu path known
+,,justifyCenter,,yes (id),,no menu path known
+,,highlightFont2,Alt+Shift+Ctrl+M,yes (id),,no menu path known
+,,~kernCloser,Shift+Ctrl+[,yes (id),,text-editing context; no menu path known
+,,~kernFurther,Shift+Ctrl+],yes (id),,text-editing context; no menu path known
+,,systemInfo,,yes (id),,no menu path known
+,,wishform,,yes (id),,no menu path known
+,,supportCommunity,,yes (id),,no menu path known
+,,whatsNewContent,,yes (id),,no menu path known
+,,supportContent,,yes (id),,no menu path known
+,,AdobeSwatch_ Other libraries menu item,,yes (id),,no menu path known
+,,AdobeBrushMgrUI Other libraries menu item,,yes (id),,no menu path known
+,,ReflowWindowMenu,,yes (id),,no menu path known
+,,ReTypeWindowMenu,,yes (id),,no menu path known
+,,Adobe Property Palette,,yes (id),,no menu path known
+,,Adobe Pattern Panel Toggle,,yes (id),,no menu path known
+,,Adobe Vector Edge Panel,,yes (id),,no menu path known
+,,Adobe CSXS Extension com.adobe.DesignLibraries.angularLibraries,,yes (id),,no menu path known
+,,Adobe Vectorize Panel,,yes (id),,no menu path known
+,,Adobe History Panel Menu Item,,yes (id),,no menu path known
+,,Adobe SmartExport Panel Menu Item,,yes (id),,no menu path known
+,,Adobe 3D Panel,,yes (id),,no menu path known
+,,Manage Tools Panel,,yes (id),,no menu path known
+,,New Tools Panel,,yes (id),,no menu path known
+,,Adobe Quick Toolbar Menu,,yes (id),,no menu path known
+,,Adobe Basic Toolbar Menu,,yes (id),,no menu path known
+,,Adobe Advanced Toolbar Menu,,yes (id),,no menu path known
+,,drover control palette plugin,,yes (id),,no menu path known
+,,Adobe Reset Workspace,,yes (id),,no menu path known
+,,Browse Add-Ons Menu,,yes (id),,no menu path known
+,,view10,,yes (id),,no menu path known
+,,view9,,yes (id),,no menu path known
+,,view8,,yes (id),,no menu path known
+,,view7,,yes (id),,no menu path known
+,,view6,,yes (id),,no menu path known
+,,view5,,yes (id),,no menu path known
+,,view4,,yes (id),,no menu path known
+,,view3,,yes (id),,no menu path known
+,,view2,,yes (id),,no menu path known
+,,view1,,yes (id),,no menu path known
+,,glyphSnapping,,yes (id),,no menu path known
+,,pixelconstraints,,yes (id),,no menu path known
+,,Live Corner Annotator,,yes (id),,no menu path known
+,,rotateViewToSelection,,yes (id),,no menu path known
+,,RotateViewNegative180,,yes (id),,no menu path known
+,,RotateViewNegative150,,yes (id),,no menu path known
+,,RotateViewNegative135,,yes (id),,no menu path known
+,,RotateViewNegative120,,yes (id),,no menu path known
+,,RotateViewNegative90,,yes (id),,no menu path known
+,,RotateViewNegative60,,yes (id),,no menu path known
+,,RotateViewNegative45,,yes (id),,no menu path known
+,,RotateViewNegative30,,yes (id),,no menu path known
+,,RotateViewNegative15,,yes (id),,no menu path known
+,,RotateViewZero,,yes (id),,no menu path known
+,,RotateView15,,yes (id),,no menu path known
+,,RotateView30,,yes (id),,no menu path known
+,,RotateView45,,yes (id),,no menu path known
+,,RotateView60,,yes (id),,no menu path known
+,,RotateView90,,yes (id),,no menu path known
+,,RotateView120,,yes (id),,no menu path known
+,,RotateView135,,yes (id),,no menu path known
+,,RotateView150,,yes (id),,no menu path known
+,,RotateView180,,yes (id),,no menu path known
+,,Adobe Presentation Mode,,yes (id),,no menu path known
+,,TrimView,,yes (id),,no menu path known
+,,Live PSAdapter_plugin_Grn ,,yes (id),,no menu path known
+,,Live PSAdapter_plugin_Gls ,,yes (id),,no menu path known
+,,Live PSAdapter_plugin_Spt ,,yes (id),,no menu path known
+,,Live Adobe PSL Gaussian Blur,,yes (id),,no menu path known
+,,Live PSAdapter_plugin_Ct  ,,yes (id),,no menu path known
+,,Live Adobe Geometry3D Materials,,yes (id),,no menu path known
+,,Live Adobe Geometry3D Rotate,,yes (id),,no menu path known
+,,Live Adobe Geometry3D Inflate,,yes (id),,no menu path known
+,,Live Adobe Geometry3D Revolve,,yes (id),,no menu path known
+,,Live Adobe Geometry3D Extrude,,yes (id),,no menu path known
+,,Selection Hat 14,,yes (id),,no menu path known
+,,SmartEdit Menu Item,,yes (id),,no menu path known
+,,Area Text Objects menu item,,yes (id),,no menu path known
+,,Point Text Objects menu item,,yes (id),,no menu path known
+,,Find Text Fill Stroke Color menu item,,yes (id),,no menu path known
+,,Find Text Stroke Color menu item,,yes (id),,no menu path known
+,,Find Text Fill Color menu item,,yes (id),,no menu path known
+,,Find Text Font Size menu item,,yes (id),,no menu path known
+,,Find Text Font Family Style Size menu item,,yes (id),,no menu path known
+,,Find Text Font Family Style menu item,,yes (id),,no menu path known
+,,Find Text Font Family menu item,,yes (id),,no menu path known
+,,Find Live Shape menu item,,yes (id),,no menu path known
+,,convertlegacyText4,,yes (id),,no menu path known
+,,convertlegacyText3,,yes (id),,no menu path known
+,,convertlegacyText2,,yes (id),,no menu path known
+,,convertlegacyText1,,yes (id),,no menu path known
+,,convertlegacyText,,yes (id),,no menu path known
+,,~placeHolderText,,yes (id),,no menu path known
+,,~forcedLineBreak,,yes (id),,no menu path known
+,,~thinSpace,Alt+Shift+Ctrl+M,yes (id),,text-editing context; no menu path known
+,,~hairSpace,,yes (id),,no menu path known
+,,~nonBreakingSpace,,yes (id),,no menu path known
+,,~enSpace,Shift+Ctrl+N,yes (id),,text-editing context; no menu path known
+,,~emSpace,Shift+Ctrl+M,yes (id),,text-editing context; no menu path known
+,,Adobe IllustratorUI Resolve Missing Font,,yes (id),,no menu path known
+,,textpathtypeOptions,,yes (id),,no menu path known
+,,textpathtypeGravity,,yes (id),,no menu path known
+,,textpathtypestairs,,yes (id),,no menu path known
+,,textpathtype3d,,yes (id),,no menu path known
+,,textpathtypeSkew,,yes (id),,no menu path known
+,,textpathtypeRainbow,,yes (id),,no menu path known
+,,areatextoptions,,yes (id),,no menu path known
+,,point-area,,yes (id),,no menu path known
+,,Browse Typekit Fonts Menu IllustratorUI,,yes (id),,no menu path known
+,,collectForExportMultipleAsset,,yes (id),,no menu path known
+,,collectForExportSingleAsset,,yes (id),,no menu path known
+,,Switch Orientation,,yes (id),,no menu path known
+,,Text Wrap Options...,,yes (id),,no menu path known
+,,Expand Image Tracing,,yes (id),,no menu path known
+,,Release Image Tracing,,yes (id),,no menu path known
+,,Make and Expand Image Tracing,,yes (id),,no menu path known
+,,Make Image Tracing,,yes (id),,no menu path known
+,,Edit Vector Edge,,yes (id),,no menu path known
+,,Release Vector Edge,,yes (id),,no menu path known
+,,Make Vector Edge,,yes (id),,no menu path known
+,,Expand Objects on Path,,yes (id),,no menu path known
+,,Options Objects on Path,,yes (id),,no menu path known
+,,Attach Objects on Path,,yes (id),,no menu path known
+,,Repeat Art Options,,yes (id),,no menu path known
+,,Release Repeat Art,,yes (id),,no menu path known
+,,Make Symmetry Repeat,,yes (id),,no menu path known
+,,Make Grid Repeat,,yes (id),,no menu path known
+,,Make Radial Repeat,,yes (id),,no menu path known
+,,Partial Rearrange Edit,,yes (id),,no menu path known
+,,Partial Rearrange Release,,yes (id),,no menu path known
+,,Partial Rearrange Make,,yes (id),,no menu path known
+,,Adobe Pattern Tile Color,,yes (id),,no menu path known
+,,Adobe Make Pattern,,yes (id),,no menu path known
+,,Expand Shape,,yes (id),,no menu path known
+,,Convert to Shape,,yes (id),,no menu path known
+,,Rows and Columns....,,yes (id),,no menu path known
+,,smooth menu item,,yes (id),,no menu path known
+,,Reverse Path Direction,,yes (id),,no menu path known
+,,GenAIConsolidatedVariations,,yes (id),,no menu path known
+,,GenAIConsolidatedPatterns,,yes (id),,no menu path known
+,,GenAIConsolidatedRecolor,,yes (id),,no menu path known
+,,GenAIConsolidatedBleed,,yes (id),,no menu path known
+,,Gen Expand Object Combine,,yes (id),,no menu path known
+,,Gen Expand Object Make,,yes (id),,no menu path known
+,,GenAIConsolidatedShapeFill,,yes (id),,no menu path known
+,,GenAIConsolidatedGenerateVectors,,yes (id),,no menu path known
+,,Make Pixel Perfect,,yes (id),,no menu path known
+,,Crop Image,,yes (id),,no menu path known
+,,Horizontal Distribute Right,,yes (id),,no menu path known
+,,Horizontal Distribute Center,,yes (id),,no menu path known
+,,Horizontal Distribute Left,,yes (id),,no menu path known
+,,Vertical Distribute Bottom,,yes (id),,no menu path known
+,,Vertical Distribute Center,,yes (id),,no menu path known
+,,Vertical Distribute Top,,yes (id),,no menu path known
+,,DevicesPref,,yes (id),,no menu path known
+,,ClipboardPref,,yes (id),,no menu path known
+,,FilePref,,yes (id),,no menu path known
+,,GPUPerformancePref,,yes (id),,no menu path known
+,,userInterfacePref,,yes (id),,no menu path known
+,,selectionPref,,yes (id),,no menu path known
+,,ImportSettings,,yes (id),,no menu path known
+,,ExportSettings,,yes (id),,no menu path known
+,,Generative Recolor Art Dialog,,yes (id),,no menu path known
+,,Edit Custom Dictionary...,,yes (id),,no menu path known
+,,Auto Spell Check,,yes (id),,no menu path known
+,,Search Adobe Stock,,yes (id),,no menu path known
