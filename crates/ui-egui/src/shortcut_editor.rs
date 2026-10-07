@@ -105,15 +105,29 @@ pub fn default_command_shortcut(id: &str) -> Option<&'static str> {
 
 /// Window menu items that show a panel (`window.panel {panel}`) with a default shortcut: (panel
 /// id, shortcut). Every icon panel can be given one in the editor (entry key `panel:<id>`).
+/// Default `Window → <panel>` bindings, in the Mac spelling the UI maps per platform.
+///
+/// Every one matches Illustrator 30.1: the shortcut export from a licensed install
+/// (`docs/parity/shortcuts-30.1.csv`) and Adobe's published default table
+/// (`shortcuts-default.csv`, "Function keys") agree on all of them. Matrix rows `MENU-0560`,
+/// `MENU-0561`, `MENU-0562`, `MENU-0563`, `MENU-0564`, `MENU-0565`, `MENU-0568`, `MENU-0569`,
+/// `MENU-0570`, `MENU-0571`, `MENU-0575`, `MENU-0576`, `MENU-0579`, `MENU-0580`, `MENU-0581`.
 pub const PANEL_SHORTCUTS: &[(&str, &str)] = &[
+    ("align", "Shift+F7"),
+    ("appearance", "Shift+F6"),
+    ("attributes", "Cmd+F11"),
+    ("brushes", "F5"),
     ("color", "F6"),
     ("colorGuide", "Shift+F3"),
-    ("appearance", "Shift+F6"),
-    ("graphicStyles", "Shift+F5"),
-    ("stroke", "Cmd+F10"),
     ("gradient", "Cmd+F9"),
+    ("graphicStyles", "Shift+F5"),
+    ("info", "Cmd+F8"),
+    ("layers", "F7"),
+    ("pathfinder", "Cmd+Shift+F9"),
+    ("stroke", "Cmd+F10"),
+    ("symbols", "Cmd+Shift+F11"),
+    ("transform", "Shift+F8"),
     ("transparency", "Cmd+Shift+F10"),
-    ("attributes", "Cmd+F11"),
 ];
 
 /// Default shortcut of an entry key (`tool:<id>`, `panel:<id>` or a command id).
@@ -256,7 +270,7 @@ pub fn entries() -> &'static [Entry] {
             }
             v.push(Entry { key: c.id.into(), label: c.label.into(), group: c.menu.join(" › "), is_tool: false });
         }
-        v.extend(crate::state::ICON_PANELS.iter().map(|(id, label, _)| Entry {
+        v.extend(crate::state::all_panels().map(|(id, label)| Entry {
             key: format!("panel:{id}"),
             label: label.to_string(),
             group: "Window".into(),
@@ -897,5 +911,74 @@ mod tests {
         assert!(entries().iter().any(|e| e.key == "edit.undo"));
         let mut seen = HashSet::new();
         assert!(entries().iter().all(|e| seen.insert(e.key.clone())), "duplicate entries");
+    }
+
+    /// Parity: the Window menu's function keys, as Illustrator 30.1 binds them.
+    ///
+    /// Each pair is (panel id, the key the reference app uses, matrix row). The expected values are
+    /// the Windows spelling both of our sources record — the licensed-install shortcut export and
+    /// Adobe's published default table — and the app stores the Mac spelling, so `Cmd` folds to
+    /// `Ctrl` here exactly as `cargo xtask parity --audit` folds it.
+    const PANEL_PARITY: &[(&str, &str, &str)] = &[
+        ("align", "Shift+F7", "MENU-0560"),
+        ("appearance", "Shift+F6", "MENU-0561"),
+        ("attributes", "Ctrl+F11", "MENU-0562"),
+        ("brushes", "F5", "MENU-0563"),
+        ("color", "F6", "MENU-0564"),
+        ("colorGuide", "Shift+F3", "MENU-0565"),
+        ("gradient", "Ctrl+F9", "MENU-0568"),
+        ("graphicStyles", "Shift+F5", "MENU-0569"),
+        ("info", "Ctrl+F8", "MENU-0570"),
+        ("layers", "F7", "MENU-0571"),
+        ("pathfinder", "Shift+Ctrl+F9", "MENU-0575"),
+        ("stroke", "Ctrl+F10", "MENU-0576"),
+        ("symbols", "Shift+Ctrl+F11", "MENU-0579"),
+        ("transform", "Shift+F8", "MENU-0580"),
+        ("transparency", "Shift+Ctrl+F10", "MENU-0581"),
+    ];
+
+    /// (sorted modifiers, key), so `Shift+Ctrl+F9` and `Cmd+Shift+F9` compare equal.
+    fn chord(text: &str) -> (Vec<String>, String) {
+        let mut mods = vec![];
+        let mut key = String::new();
+        for part in text.split('+') {
+            match part.to_ascii_lowercase().as_str() {
+                "cmd" | "command" | "ctrl" | "control" => mods.push("Ctrl".to_string()),
+                "opt" | "option" | "alt" => mods.push("Alt".to_string()),
+                "shift" => mods.push("Shift".to_string()),
+                _ => key = part.to_ascii_uppercase(),
+            }
+        }
+        mods.sort();
+        (mods, key)
+    }
+
+    #[test]
+    fn panel_shortcuts_match_the_reference_app() {
+        for (panel, want, row) in PANEL_PARITY {
+            let got = panel_shortcut(panel).unwrap_or_else(|| panic!("{row}: {panel} has no shortcut"));
+            assert_eq!(chord(got), chord(want), "{row}: {panel} binds {got}, the reference app uses {want}");
+        }
+    }
+
+    #[test]
+    fn every_bound_panel_is_reachable_and_rebindable() {
+        let known: HashSet<&str> = crate::state::all_panels().map(|(id, _)| id).collect();
+        for (panel, _) in PANEL_SHORTCUTS {
+            // Not in `all_panels` means the key would show in the menu and never fire, because
+            // `shortcuts::all_shortcuts` walks that list to build the dispatch table.
+            assert!(known.contains(panel), "`{panel}` has a shortcut but is not a panel `window.panel` can open");
+            assert!(entries().iter().any(|e| e.key == format!("panel:{panel}")), "`{panel}` cannot be rebound in Keyboard Shortcuts");
+        }
+    }
+
+    #[test]
+    fn no_two_panels_claim_the_same_key() {
+        let mut seen: std::collections::HashMap<(Vec<String>, String), &str> = std::collections::HashMap::new();
+        for (panel, sc) in PANEL_SHORTCUTS {
+            if let Some(other) = seen.insert(chord(sc), panel) {
+                panic!("`{panel}` and `{other}` both claim {sc}");
+            }
+        }
     }
 }

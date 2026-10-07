@@ -58,7 +58,7 @@ pub(crate) fn all_shortcuts() -> Vec<(KeyboardShortcut, &'static str, serde_json
             v.push((sc, c.0, json!({})));
         }
     }
-    for (panel, _, _) in crate::state::ICON_PANELS {
+    for (panel, _) in crate::state::all_panels() {
         if let Some(sc) = crate::shortcut_editor::panel_shortcut(panel).and_then(parse) {
             v.push((sc, "window.panel", json!({ "panel": panel })));
         }
@@ -423,6 +423,52 @@ mod tests {
         });
         out.textures_delta.clear();
         out
+    }
+
+    /// A key press, as egui delivers it.
+    fn press(key: Key, modifiers: egui::Modifiers) -> Vec<egui::Event> {
+        vec![egui::Event::Key { key, physical_key: None, pressed: true, repeat: false, modifiers }]
+    }
+
+    /// Parity: the Window menu's function keys reach their panel, not just show a key in the menu.
+    ///
+    /// `window.panel` is one parameterised command behind every Window entry, so a binding only
+    /// fires if the panel is in `state::all_panels`, which [`all_shortcuts`] walks — and `layers`
+    /// is a dock tab rather than an icon panel, so it was the one missing from that list.
+    ///
+    /// A dock tab and an icon panel land differently: with the dock expanded a tab switches
+    /// `dock_tab` (it has its own column, so there is no flyout), while an icon panel opens as
+    /// `open_panel`. Rows `MENU-0563` (Brushes F5), `MENU-0564` (Color F6), `MENU-0571` (Layers
+    /// F7), `MENU-0569` (Graphic Styles Shift+F5).
+    #[test]
+    fn panel_function_keys_reach_their_panel() {
+        let fresh = || {
+            let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Default::default());
+            app.session.execute("file.new", &json!({"width": 200, "height": 200})).unwrap();
+            app.ui.open_panel = None;
+            app
+        };
+        for (key, modifiers, panel) in [
+            (Key::F5, egui::Modifiers::NONE, "brushes"),
+            (Key::F6, egui::Modifiers::NONE, "color"),
+            // Shift+F5 must win over the plain F5 binding.
+            (Key::F5, egui::Modifiers::SHIFT, "graphicStyles"),
+        ] {
+            let mut app = fresh();
+            frame(&mut app, press(key, modifiers));
+            assert_eq!(app.ui.open_panel.as_deref(), Some(panel), "{modifiers:?}+{key:?} should open the {panel} panel");
+        }
+
+        // Layers is a dock tab: expanded, F7 selects its tab; collapsed, it pops out like a panel.
+        let mut app = fresh();
+        app.ui.dock_tab = crate::state::DockTab::Properties;
+        frame(&mut app, press(Key::F7, egui::Modifiers::NONE));
+        assert_eq!(app.ui.dock_tab, crate::state::DockTab::Layers, "F7 should select the Layers dock tab");
+
+        let mut app = fresh();
+        app.ui.dock_collapsed = true;
+        frame(&mut app, press(Key::F7, egui::Modifiers::NONE));
+        assert_eq!(app.ui.open_panel.as_deref(), Some("layers"), "F7 should pop Layers out of a collapsed dock");
     }
 
     #[test]

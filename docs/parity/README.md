@@ -112,8 +112,9 @@ into the right menu path* — nothing more. It says nothing about whether the di
 defaults, ranges and units match 30.1, which is what 1:1 actually requires. Promoting a row to
 `done` is hand work: verify the field against the reference app, write a test, cite both.
 
-As of the first pass (2026-10-08): **334 of 908 in-scope menu rows are `partial`**, 90 rows are
-`n/a`, 20 are in the menus as stubs, and 495 found no match. The 495 are the honest backlog, and
+As of 2026-10-08: of 908 in-scope menu rows, **15 are `done`** (the `Window → <panel>` function
+keys — implemented, matching 30.1, with a test), **319 are `partial`**, 90 are `n/a`, 20 are in the
+menus as stubs, and 495 found no match. The 495 are the honest backlog, and
 they are concentrated where upstream says they are — Effect (86), View (49), Type (50) — plus 175
 rows in `Menus/(path unknown)` whose source gave no menu path, which need their paths researched
 before they can be joined at all.
@@ -126,7 +127,12 @@ their own joins: the panel registry, the tool list, the effect registry, the pre
 
 Every row with `field: Shortcut` was verified against a licensed 30.1, so the audit compares it
 with the keys the app actually binds, folding `Cmd`→`Ctrl` and `Opt`→`Alt` and ignoring modifier
-order. On the first run: **77 agree, 2 disagree, 17 are unbound in the app.**
+order. Currently: **95 agree, 2 disagree, 2 unbound.**
+
+It compares each menu *item's* key, via `menus::item_shortcut`, not its command's — the Window menu
+runs one parameterised `window.panel {panel}` behind every entry, and each panel binds its own key,
+so reading the command's shortcut makes bound panels look unbound. The first run did exactly that
+and over-reported the gap; see [`open-questions.md`](open-questions.md#a-correction-to-the-first-runs-figures).
 
 A disagreement does **not** mean the app is wrong. It means one of the two is, and the first run
 showed that it can be either: both disagreements look like mis-extracted matrix rows rather than

@@ -134,6 +134,20 @@ pub const ICON_PANELS: &[(&str, &str, &str)] = &[
     (crate::panels::css_properties::ID, "CSS Properties", "globe"),
 ];
 
+/// Every panel `window.panel` can open, as (id, English label): the three dock tabs plus the icon
+/// panels. The dock tabs are not in [`ICON_PANELS`] because they have their own column, but they
+/// are panels like any other — they appear in the Window menu, they can carry a keyboard shortcut
+/// and the user can rebind them.
+pub fn all_panels() -> impl Iterator<Item = (&'static str, &'static str)> {
+    DockTab::ALL
+        .into_iter()
+        .map(|t| {
+            let (id, label, _) = t.info();
+            (id, label)
+        })
+        .chain(ICON_PANELS.iter().map(|(id, label, _)| (*id, *label)))
+}
+
 /// Groups of icon panels separated by dividers in the collapsed column.
 pub const ICON_PANEL_GROUPS: &[&[&str]] = &[
     &["color", "colorGuide"],

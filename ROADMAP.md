@@ -10,10 +10,44 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 
 > **Parity re-baseline in progress.** The scores below are upstream's self-assessment, inherited at
 > the fork. `docs/parity/matrix.csv` is replacing them with a row-level audit against a licensed
-> Illustrator 30.1: as of 2026-10-08, **334 of 908 in-scope menu rows** are confirmed `partial`
-> (the command exists and is wired to the right menu path), 90 need no code, 20 are stubs and 495
-> have no match. Panels, tools, effects, dialogs and preferences are not audited yet. Run
-> `cargo xtask parity` for the current figure, and prefer it to any number in this table.
+> Illustrator 30.1. As of 2026-10-08: **15 rows `done`** (implemented, matching the reference app,
+> with a test), **319 `partial`** (the command exists and is wired to the right menu path, fields
+> unverified), 90 need no code, 1,433 still `planned`. Panels, tools, effects, dialogs and
+> preferences are not audited yet. Run `cargo xtask parity` for the current figure, and prefer it
+> to any number in this table.
+
+## The parity programme (VectorStudio)
+
+The fork's own work, in order. Each item says what finishing it buys, because the ordering is by
+how much each one unblocks rather than by size.
+
+**1. Resolve the matrix's own errors.** `docs/parity/open-questions.md` items 1–4: 39 duplicated
+row pairs (the in-scope denominator is overstated ~2 %), and four `verified` rows whose shortcuts
+the app contradicts in ways that point at mis-extraction, not at app defects. Needs the licensed
+VM (`research/illustrator/`). **Until this lands every coverage figure carries known errors**, and
+a wrong `verified` row is worse than an unverified one because it gets implemented faithfully.
+
+**2. Bind the shortcuts the audit finds missing.** ✅ *Done 2026-10-08 for the 15
+`Window → <panel>` function keys* — seven were unbound, all 15 now `done` with a test
+(`shortcut_editor::tests::panel_shortcuts_match_the_reference_app`). The remaining two candidates
+are blocked on item 1. This is the cheapest class of fidelity win: the feature already exists and
+only its binding is wrong, and a power user notices immediately.
+
+**3. Extend the audit past the menus.** 918 in-scope rows are not `element_type: menu` — panels
+(372), features (174), tools (136), effects (117), dialogs (61), preferences (39), presets (29),
+formats (21) — and no join covers them, so they are invisible to every coverage figure. Each needs
+its own ground truth: `state::all_panels`, `vectorcraft_tools::catalog`, the effect registry,
+`prefs.list`. Panels and tools first; they are the largest blocks and both have a real registry to
+join against.
+
+**4. Research the 175 path-less rows.** Everything in `area: Menus/(path unknown)` came from a
+source with no menu path, so the audit cannot join it at all.
+`research/illustrator/probe-menus.ps1` dumps every menu command and its path from a licensed
+install. Until then these rows can never move off `planned`, whatever gets built.
+
+Then the interaction-fidelity pass proper — modifiers, cursors, per-context Properties panel,
+isolation mode — driven row by row from the verified matrix rather than from a side-by-side
+session alone.
 
 | Dimension | Status |
 |---|---|
@@ -56,9 +90,11 @@ since 2026-10-01.
 
 Ordered by how much each gap blocks someone from switching. Sizes are one-agent hours from the parity table.
 
-1. **Interaction fidelity:** go tool by tool and panel by panel against `plan/illustrator/05-tools.md`,
-   `06-panels.md` and `09-shortcuts.md`, covering modifier keys, cursors, the Properties panel per context and
-   isolation mode. Do it side by side with Illustrator where the owner allows. 60–90 h.
+1. **Interaction fidelity:** go tool by tool and panel by panel against `docs/parity/matrix.csv` and the
+   shortcut baselines beside it, covering modifier keys, cursors, the Properties panel per context and
+   isolation mode. `cargo xtask parity --audit` measures the shortcut half automatically (95 of 99 matched
+   menu rows now agree; the Window function keys landed 2026-10-08), so start from what it reports rather
+   than from a side-by-side session alone. 60–90 h.
 2. **Photoshop-style raster effects and the Effect Gallery:** about 55 filters (Artistic, Brush Strokes, Distort,
    Pixelate, Sketch, Stylize, Texture, Video) on the raster pipeline that drop shadows already use, applied at
    Document Raster Effects Settings resolution. Parallelizes well across agents. 28–42 h.
@@ -91,6 +127,10 @@ When a task lands, update this section, the parity table and "Shipped so far" in
 grade by behaviour against `plan/illustrator/`, not by whether a menu item exists.
 
 ## Shipped so far
+- **Parity (VectorStudio):** `docs/parity/matrix.csv` — 1,826 in-scope rows, 1,016 verified against a licensed
+  Illustrator 30.1 — with `cargo xtask parity` as a gate (a `done` row must cite the code that satisfies it) and
+  `--audit` joining the matrix to the app's real menu surface. First rows earned: the 15 `Window → <panel>`
+  function keys, seven of which were unbound (`shortcut_editor::PANEL_SHORTCUTS`), each with a test.
 - **Architecture:** 19+ crates with enforced layering (`cargo xtask layers`). Every action is a command (~400 engine + ~50 UI). Undo is unlimited via structural sharing. `command.batch` runs several commands as one transaction.
 - **Automation:**
   - Actions panel (record/playback, persisted), generic parameter dialogs for every "…" command.

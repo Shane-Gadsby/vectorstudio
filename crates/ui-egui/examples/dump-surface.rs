@@ -6,22 +6,28 @@
 //! registry alone is not enough, because commands the UI owns (`file.open`, which needs a file
 //! picker) carry no menu path of their own.
 //!
-//! Each row is `{path, label, kind, id?, shortcut?}`, where `kind` is one of:
-//! * `command` — wired to a command id, so something runs;
+//! Each row is `{path, label, kind, id?, shortcut?, params?}`, where `kind` is one of:
+//! * `command` — wired to a command id, so something runs. Its `shortcut` comes from
+//!   `menus::item_shortcut`, which resolves the *item's* key: the Window menu's entries all run
+//!   `window.panel`, and each panel has its own binding, so the command's own shortcut is wrong
+//!   for them;
 //! * `todo` — in the menu, not implemented (upstream's own stub marker);
 //! * `header` — a disabled section label, nothing to implement.
 
 use serde_json::{Value, json};
-use vectorcraft_ui_egui::menus::{Item, UI_COMMANDS, menu_tree};
+use vectorcraft_ui_egui::menus::{Item, UI_COMMANDS, item_shortcut, menu_tree};
 
 fn walk(prefix: &str, items: &[Item], out: &mut Vec<Value>) {
     for item in items {
         match item {
+            // The item's own shortcut, not its command's: `window.panel` is one command behind
+            // every Window menu entry, and each panel binds its own key.
             Item::Cmd(label, id, params) => out.push(json!({
                 "path": format!("{prefix} > {label}"),
                 "label": label,
                 "kind": "command",
                 "id": id,
+                "shortcut": item_shortcut(id, params),
                 "params": if params.is_null() { Value::Null } else { params.clone() },
             })),
             Item::Todo(label, shortcut) => out.push(json!({

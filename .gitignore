@@ -13,3 +13,6 @@ plan/
 # never reach this public fork. See docs/parity/README.md ("Reference fixtures").
 /fixtures/ai/
 /.research/
+
+# JetBrains IDE project state (Rider, CLion).
+/.idea/

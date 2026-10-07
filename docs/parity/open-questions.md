@@ -7,6 +7,20 @@ then update the matrix and strike the item.
 
 Ordered by how much damage they do if left alone.
 
+**Resolved since:** the 15 `Window → <panel>` function keys (`MENU-0560`…`MENU-0581`). Seven were
+genuinely unbound and now are bound, and all 15 are `done` with a test — see "A correction" below.
+
+### A correction to the first run's figures
+
+The first audit reported **17 unbound** panel shortcuts. That was wrong: it read each row's
+shortcut from the *command* spec, and every Window menu entry runs the one parameterised command
+`window.panel {panel}`, so the eight panels that already had bindings looked unbound. The dump now
+resolves each menu item's own key through `menus::item_shortcut`, and the honest figures are
+**95 agree, 2 disagree, 2 unbound** (from 88/2/9 before the seven were bound).
+
+The lesson is worth keeping: a parity audit that reads the wrong field invents work. When a number
+here looks surprising, check what the audit actually measured before believing it.
+
 ## 1. 39 duplicated row pairs (78 rows)
 
 The matrix merged two sources without de-duplicating, so 39 commands have two rows each — the same
@@ -51,21 +65,18 @@ rather than assuming.
 **Check at the same time** whether other rows in the same stretch of `Menus/View` are shifted by
 one, since a single off-by-one in the source would explain both this and item 2.
 
-## 4. 17 panel shortcuts the reference app has and the app does not bind
+## 4. Two perspective-grid shortcut rows the app does not bind
 
-Genuine missing work rather than a data question, listed here so it is not lost. All are
-`Window → <panel>` function keys, every row `verified`:
+Same family as items 2 and 3, and probably the same off-by-one:
 
-`Align` Shift+F7 · `Appearance` Shift+F6 · `Attributes` Ctrl+F11 · `Brushes` F5 · `Color` F6 ·
-`Color Guide` Shift+F3 · `Gradient` Ctrl+F9 · `Graphic Styles` Shift+F5 · `Info` Ctrl+F8 ·
-`Layers` F7 · `Pathfinder` Shift+Ctrl+F9 · `Stroke` Ctrl+F10 · `Symbols` Shift+Ctrl+F11 ·
-`Transform` Shift+F8 · `Transparency` Shift+Ctrl+F10
+- `MENU-0309` `View > Perspective Grid > Show Rulers` claims `Ctrl+R`. Adobe's published table
+  gives `Ctrl+R` to **Show/hide artboard rulers** (`View > Rulers`), a different command.
+- `MENU-0310` `View > Perspective Grid > Snap to Grid` claims `Shift+Ctrl+'`, which looks like the
+  `View > Snap to Grid` binding rather than the perspective-grid submenu's own.
 
-Plus `View > Perspective Grid > Show Rulers` (`Ctrl+R`) and
-`View > Perspective Grid > Snap to Grid` (`Shift+Ctrl+'`).
-
-A power user reaches for these constantly, the panels all exist already, and the fix is a shortcut
-on each `window.panel` command — so this is the cheapest fidelity win currently visible.
+Both are graded `verified`, so **probe them on the VM** before binding anything. Implementing a
+mis-extracted row is worse than leaving it unbound: it takes a key away from whatever really owns
+it, and the matrix then says the wrong thing twice.
 
 ## 5. 175 rows with no menu path
 

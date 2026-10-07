@@ -48,6 +48,9 @@ pub enum Evidence {
 pub struct Entry {
     pub kind: String,
     pub id: Option<String>,
+    /// The key this menu item binds, which is not always its command's: every Window entry runs
+    /// `window.panel`, and each panel has its own.
+    pub shortcut: Option<String>,
 }
 
 /// Compare menu paths the way a reader would: ignore case, ellipses, the `>`/`›` separators and
@@ -75,6 +78,7 @@ pub fn index(surface: &Value) -> BTreeMap<String, Entry> {
         let entry = Entry {
             kind: m.get("kind").and_then(Value::as_str).unwrap_or("command").to_owned(),
             id: m.get("id").and_then(Value::as_str).map(str::to_owned),
+            shortcut: m.get("shortcut").and_then(Value::as_str).filter(|s| !s.is_empty()).map(str::to_owned),
         };
         // A path that is both a command and a submenu parent counts as the command.
         out.entry(key).or_insert(entry);
@@ -296,8 +300,9 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
             continue;
         }
         let key = norm(row.get("element"));
-        let Some(id) = menu.get(&key).and_then(|e| e.id.as_deref()) else { continue };
-        let Some(verdict) = compare_shortcut(row.get("default"), bound.get(id).map(String::as_str)) else { continue };
+        let Some(entry) = menu.get(&key) else { continue };
+        let got = entry.shortcut.as_deref().or_else(|| entry.id.as_deref().and_then(|id| bound.get(id).map(String::as_str)));
+        let Some(verdict) = compare_shortcut(row.get("default"), got) else { continue };
         *sc_counts
             .entry(match verdict {
                 Shortcut::Same => "same",
@@ -306,7 +311,7 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
             })
             .or_default() += 1;
         if verdict != Shortcut::Same {
-            let got = bound.get(id).map(String::as_str).unwrap_or("(none)");
+            let got = got.unwrap_or("(none)");
             disagreements.push(format!("{:<10} {:<42} reference {:<18} app {got}", row.get("id"), row.get("element"), row.get("default")));
         }
     }
