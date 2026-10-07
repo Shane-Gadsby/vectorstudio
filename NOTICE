@@ -1,11 +1,15 @@
-VectorCraft
+VectorStudio
 Copyright (c) 2026 ArtCraft Team and the VectorCraft contributors.
+Copyright (c) 2026 the VectorStudio contributors.
 Licensed under the MIT License or the Apache License, Version 2.0, at your option
 (LICENSE-MIT, LICENSE-APACHE).
 
-The ArtCraft name, wordmark and logos in docs/brand/ are trademarks of the ArtCraft Team. They are
-not open source and are not covered by the license above; their terms are in
-docs/brand/LICENSE-brand.txt.
+VectorStudio is based on VectorCraft (https://github.com/storytold/vectorcraft) by the ArtCraft
+team and community, used under the license above.
+
+VectorStudio is not an ArtCraft product and is not affiliated with, sponsored by or endorsed by
+the ArtCraft Team. The ArtCraft name, wordmark and logos are trademarks of the ArtCraft Team; they
+are not open source, and they were removed from this fork as that project's brand license requires.
 
 Third-party material
 

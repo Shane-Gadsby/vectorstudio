@@ -1,4 +1,4 @@
-//! PDF → Document (hayro-interpret device that builds a VectorCraft node tree).
+//! PDF → Document (hayro-interpret device that builds a VectorStudio node tree).
 
 use std::collections::HashMap;
 use std::sync::{Arc, Mutex};
@@ -831,7 +831,7 @@ impl<'p> Builder<'p> {
         self.push_node(n);
     }
 
-    /// Convert a hayro paint to a VectorCraft paint and opacity (`stroke`: for a stroke).
+    /// Convert a hayro paint to a VectorStudio paint and opacity (`stroke`: for a stroke).
     fn paint(&mut self, p: &hayro_interpret::Paint<'_>, stroke: bool) -> (Paint, f32) {
         match p {
             hayro_interpret::Paint::Color(c) => {

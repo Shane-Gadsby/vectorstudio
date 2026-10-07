@@ -1,4 +1,4 @@
-//! VectorCraft desktop app.
+//! VectorStudio desktop app.
 //!
 //! Usage: `vectorcraft [--control <port>] [files…]`
 //!
@@ -63,16 +63,17 @@ fn discard_marked_text() {
     }
 }
 
-/// Where UI preferences live: ~/Library/Application Support/VectorCraft (macOS),
-/// %APPDATA%\VectorCraft (Windows), $XDG_CONFIG_HOME or ~/.config/vectorcraft (Linux).
+/// Where UI preferences live: ~/Library/Application Support/VectorStudio (macOS),
+/// %APPDATA%\VectorStudio (Windows), $XDG_CONFIG_HOME or ~/.config/vectorcraft (Linux).
 fn prefs_path() -> Option<std::path::PathBuf> {
-    prefs_path_for("VectorCraft", "vectorcraft")
+    prefs_path_for("VectorStudio", "vectorcraft")
 }
 
-/// The same place under the project's former name (DrawCraft): read once if there are no
-/// VectorCraft preferences yet, so settings survive the rename.
-fn legacy_prefs_path() -> Option<std::path::PathBuf> {
-    prefs_path_for("DrawCraft", "drawcraft")
+/// The same place under the names this project has had before (VectorCraft, which this is a fork
+/// of, and DrawCraft before that), newest first: read once if there are no VectorStudio
+/// preferences yet, so settings survive the renames.
+fn legacy_prefs_paths() -> impl Iterator<Item = std::path::PathBuf> {
+    [("VectorCraft", "vectorcraft"), ("DrawCraft", "drawcraft")].into_iter().filter_map(|(name, lower)| prefs_path_for(name, lower))
 }
 
 fn prefs_path_for(name: &str, lower: &str) -> Option<std::path::PathBuf> {
@@ -99,7 +100,7 @@ fn read_prefs() -> Option<vectorcraft_ui_egui::UiState> {
     if !prefs_enabled() {
         return None;
     }
-    let bytes = prefs_path().and_then(|p| std::fs::read(p).ok()).or_else(|| legacy_prefs_path().and_then(|p| std::fs::read(p).ok()))?;
+    let bytes = prefs_path().and_then(|p| std::fs::read(p).ok()).or_else(|| legacy_prefs_paths().find_map(|p| std::fs::read(p).ok()))?;
     serde_json::from_slice(&bytes).ok()
 }
 
@@ -287,7 +288,7 @@ fn main() -> eframe::Result {
     let power = power_preference(gpu_pref, eframe::wgpu::PowerPreference::from_env());
     let mut options = eframe::NativeOptions {
         viewport: egui::ViewportBuilder::default()
-            .with_title("VectorCraft")
+            .with_title("VectorStudio")
             .with_inner_size(window::DEFAULT_SIZE)
             .with_min_inner_size(window::MIN_SIZE)
             .with_drag_and_drop(true)
@@ -303,7 +304,7 @@ fn main() -> eframe::Result {
         create.power_preference = power;
     }
     eframe::run_native(
-        "VectorCraft",
+        "VectorStudio",
         options,
         Box::new(move |cc| {
             let mut app = VectorcraftApp::new(Session::new(), services());

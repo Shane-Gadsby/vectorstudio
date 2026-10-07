@@ -162,7 +162,7 @@ fn partial_catalogs_only_translate_strings_the_ui_shows() {
     }
 }
 
-/// VectorCraft › Language (`app.language`) sets the `interfaceLanguage` preference, which is what
+/// VectorStudio › Language (`app.language`) sets the `interfaceLanguage` preference, which is what
 /// persists; the checked item follows the preference, and a bad code is an error, not a change.
 #[test]
 fn language_command_sets_the_preference() {
@@ -331,7 +331,7 @@ const KEEPS_MENU_NAMES: [&str; 2] = ["cs", "ja"];
 /// names and the perspective grid presets (names, shown untranslated wherever else they appear).
 /// Each language's own name in the Language menu is left alone too.
 const MENU_KEEP_AS_IS: &[&str] = &[
-    "VectorCraft",
+    "VectorStudio",
     "OpenType",
     "Essentials",
     "Essentials Classic",

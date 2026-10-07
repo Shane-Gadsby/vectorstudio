@@ -1,4 +1,4 @@
-//! macOS: VectorCraft's menu tree as the native system menu bar (like Illustrator on the Mac).
+//! macOS: VectorStudio's menu tree as the native system menu bar (like Illustrator on the Mac).
 //! Items dispatch through the same command path as the in-window menus; enablement, check marks
 //! and dynamic labels ("Undo Move") are refreshed a few times per second, and the menu is rebuilt
 //! when saved views or recent files come and go.

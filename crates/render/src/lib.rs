@@ -1,4 +1,4 @@
-//! VectorCraft renderer: document → premultiplied RGBA pixels.
+//! VectorStudio renderer: document → premultiplied RGBA pixels.
 //!
 //! The backend is `vello_cpu` (SIMD, sparse strips). Callers give a *view transform* mapping
 //! document points to output pixels; the renderer culls by bounds, evaluates appearance stacks

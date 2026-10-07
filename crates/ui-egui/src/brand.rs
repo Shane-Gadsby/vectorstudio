@@ -1,4 +1,4 @@
-//! The VectorCraft brand mark: the app icon (the engraved dragon, `assets/app-icon/`, see its
+//! The VectorStudio brand mark: the app icon (the engraved dragon, `assets/app-icon/`, see its
 //! README). The PNG carries the icon's rounded corners; it is decoded once per context into a
 //! mipmapped texture, so it stays crisp from the 22 pt app-bar mark to the About box.
 

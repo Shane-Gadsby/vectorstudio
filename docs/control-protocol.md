@@ -396,7 +396,7 @@ for the next launch. While copies are written in the background `ui.inspect` lis
 ("Saving recovery data for <name>").
 
 Native save options: File → Save As to a native or `.ai` file opens the `saveOptions` dialog after the save panel
-(heading "VectorCraft Options" or "PDF-compatible .ai Options"). Fields: `separateArtboards`, `all` (true: every
+(heading "VectorStudio Options" or "PDF-compatible .ai Options"). Fields: `separateArtboards`, `all` (true: every
 artboard; false: `range`, such as "1-3, 5"), `includeLinked`, `embedProfiles`, `pdfCompatible`, `compress`, and for
 native files `version` and `preview`. A bad range keeps the dialog open; `ui.dialog.confirm` writes the file and the
 artboards' files.

@@ -1,6 +1,6 @@
 //! `cargo xtask brands`: no other vendor's product or company names in what users and agents read.
 //!
-//! VectorCraft names its own features; where a comparison is needed, text says "the reference
+//! VectorStudio names its own features; where a comparison is needed, text says "the reference
 //! app". Scanned:
 //! * string literals in Rust sources (command labels and params docs, `UI_COMMANDS`, menus, panels,
 //!   MCP tool definitions…). Comments and test code (`tests*.rs`, `*_tests.rs`, `tests/` and
@@ -358,7 +358,7 @@ line Pantone"; }
         assert_eq!(kind_of("crates/engine/tests/command_sweep.rs"), None);
         assert_eq!(kind_of(SELF), None);
         assert_eq!(kind_of("crates/ui-egui/Cargo.toml"), Some(Kind::Manifest));
-        assert_eq!(kind_of("docs/brand/LICENSE-brand.txt"), Some(Kind::Text));
+        assert_eq!(kind_of("docs/images/shot-1-neon.png"), Some(Kind::Text));
         assert_eq!(kind_of("packaging/linux/nfpm.yaml"), Some(Kind::Text));
         // Reference research names the reference app on purpose and reaches no user.
         assert_eq!(kind_of("docs/parity/matrix.csv"), None);

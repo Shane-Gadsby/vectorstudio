@@ -31,7 +31,7 @@ const MAX_DRAWN: usize = 1 << 24;
 const SHADING_SAMPLES: usize = 32;
 
 const FAR_AWAY: &str = "objects far outside the page were left out";
-const TOO_MUCH: &str = "the file draws more than VectorCraft reads: the rest was left out";
+const TOO_MUCH: &str = "the file draws more than VectorStudio reads: the rest was left out";
 const TILING_PATTERNS: &str = "pattern fills are filled with mid-grey";
 const SAMPLED_FUNCTIONS: &str = "shadings whose colours come from sampled functions are filled with their middle colour";
 

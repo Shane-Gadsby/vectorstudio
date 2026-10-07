@@ -26,7 +26,7 @@ pub const OPTIONS: &[FormatOption] = &[
         name: "version",
         ty: "integer",
         default: "3",
-        description: "the format version to write: 3 (current), or 2 or 1 for older VectorCraft versions (not compressed; newer features they don't know are lost there)",
+        description: "the format version to write: 3 (current), or 2 or 1 for older VectorStudio versions (not compressed; newer features they don't know are lost there)",
     },
     FormatOption {
         name: "preview",
@@ -138,7 +138,7 @@ pub(super) fn encode(cmd: &str, f: &Format, doc: &Document, p: &Value) -> Result
 }
 
 /// The ICC files of the profiles `doc` is tagged with that were loaded from files (the built-in
-/// ones are there wherever VectorCraft runs).
+/// ones are there wherever VectorStudio runs).
 fn embedded_profiles(doc: &Document) -> BTreeMap<String, Vec<u8>> {
     [&doc.color_profiles.rgb, &doc.color_profiles.cmyk]
         .into_iter()

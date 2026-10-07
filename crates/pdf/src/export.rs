@@ -195,7 +195,7 @@ impl Writer {
         };
 
         let mut pdf = krilla::Document::new_with(settings);
-        let mut meta = Metadata::new().creator("VectorCraft".into()).producer("VectorCraft".into());
+        let mut meta = Metadata::new().creator("VectorStudio".into()).producer("VectorStudio".into());
         if !title.is_empty() {
             meta = meta.title(title.to_string());
         }
@@ -573,7 +573,7 @@ fn color(c: &Color) -> krilla::color::Color {
     match *c {
         Color::Rgb { r, g, b } => rgb::Color::new(q(r), q(g), q(b)).into(),
         Color::Cmyk { c, m, y, k } => cmyk::Color::new(q(c), q(m), q(y), q(k)).into(),
-        // VectorCraft grey is ink coverage (0 = white); PDF DeviceGray is lightness.
+        // VectorStudio grey is ink coverage (0 = white); PDF DeviceGray is lightness.
         Color::Gray { k } => luma::Color::new(q(1.0 - k)).into(),
         Color::Lab { .. } => {
             let [r, g, b] = c.to_rgb();

@@ -7,11 +7,11 @@
   <key>CFBundleDevelopmentRegion</key>
   <string>en</string>
   <key>CFBundleDisplayName</key>
-  <string>VectorCraft</string>
+  <string>VectorStudio</string>
   <key>CFBundleName</key>
-  <string>VectorCraft</string>
+  <string>VectorStudio</string>
   <key>CFBundleExecutable</key>
-  <string>VectorCraft</string>
+  <string>VectorStudio</string>
   <key>CFBundleIdentifier</key>
   <string>ai.storyteller.vectorcraft</string>
   <key>CFBundleInfoDictionaryVersion</key>
@@ -24,12 +24,12 @@
   <string>@SHORT_VERSION@</string>
   <key>CFBundleVersion</key>
   <string>@SHORT_VERSION@</string>
-  <key>VectorCraftVersion</key>
+  <key>VectorStudioVersion</key>
   <string>@VERSION@</string>
-  <key>VectorCraftBuildCommit</key>
+  <key>VectorStudioBuildCommit</key>
   <string>@BUILD_SHA@</string>
   <key>CFBundleIconFile</key>
-  <string>VectorCraft</string>
+  <string>VectorStudio</string>
   <key>LSApplicationCategoryType</key>
   <string>public.app-category.graphics-design</string>
   <!-- Must match MACOSX_DEPLOYMENT_TARGET in package.sh. Big Sur is the first release on
@@ -43,23 +43,23 @@
   <key>NSRequiresAquaSystemAppearance</key>
   <false/>
   <key>NSHumanReadableCopyright</key>
-  <string>Copyright © the VectorCraft authors. MIT OR Apache-2.0.</string>
+  <string>Copyright © the VectorStudio authors. MIT OR Apache-2.0.</string>
 
-  <!-- VectorCraft's own format (.drawcraft is its name from before the rename). -->
+  <!-- VectorStudio's own format (.drawcraft is its name from before the rename). -->
   <key>UTExportedTypeDeclarations</key>
   <array>
     <dict>
       <key>UTTypeIdentifier</key>
       <string>ai.storyteller.vectorcraft.document</string>
       <key>UTTypeDescription</key>
-      <string>VectorCraft Document</string>
+      <string>VectorStudio Document</string>
       <key>UTTypeConformsTo</key>
       <array>
         <string>public.data</string>
         <string>public.image</string>
       </array>
       <key>UTTypeIconFile</key>
-      <string>VectorCraft</string>
+      <string>VectorStudio</string>
       <key>UTTypeTagSpecification</key>
       <dict>
         <key>public.filename-extension</key>

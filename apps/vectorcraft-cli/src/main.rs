@@ -1,4 +1,4 @@
-//! `vectorcraft-cli`: VectorCraft from the command line.
+//! `vectorcraft-cli`: VectorStudio from the command line.
 //!
 //! ```text
 //! vectorcraft-cli mcp [--connect 127.0.0.1:7979 | --headless]
@@ -50,7 +50,7 @@ fn stdout_failed(e: std::io::Error) -> ! {
 }
 
 const USAGE: &str = "\
-vectorcraft-cli — VectorCraft automation
+vectorcraft-cli — VectorStudio automation
 
 USAGE:
   vectorcraft-cli mcp [--connect ADDR | --headless]

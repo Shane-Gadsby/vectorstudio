@@ -947,7 +947,7 @@ impl<'a> Interp<'a> {
                 }
             }
             Version => self.push(Obj::string(b"3010".to_vec()))?,
-            Product => self.push(Obj::string(b"VectorCraft".to_vec()))?,
+            Product => self.push(Obj::string(b"VectorStudio".to_vec()))?,
             RealTime | UserTime => self.push(Obj::Int(0))?,
             Print | EqPrint | EqEqPrint => {
                 self.pop()?;

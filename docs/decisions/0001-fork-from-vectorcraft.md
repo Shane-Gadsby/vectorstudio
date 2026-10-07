@@ -109,5 +109,32 @@ a means.
    verbatim, never dropped.
 3. **The interaction-fidelity pass**, driven row by row from the verified matrix and the shortcut
    baselines. It is upstream's own top-priority gap and the thing a power user notices first.
-4. Finish the surface rebrand beyond the display strings touched here (icons, `.icns`/`.ico`
-   artwork, signing identity, release workflows).
+4. **Finish the identity split.** The display-name rebrand and the ArtCraft mark removal are done;
+   what remains is the *identity*: `CFBundleIdentifier`, the Linux desktop/metainfo file names and
+   the Windows install GUIDs still read `ai.storyteller.vectorcraft`, so a VectorStudio build would
+   collide with an installed VectorCraft on the same machine. Also owed: our own app icon (the
+   engraved dragon is upstream's original artwork — MIT-licensed and attributed, so usable, but it
+   is their product's face), and a signing identity.
+
+### The brand licence
+
+Upstream's `docs/brand/LICENSE-brand.txt` required forks to remove the ArtCraft marks. That was
+done when the fork was taken: `docs/brand/` is deleted, the ArtCraft website, app-page and Discord
+links are gone from the Help menu, the About box and the app bar, `NOTICE` and `README.md` carry
+the plain-text "based on VectorCraft" credit that the licence permits instead, and `ASSETS.md` no
+longer claims a trademark exception. The app icon under `assets/app-icon/` is separate: it is
+MIT OR Apache-2.0 original artwork, kept with its attribution.
+
+The display-name rename follows the same rule set:
+
+- **Changed:** window title and app-bar label, About box, Welcome screen, menu labels, dialog and
+  error prose, MCP server title and tool descriptions, EPS `%%Creator`, PDF/TIFF/EMF producer
+  metadata, packaging display names, the macOS bundle layout, and the three translation catalogs.
+- **Left alone, deliberately:** `%VectorCraft_BeginData`/`_EndData` (EPS private-data markers),
+  `"VectorCraft editing data"` (the PDF `PieceInfo` description that finds our own embedded
+  document), `"VectorCraft Default"` (a stored PDF preset name), `"VectorCraft Generic CMYK"` (a
+  profile name stored in documents), `~/Documents/VectorCraft Templates` (user data), and every
+  lowercase `vectorcraft` crate name, module path and format id.
+- **Migrated rather than broken:** preferences are now read from `VectorStudio`, then `VectorCraft`,
+  then `DrawCraft`, and `LEGACY_PRESETS` maps the old shortcut-set names forward, so no setting is
+  orphaned by the rename.
