@@ -7,76 +7,72 @@ then update the matrix and strike the item.
 
 Ordered by how much damage they do if left alone.
 
-**Resolved since:** the 15 `Window → <panel>` function keys (`MENU-0560`…`MENU-0581`). Seven were
-genuinely unbound and now are bound, and all 15 are `done` with a test — see "A correction" below.
+**Resolved since:** items 1, 3 and 4, and one of item 2's four rows. What is left needs the
+licensed VM. Shortcut agreement now stands at **96 of 99** matched menu rows.
 
 ### A correction to the first run's figures
 
 The first audit reported **17 unbound** panel shortcuts. That was wrong: it read each row's
 shortcut from the *command* spec, and every Window menu entry runs the one parameterised command
 `window.panel {panel}`, so the eight panels that already had bindings looked unbound. The dump now
-resolves each menu item's own key through `menus::item_shortcut`, and the honest figures are
-**95 agree, 2 disagree, 2 unbound** (from 88/2/9 before the seven were bound).
+resolves each menu item's own key through `menus::item_shortcut`. The figures went 88/2/9 before
+the seven were bound, 95/2/2 after, and **96/1/2** once `MENU-0316` was corrected.
 
 The lesson is worth keeping: a parity audit that reads the wrong field invents work. When a number
 here looks surprising, check what the audit actually measured before believing it.
 
-## 1. 39 duplicated row pairs (78 rows)
+## 1. ~~39 duplicated row pairs~~ — resolved 2026-10-08
 
-The matrix merged two sources without de-duplicating, so 39 commands have two rows each — the same
-leaf label and the same shortcut under two different `area` spellings:
+**35 pairs, not 39.** The other four were never duplicates: they were two different commands
+claiming one key, which is item 2. Matching candidates on the leaf label alone had conflated them
+(`View > Show Grid` and `View > Perspective Grid > Show Grid` share a leaf), so the rule now
+compares the whole element with the two sources' cosmetic differences removed.
 
-| | |
-|---|---|
-| `MENU-0646` | `Keyboard/Other: Misc` · `Other Misc > Cut (Secondary)` · `F2` |
-| `MENU-0707` | `Keyboard/Other: Misc` · `Other: Misc > … > Cut (Secondary)` · `F2` |
+The twins were not redundant, which is why this needed care rather than a delete: the row from
+`shortcuts-30.1.csv` carried `behaviour` and a readable `element`, the row from
+`menu-commands-30.1.csv` carried Illustrator's own `command_id`. Each pair's evidence was merged
+into the first and the second set to `scope: out` with a note naming the survivor — **no row was
+deleted**, because ids are cited in commit messages.
 
-By area: Other: Text 36 rows, Other: Misc 24, Other: Object 8, Menus/View 6, Menus/Object 2,
-Other: Select 2.
+In-scope rows went from 1,826 to **1,791**, so every coverage figure before this date was about
+2 % flattering.
 
-**Why it matters:** the in-scope denominator is overstated by ~39 rows (2 %), so every coverage
-percentage the gate prints is slightly flattering, and whoever implements one of a pair will leave
-its twin looking unfinished for ever.
+## 2. Four rows where the app and the matrix disagree — **one resolved, three need the VM**
 
-**To resolve:** keep the row whose `element` carries the full menu path, fold any extra `source`
-and `verified_by` evidence into it, and set the twin to `scope: out` with a note pointing at the
-survivor — do not delete rows, because ids are cited in commit messages. `cargo xtask parity
---audit` lists every pair under "claimed by more than one row".
+The collision check turned out to explain the mechanism: in each case the row had absorbed a
+*neighbouring* row's shortcut, and the neighbour's own row holds the same key.
 
-## 2. `Object > Hide > Selection` — the matrix says `Ctrl+2`, the app binds `Cmd+3`
+### Resolved: `MENU-0316 View > Show Grid`
 
-`MENU-0089` claims `Ctrl+2`, but `MENU-0084` (`Object > Lock > Selection`) claims `Ctrl+2` too, and
-one binding cannot run two commands. The surrounding rows pair up as
-`Lock > Selection` ↔ `Unlock All` = `Alt+Ctrl+2` (`MENU-0087`) and
-`Hide > Selection` ↔ `Show All` = `Alt+Ctrl+3` (`MENU-0092`), which points at `MENU-0089` being the
-mis-extracted one and the app being right.
+Claimed `Shift+Ctrl+I`. Adobe's published table gives that to **Show/hide perspective grid**,
+which is `MENU-0689`'s key, and gives Show grid **`Ctrl + '`** — which is what the app binds. Two
+independent sources against one mis-extraction, so the row now reads `Ctrl+'` at `doc-30`
+confidence, with `verified_by` cleared: it is documented, no longer verified against the install.
+**The app was right.** Re-confirm on the VM to restore `verified`.
 
-That is reasoning, not evidence. **Re-probe both rows on the VM**, because `MENU-0089` is currently
-graded `verified`, and a wrong `verified` row is worse than an unverified one.
+### Still open — probe these three
 
-## 3. `View > Show Grid` — the matrix says `Shift+Ctrl+I`, the app binds `Cmd+'`
+| Row | Claims | Who really owns that key | What the app does |
+|---|---|---|---|
+| `MENU-0089` `Object > Hide > Selection` | `Ctrl+2` | `MENU-0084` `Object > Lock > Selection` claims it too | binds `Cmd+3` |
+| `MENU-0309` `View > Perspective Grid > Show Rulers` | `Ctrl+R` | `MENU-0681` `View > Rulers > Show Rulers`, per the published table | binds nothing |
+| `MENU-0310` `View > Perspective Grid > Snap to Grid` | `Shift+Ctrl+'` | `MENU-0317` `View > Snap to Grid`, per the published table | binds nothing |
 
-`MENU-0316` claims `Shift+Ctrl+I`. Adobe's published default-shortcut table
-(`shortcuts-default.csv`, "View artwork" section) gives `Ctrl + Shift + I` for **Show/hide
-perspective grid**, a different command — so the extraction looks to have attached one row's key to
-its neighbour. Again the app looks right and the row looks wrong, and again that needs confirming
-rather than assuming.
+All three are now `confidence: unverified` with the evidence in their `behaviour`, and they keep
+their claimed value **on purpose** so `cargo xtask parity --audit` goes on reporting them until
+the VM settles it. For `MENU-0089` the Unlock All / Show All pair (`Alt+Ctrl+2` / `Alt+Ctrl+3`)
+suggests `Ctrl+3`; for the other two the real answer is probably *no default shortcut*. Neither is
+documented, so neither was written in.
 
-**Check at the same time** whether other rows in the same stretch of `Menus/View` are shifted by
-one, since a single off-by-one in the source would explain both this and item 2.
+**Do not bind a disputed row.** It would take the key from whatever really owns it and make the
+matrix wrong twice.
 
-## 4. Two perspective-grid shortcut rows the app does not bind
+## 3. ~~`View > Show Grid`~~ — see item 2
 
-Same family as items 2 and 3, and probably the same off-by-one:
+## 4. ~~Panel shortcuts the app does not bind~~ — resolved 2026-10-08
 
-- `MENU-0309` `View > Perspective Grid > Show Rulers` claims `Ctrl+R`. Adobe's published table
-  gives `Ctrl+R` to **Show/hide artboard rulers** (`View > Rulers`), a different command.
-- `MENU-0310` `View > Perspective Grid > Snap to Grid` claims `Shift+Ctrl+'`, which looks like the
-  `View > Snap to Grid` binding rather than the perspective-grid submenu's own.
-
-Both are graded `verified`, so **probe them on the VM** before binding anything. Implementing a
-mis-extracted row is worse than leaving it unbound: it takes a key away from whatever really owns
-it, and the matrix then says the wrong thing twice.
+The 15 `Window → <panel>` function keys are `done` with tests; seven had been unbound. The two
+remaining candidates are the perspective-grid pair above, held behind item 2.
 
 ## 5. 175 rows with no menu path
 

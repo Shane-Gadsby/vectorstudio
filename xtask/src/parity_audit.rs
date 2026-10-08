@@ -294,6 +294,7 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
     // been mis-extracted. Resolve it on the licensed VM, not by inference.
     let bound = shortcuts(&surface);
     let mut sc_counts: BTreeMap<&str, usize> = BTreeMap::new();
+    let mut sc_verified = 0usize;
     let mut disagreements: Vec<String> = Vec::new();
     for row in &rows {
         if row.get("scope") != "in" || row.get("field") != "Shortcut" {
@@ -303,6 +304,9 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
         let Some(entry) = menu.get(&key) else { continue };
         let got = entry.shortcut.as_deref().or_else(|| entry.id.as_deref().and_then(|id| bound.get(id).map(String::as_str)));
         let Some(verdict) = compare_shortcut(row.get("default"), got) else { continue };
+        if row.get("confidence") == "verified" {
+            sc_verified += 1;
+        }
         *sc_counts
             .entry(match verdict {
                 Shortcut::Same => "same",
@@ -346,7 +350,7 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
 
     let sc_total: usize = sc_counts.values().sum();
     if sc_total > 0 {
-        println!("\nshortcuts on matched menu rows ({sc_total}, every one verified against a licensed 30.1):");
+        println!("\nshortcuts on matched menu rows ({sc_total}, of which {sc_verified} verified against a licensed 30.1):");
         for (k, n) in &sc_counts {
             println!("  {k:<8} {n:>4}");
         }

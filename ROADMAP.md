@@ -10,9 +10,10 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 
 > **Parity re-baseline in progress.** The scores below are upstream's self-assessment, inherited at
 > the fork. `docs/parity/matrix.csv` is replacing them with a row-level audit against a licensed
-> Illustrator 30.1. As of 2026-10-08: **15 rows `done`** (implemented, matching the reference app,
-> with a test), **319 `partial`** (the command exists and is wired to the right menu path, fields
-> unverified), 90 need no code, 1,433 still `planned`. Panels, tools, effects, dialogs and
+> Illustrator 30.1. As of 2026-10-08: **1,791 rows in scope** (down from 1,826 once 35 duplicated
+> pairs were merged), of which **15 are `done`** (implemented, matching the reference app, with a
+> test), **319 `partial`** (the command exists and is wired to the right menu path, fields
+> unverified), 125 need no code and 1,398 are still `planned`. Panels, tools, effects, dialogs and
 > preferences are not audited yet. Run `cargo xtask parity` for the current figure, and prefer it
 > to any number in this table.
 
@@ -21,11 +22,12 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 The fork's own work, in order. Each item says what finishing it buys, because the ordering is by
 how much each one unblocks rather than by size.
 
-**1. Resolve the matrix's own errors.** `docs/parity/open-questions.md` items 1–4: 39 duplicated
-row pairs (the in-scope denominator is overstated ~2 %), and four `verified` rows whose shortcuts
-the app contradicts in ways that point at mis-extraction, not at app defects. Needs the licensed
-VM (`research/illustrator/`). **Until this lands every coverage figure carries known errors**, and
-a wrong `verified` row is worse than an unverified one because it gets implemented faithfully.
+**1. Resolve the matrix's own errors.** *Mostly done 2026-10-08.* 35 duplicated row pairs merged
+(the in-scope denominator was overstated ~2 %: 1,826 → 1,791) and one of the four disputed
+shortcut rows corrected from Adobe's published table. **Three rows still need the licensed VM** —
+`MENU-0089`, `MENU-0309`, `MENU-0310`, now `unverified` with their evidence recorded. In every
+case resolved so far the app was right and our extraction was wrong, which is worth remembering
+before "fixing" the app to match a row.
 
 **2. Bind the shortcuts the audit finds missing.** ✅ *Done 2026-10-08 for the 15
 `Window → <panel>` function keys* — seven were unbound, all 15 now `done` with a test

@@ -112,7 +112,7 @@ into the right menu path* — nothing more. It says nothing about whether the di
 defaults, ranges and units match 30.1, which is what 1:1 actually requires. Promoting a row to
 `done` is hand work: verify the field against the reference app, write a test, cite both.
 
-As of 2026-10-08: of 908 in-scope menu rows, **15 are `done`** (the `Window → <panel>` function
+As of 2026-10-08: of 873 in-scope menu rows, **15 are `done`** (the `Window → <panel>` function
 keys — implemented, matching 30.1, with a test), **319 are `partial`**, 90 are `n/a`, 20 are in the
 menus as stubs, and 495 found no match. The 495 are the honest backlog, and
 they are concentrated where upstream says they are — Effect (86), View (49), Type (50) — plus 175
@@ -127,17 +127,18 @@ their own joins: the panel registry, the tool list, the effect registry, the pre
 
 Every row with `field: Shortcut` was verified against a licensed 30.1, so the audit compares it
 with the keys the app actually binds, folding `Cmd`→`Ctrl` and `Opt`→`Alt` and ignoring modifier
-order. Currently: **95 agree, 2 disagree, 2 unbound.**
+order. Currently: **96 agree, 1 disagrees, 2 unbound.**
 
 It compares each menu *item's* key, via `menus::item_shortcut`, not its command's — the Window menu
 runs one parameterised `window.panel {panel}` behind every entry, and each panel binds its own key,
 so reading the command's shortcut makes bound panels look unbound. The first run did exactly that
 and over-reported the gap; see [`open-questions.md`](open-questions.md#a-correction-to-the-first-runs-figures).
 
-A disagreement does **not** mean the app is wrong. It means one of the two is, and the first run
-showed that it can be either: both disagreements look like mis-extracted matrix rows rather than
-app defects. The audit also checks the matrix against itself — two rows cannot claim the same
-binding — which found 39 duplicated row pairs and no inference needed to prove it.
+A disagreement does **not** mean the app is wrong. It means one of the two is — and so far it has
+been *our data* every time. The audit also checks the matrix against itself, since two rows cannot
+claim one binding; that found 35 duplicated row pairs (merged 2026-10-08, which cut the in-scope
+denominator from 1,826 to 1,791) and, in the four remaining collisions, showed that each disputed
+row had absorbed a neighbouring row's shortcut.
 
 Everything the first run raised is written up in [`open-questions.md`](open-questions.md), with
 what to probe on the VM. **Resolve those on the licensed install, never by inference from another
