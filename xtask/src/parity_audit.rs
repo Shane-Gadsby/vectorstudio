@@ -246,6 +246,76 @@ pub fn compare_shortcut(want: &str, got: Option<&str>) -> Option<Shortcut> {
     }
 }
 
+/// What `prefs.list` knows: the set of categories, and label → value.
+///
+/// Preferences are the one non-menu surface that carries a real **default** to check, not just an
+/// existence claim: each entry has a category, a label and the value a fresh session starts with.
+pub struct Prefs {
+    pub categories: BTreeSet<String>,
+    pub by_label: BTreeMap<String, Value>,
+}
+
+pub fn prefs(surface: &Value) -> Prefs {
+    let mut categories = BTreeSet::new();
+    let mut by_label = BTreeMap::new();
+    for p in surface.get("prefs").and_then(Value::as_array).into_iter().flatten() {
+        if let Some(c) = p.get("category").and_then(Value::as_str) {
+            categories.insert(c.to_lowercase());
+        }
+        if let Some(l) = p.get("label").and_then(Value::as_str) {
+            by_label.insert(l.to_lowercase(), p.get("value").cloned().unwrap_or(Value::Null));
+        }
+    }
+    Prefs { categories, by_label }
+}
+
+/// Does the matrix's stated default agree with the value a fresh session holds?
+///
+/// `None` when the row's default cannot be compared — prose, a range, or a version annotation
+/// like `Off (30.0)`. Guessing at those would invent agreement.
+pub fn same_default(want: &str, got: &Value) -> Option<bool> {
+    let want = want.split('(').next().unwrap_or(want).trim();
+    if want.is_empty() {
+        return None;
+    }
+    match got {
+        Value::Bool(b) => match want.to_lowercase().as_str() {
+            "on" | "true" | "checked" | "yes" => Some(*b),
+            "off" | "false" | "unchecked" | "no" => Some(!*b),
+            _ => None,
+        },
+        Value::Number(n) => {
+            let w: f64 = want.parse().ok()?;
+            Some((n.as_f64()? - w).abs() < f64::EPSILON)
+        }
+        Value::String(s) => Some(s.eq_ignore_ascii_case(want)),
+        _ => None,
+    }
+}
+
+/// Panel labels the app can open, lowercased.
+///
+/// Only the `(panel)` rows join here — the ones asking whether the panel exists at all. A row
+/// naming one of its *controls* cannot be settled from a registry; see `docs/parity/README.md`.
+pub fn panels(surface: &Value) -> BTreeSet<String> {
+    surface
+        .get("panels")
+        .and_then(Value::as_array)
+        .into_iter()
+        .flatten()
+        .filter_map(|p| p.get("label").and_then(Value::as_str))
+        .map(str::to_lowercase)
+        .collect()
+}
+
+/// Does the app have the panel this row names?
+///
+/// The matrix sometimes names two panels in one row (`Character Styles / Paragraph Styles`) or
+/// reaches one through a menu (`Type → Tabs`), so each part is tried.
+pub fn has_panel(element: &str, known: &BTreeSet<String>) -> bool {
+    element.split(['/', '\u{2192}']).map(|part| part.trim().to_lowercase()).any(|part| !part.is_empty() && known.contains(&part))
+}
+
 /// Tool label (without the trailing "Tool") → the single-key shortcut the app binds.
 ///
 /// Tools are not menu entries and carry their own shortcuts, so they need their own join. The
@@ -382,6 +452,90 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
         }
         if collisions.len() > 20 {
             println!("  … and {} more", collisions.len() - 20);
+        }
+    }
+
+    // Preference rows: a category must exist, a named preference must exist, and where the row
+    // states a default it is compared with the value a fresh session starts with.
+    let known_prefs = prefs(&surface);
+    let mut pref_counts: BTreeMap<&str, usize> = BTreeMap::new();
+    let mut pref_notes: Vec<String> = Vec::new();
+    for row in &mut rows {
+        if row.get("scope") != "in" || row.get("element_type") != "preference" {
+            continue;
+        }
+        let field = row.get("field").to_owned();
+        let (found, what) = match field.strip_prefix("Category: ") {
+            Some(cat) => (known_prefs.categories.contains(&cat.to_lowercase()), "category"),
+            None if field.is_empty() => continue,
+            None => (known_prefs.by_label.contains_key(&field.to_lowercase()), "preference"),
+        };
+        if !found {
+            // NOT a finding. The matrix often prefixes a label to disambiguate it — it writes
+            // `Grid Color` where the app, inside the Guides & Grid category, writes `Color`
+            // (there are two `Color` entries there) — and combines two preferences into one row.
+            // So a failed exact match means "needs a label mapping", not "missing".
+            *pref_counts.entry("no exact label match").or_default() += 1;
+            pref_notes.push(format!("unmapped {:<11} {what} `{field}`", row.get("id")));
+            continue;
+        }
+        // The default, where the row gives one that can be compared at all.
+        let verdict = known_prefs.by_label.get(&field.to_lowercase()).and_then(|v| same_default(row.get("default"), v));
+        match verdict {
+            Some(true) => *pref_counts.entry("default agrees").or_default() += 1,
+            Some(false) => {
+                *pref_counts.entry("DEFAULT DIFFERS").or_default() += 1;
+                let got = known_prefs.by_label.get(&field.to_lowercase()).map(ToString::to_string).unwrap_or_default();
+                pref_notes.push(format!("differs {:<11} `{field}` reference {} app {got}", row.get("id"), row.get("default")));
+            }
+            None => *pref_counts.entry("present").or_default() += 1,
+        }
+        if write && row.get("status") == "planned" {
+            row.set("status", "partial");
+            row.set("impl_ref", "crates/engine/src/cmd/prefscmds.rs (prefs.list)");
+            changed += 1;
+        }
+    }
+    let pref_total: usize = pref_counts.values().sum();
+    if pref_total > 0 {
+        println!("\npreferences ({pref_total} rows, against prefs.list):");
+        for (k, n) in &pref_counts {
+            println!("  {k:<21} {n:>4}");
+        }
+        println!("  (an unmapped row is not a missing preference: see docs/parity/README.md)");
+        for line in pref_notes.iter().take(20) {
+            println!("  {line}");
+        }
+    }
+
+    // Panel existence rows: `(panel)` asks only whether the panel is there.
+    let known_panels = panels(&surface);
+    let mut panel_counts: BTreeMap<&str, usize> = BTreeMap::new();
+    let mut panel_missing: Vec<String> = Vec::new();
+    for row in &mut rows {
+        if row.get("scope") != "in" || row.get("element_type") != "panel" || row.get("field") != "(panel)" {
+            continue;
+        }
+        if has_panel(row.get("element"), &known_panels) {
+            *panel_counts.entry("present").or_default() += 1;
+            if write && row.get("status") == "planned" {
+                row.set("status", "partial");
+                row.set("impl_ref", "crates/ui-egui/src/state.rs (all_panels)");
+                changed += 1;
+            }
+        } else {
+            *panel_counts.entry("absent").or_default() += 1;
+            panel_missing.push(format!("{:<11} {}", row.get("id"), row.get("element")));
+        }
+    }
+    let panel_total: usize = panel_counts.values().sum();
+    if panel_total > 0 {
+        println!("\npanel existence ({panel_total} `(panel)` rows, against state::all_panels):");
+        for (k, n) in &panel_counts {
+            println!("  {k:<8} {n:>4}");
+        }
+        for line in panel_missing.iter().take(20) {
+            println!("  absent: {line}");
         }
     }
 
@@ -529,6 +683,30 @@ mod tests {
         assert_eq!(shortcut("Ctrl++"), Some((vec!["Ctrl".into()], "=".into())));
         assert_eq!(shortcut(""), None);
         assert_ne!(shortcut("Ctrl+N"), shortcut("Ctrl+Shift+N"));
+    }
+
+    #[test]
+    fn defaults_compare_only_when_the_row_states_a_comparable_one() {
+        assert_eq!(same_default("100", &json!(100.0)), Some(true));
+        assert_eq!(same_default("100", &json!(72.0)), Some(false));
+        assert_eq!(same_default("On", &json!(true)), Some(true));
+        assert_eq!(same_default("Off", &json!(true)), Some(false));
+        assert_eq!(same_default("Off (30.0)", &json!(false)), Some(true), "a version note is stripped");
+        assert_eq!(same_default("Lines", &json!("Lines")), Some(true));
+        // Prose, an empty cell or a mismatched kind cannot be compared, and must not be guessed.
+        assert_eq!(same_default("", &json!(1.0)), None);
+        assert_eq!(same_default("up to 6 angles", &json!(6.0)), None);
+        assert_eq!(same_default("On", &json!(1.0)), None);
+    }
+
+    #[test]
+    fn panel_rows_match_a_panel_by_any_of_the_names_they_list() {
+        let known: BTreeSet<String> = ["layers", "character styles", "tabs"].iter().map(|s| (*s).to_owned()).collect();
+        assert!(has_panel("Layers", &known));
+        assert!(has_panel("Character Styles / Paragraph Styles", &known), "either half counts");
+        assert!(has_panel("Type \u{2192} Tabs", &known), "a panel reached through a menu");
+        assert!(!has_panel("Variables", &known));
+        assert!(!has_panel("", &known));
     }
 
     #[test]

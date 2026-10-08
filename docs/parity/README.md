@@ -134,11 +134,52 @@ own key handling reports working code as broken.
 The other 59 `TOOL-` rows are not tools: they are toolbar controls and paint buttons (`Default`,
 `Swap Fill/Stroke`, `Increase Diameter`), which need their own surface.
 
+### Panels — and the limit of what a join can settle
+
+A panel row names an individual **control**: `record`, `play`, `insert menu item`. Only the 42
+rows whose `field` is `(panel)` ask whether the panel itself exists, and those join to
+`state::all_panels`: **37 present, 5 absent** — SVG Interactivity, Variables, 3D and Materials and
+two meta-rows, which is exactly the ROADMAP's own missing list, arrived at independently.
+
+**The other ~330 control rows are not mechanically auditable, and pretending otherwise would be
+worse than leaving them `planned`.** The tempting join is the engine's documented command
+parameters, and it does not hold up: `imageTrace.make` documents 9 of the 21 fields the Image
+Trace panel row set describes, under camelCase names (`snapCurvesToLines`, `ignoreWhite`) that a
+human-written field like *Options ▸ Ignore Color* only loosely resembles. Matching those by
+similarity would invent agreement — the same failure that over-reported the panel shortcuts and
+nearly condemned Add Anchor Point.
+
+What these rows actually need is the UI: a headless egui frame test per panel, asserting the
+controls it shows, their defaults and their ranges — the pattern upstream already uses (see the
+tests in `crates/ui-egui/src/panels/transparency.rs`). That is per-panel work, not a join, and it
+is what will move panels off `planned`.
+
+### Preferences — the first verified *default*
+
+`prefs.list` carries each preference's category, label and the value a fresh session starts with,
+so a preference row can be joined to it: **23 matched, 1 default checked, 14 unmapped.**
+
+This is the first surface where the audit checks a **default** rather than existence or a key, and
+it immediately found one: **`SHELL-0032 History States`**. The app defaulted to 500; the licensed
+install's own preferences file holds `/maximumUndoDepth 100`. Fixed to 100 with a test, keeping the
+ceiling at 1000 — deliberately above Illustrator's, so undo that effectively never runs out stays
+one preference away while the *default* is 1:1.
+
+**An unmapped row is not a missing preference.** The matrix prefixes labels to disambiguate them —
+it writes `Grid Color` where the app, inside Guides & Grid, writes `Color`, because that category
+holds two `Color` entries — and sometimes folds two preferences into one row (`Automatically Save
+Recovery Data Every` is the app's `Automatically Save Recovery Data` plus `Every (minutes)`). The
+first run of this join reported nine of those as absent, which was wrong. They need a label
+mapping, which is per-row work.
+
+Genuinely worth probing: `Object Guides`, `Glyph Guides`, `Invoke Distance Guides` and `Snap to
+Last Location` have no counterpart under any label, and the matrix's `Plug-ins & Scratch Disks`
+category is `Performance & Storage` in the app.
+
 ### Still unaudited
 
-Panels (372 rows), features (174), effects (117), dialogs (61), preferences (39), presets (29) and
-formats (21) have no join yet. Each needs its own ground truth: `state::all_panels`, the effect
-registry, `prefs.list`.
+Features (174 rows), effects (117), dialogs (61), presets (29) and formats (21) have no join yet.
+Effects have a registry. Dialogs have the same control-level problem as panels.
 
 ### What the audit also checks
 

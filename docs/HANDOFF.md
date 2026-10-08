@@ -41,7 +41,7 @@ anything either, which is what `--no-fail-fast` is for.
 
 ```
 1857 rows, 1773 in scope
-done 57 (3.2 %), partial 319 (18.0 %), n/a 143, planned 1338
+done 58 (3.3 %), partial 379 (21.4 %), n/a 143, planned 1277
 confidence: verified 1016, plan-2020 564, doc-30 200, unverified 77
 ```
 
@@ -49,10 +49,10 @@ confidence: verified 1016, plan-2020 564, doc-30 200, unverified 77
 (~69–75 % of the feature surface, 40–55 % on "a power user can't tell the difference"), graded by
 the agents that wrote the features, and the whole point of the matrix is to replace them.
 
-- `done` = implemented, matching 30.1, with a test. So far the 15 Window panel function keys and
-  the 42 tool shortcuts.
-- `partial` = the command exists and is wired to the right menu path. **Nothing more** — it says
-  nothing about fields, defaults, ranges or units.
+- `done` = implemented, matching 30.1, with a test. So far the 15 Window panel function keys,
+  the 42 tool shortcuts and the History States default.
+- `partial` = the command exists and is wired to the right menu path, or the panel exists.
+  **Nothing more** — it says nothing about fields, defaults, ranges or units.
 - 1,016 rows were verified against a **licensed** Illustrator 30.1. Those are the valuable ones,
   and every shortcut among them is re-checkable by machine: `read-kys.mjs check` (229 agree, 0 differ).
 

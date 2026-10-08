@@ -81,6 +81,23 @@ fn grid_prefs_apply_to_open_documents() {
     assert_eq!((g.spacing, g.subdivisions), (36.0, 4));
 }
 
+/// Parity: History States defaults to what Illustrator 30.1 defaults to.
+///
+/// `/maximumUndoDepth 100` in the licensed install's own preferences file (matrix row
+/// `SHELL-0032`). The ceiling is deliberately higher than Illustrator's, so a user who wants undo
+/// that effectively never runs out is one preference away — but the *default* is 1:1.
+#[test]
+fn history_states_defaults_to_the_reference_app() {
+    let mut s = Session::new();
+    assert_eq!(s.prefs.history_states, 100, "SHELL-0032: Illustrator 30.1 defaults to 100");
+    let listed = s.execute("prefs.list", &json!({})).unwrap();
+    let row = listed.as_array().and_then(|rows| rows.iter().find(|r| r["key"] == "historyStates")).expect("historyStates is listed");
+    assert_eq!(row["value"], 100);
+    assert!(row["max"].as_i64().unwrap_or(0) >= 100, "the ceiling must not be below the default");
+    s.execute("file.new", &json!({"width": 100, "height": 100})).unwrap();
+    assert_eq!(s.doc().unwrap().history.limit, 100, "a fresh document honours it");
+}
+
 #[test]
 fn history_states_limit_undo_depth() {
     let mut s = Session::new();

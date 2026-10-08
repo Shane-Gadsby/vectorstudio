@@ -15,7 +15,8 @@
 //! * `header` — a disabled section label, nothing to implement.
 //!
 //! `tools` is a separate list, because a tool is not a menu entry: it carries its own single-key
-//! shortcut from `vectorcraft_tools::catalog`.
+//! shortcut from `vectorcraft_tools::catalog`. `panels` is every panel `window.panel` can open,
+//! and `prefs` is `prefs.list`: every preference with its category, label and current value.
 
 use serde_json::{Value, json};
 use vectorcraft_ui_egui::menus::{Item, UI_COMMANDS, item_shortcut, menu_tree};
@@ -60,10 +61,15 @@ fn main() {
         .iter()
         .map(|c| json!({ "id": c.id, "label": c.label, "menu": c.menu, "shortcut": c.shortcut }))
         .collect();
+    // Every panel `window.panel` can open: the dock tabs plus the icon panels.
+    let panels: Vec<Value> = vectorcraft_ui_egui::state::all_panels().map(|(id, label)| json!({ "id": id, "label": label })).collect();
     // Tools are their own surface: they carry single-key shortcuts and never appear in the menus.
     let tools: Vec<Value> =
         vectorcraft_tools::catalog::all_tools().map(|t| json!({ "id": t.id, "label": t.label, "shortcut": t.shortcut })).collect();
-    let out = json!({ "menu": menu, "ui_commands": ui, "engine_commands": engine, "tools": tools });
+    // Preferences carry a category, a label and a current value, so unlike a panel's controls they
+    // can be joined — and the value is a real *default* to check, not just an existence claim.
+    let prefs = vectorcraft_engine::Session::new().execute("prefs.list", &json!({})).unwrap_or(Value::Null);
+    let out = json!({ "menu": menu, "prefs": prefs, "ui_commands": ui, "engine_commands": engine, "tools": tools, "panels": panels });
     match serde_json::to_string_pretty(&out) {
         Ok(text) => println!("{text}"),
         Err(e) => {

@@ -159,7 +159,11 @@ impl DocState {
             saved_doc: doc.clone(),
             doc,
             selection: Selection::default(),
-            history: History { limit: 500, ..Default::default() },
+            // Illustrator 30.1's History States default: `/maximumUndoDepth 100` in its own
+            // preferences file (matrix row SHELL-0032). Our ceiling stays deliberately higher than
+            // Illustrator's (`int(5, 1000)` in prefscmds), so undo that effectively never runs out
+            // is one preference away while the default itself is 1:1.
+            history: History { limit: 100, ..Default::default() },
             path,
             revision: 1,
             active_layer,
@@ -620,7 +624,7 @@ impl Default for Prefs {
             gpu_performance: true,
             animated_zoom: true,
             gpu_preference: s("powerSaving"),
-            history_states: 500,
+            history_states: 100, // Illustrator 30.1's default; see SHELL-0032.
             real_time_drawing: true,
             render_threads: -1,
             background_save: true,

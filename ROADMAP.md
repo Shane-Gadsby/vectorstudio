@@ -11,9 +11,9 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 > **Parity re-baseline in progress.** The scores below are upstream's self-assessment, inherited at
 > the fork. `docs/parity/matrix.csv` is replacing them with a row-level audit against a licensed
 > Illustrator 30.1. As of 2026-10-08: **1,773 rows in scope** (down from 1,826 once 53 duplicated
-> pairs were merged), of which **57 are `done`** (implemented, matching the reference app, with a
-> test), **319 `partial`** (the command exists and is wired to the right menu path, fields
-> unverified), 143 need no code and 1,338 are still `planned`. Panels, tools, effects, dialogs and
+> pairs were merged), of which **58 are `done`** (implemented, matching the reference app, with a
+> test), **379 `partial`** (the command or panel exists and is wired to the right menu path, fields
+> unverified), 143 need no code and 1,277 are still `planned`. Panels, tools, effects, dialogs and
 > preferences are not audited yet. Run `cargo xtask parity` for the current figure, and prefer it
 > to any number in this table.
 
@@ -36,12 +36,18 @@ agreeing. Only `Tab` and `Shift+Tab` cannot be joined, because 30.1 does not kee
 are blocked on item 1. This is the cheapest class of fidelity win: the feature already exists and
 only its binding is wrong, and a power user notices immediately.
 
-**3. Extend the audit past the menus.** *Tools done 2026-10-08:* they have their own join against
-`vectorcraft_tools::catalog`, 42 of 42 shortcuts agree with 30.1, and those rows are `done` with a
-test. **Still unjoined:** panels (372 rows), features (174), effects (117), dialogs (61),
-preferences (39), presets (29), formats (21) — invisible to every coverage figure until each gets
-its ground truth (`state::all_panels`, the effect registry, `prefs.list`). Panels next: the largest
-block, and `state::all_panels` already exists.
+**3. Extend the audit past the menus.** *Tools and panel existence done 2026-10-08.* Tools join
+`vectorcraft_tools::catalog` — 42 of 42 shortcuts agree, `done` with a test. Panels join
+`state::all_panels` for the 42 `(panel)` rows — 37 present, 5 absent, matching the missing list
+below.
+
+**But a join has reached its limit.** The remaining ~330 panel rows and the 61 dialog rows each
+name a *control*, and no registry knows a control's default, range or units. The engine's command
+params cover too little, too loosely, to match by name without inventing agreement. These need a
+headless egui frame test per panel asserting its controls — the pattern already used in
+`panels/transparency.rs` — which is per-panel work. *Preferences done 2026-10-08:* they join
+`prefs.list`, 23 matched, and — being the first surface carrying a real **default** — the join
+immediately found one wrong. **Effects (117 rows) are next**, having a registry.
 
 **4. Research the 175 path-less rows.** Everything in `area: Menus/(path unknown)` came from a
 source with no menu path, so the audit cannot join it at all.
@@ -178,6 +184,10 @@ grade by behaviour against `plan/illustrator/`, not by whether a menu item exist
 - **Geometry and effects:**
   - Pathfinder (10 exact curve booleans), Offset, Outline Stroke, Simplify, Clean Up, Split Into Grid, Divide Objects Below. Object › Path › Remove Anchor Points (`path.removeAnchors`) removes the direct-selected anchors without opening their paths (the Delete key still deletes them with their segments): the neighbours keep their handle directions and their facing handles are refitted so one cubic follows the two old segments, and straight sides stay straight. The Delete Anchor Point tool uses the same refit. The Control bar, the contextual task bar, the Properties quick actions and the canvas context menu offer it when anchors are selected.
   - Live effects with previewing dialogs: Distort & Transform, Path, Convert to Shape, 15 Warp styles, Round Corners, Scribble, Effect → Pathfinder (all 10 operations, live on groups; several loose objects are grouped first, in one undo step), Color Adjustments (Brightness/Contrast, Curves, Levels, Hue/Saturation, Shift to Color, Temperature/Tint, on vectors, live type and embedded images), and raster drop shadow, glows and feather. SVG and PDF export keep live effects (geometry baked; SVG raster effects as filters).
+- **Parity fixes:** History States defaults to Illustrator's 100, not 500 (`SHELL-0032`, from the
+  install's own preferences file); the ceiling stays at 1000, so unlimited-feeling undo is one
+  preference away. The 15 Window panel function keys and all 42 tool shortcuts match 30.1, each
+  with a test.
 - **Type:** Text Wrap, Type on a Path effects (Rainbow/Skew/3D Ribbon/Stair Step/Gravity), Character and Paragraph Styles (override-preserving redefine), Area Type Options (rows/columns/inset/first baseline), threaded text across any closed shapes, Fit Headline. Area type resizes like Illustrator's type areas: a bounding-box handle drag (Selection tool) or Area Type Options Width/Height size the frame and the text reflows at its size (threads too); Direct Selection drags a frame corner or edge (`text.reshapeArea`). Point type still scales. Variable fonts list every named instance as a style of their family (Figtree Light to Black and their italics, Bahnschrift, Segoe UI Variable), and the instance chosen is shaped, drawn, outlined and measured at its axis settings; PDF and SVG embed it as that instance. Variation axis sliders are not done. Hebrew and Arabic are laid out right to left with the Unicode bidirectional algorithm (embedded Latin and numbers keep their direction, lines put in visual order after wrapping) in point, area and path type, with caret, selection and arrow keys in visual order; each paragraph's direction comes from its first strong character unless Paragraph Direction sets it (Paragraph panel with Show Indic Options, `text.setFormat {direction}`), and new type aligns to the start of its direction. SVG export outlines right-to-left text.
 - **Interface languages, vertical type:** VectorStudio ▸ Language (or Preferences ▸ User Interface) picks Automatic (the system locale) or a registered language, persisted as `interfaceLanguage`. Translations come from per-language catalogs (`i18n/*.tsv`): Traditional and Simplified Chinese, Japanese and Spanish (neutral international Spanish, for every `es-*` locale) cover the whole interface, Czech and Brazilian Portuguese every menu label, Brazilian Portuguese the shell's `tl!` literals too (tested); untranslated text stays English. Japanese and Chinese glyphs come from the craft-fonts build input (release builds) or the installed fonts, Czech and Spanish ones from the bundled UI fonts. The Basic toolbar's Type button holds Vertical Type in its flyout. Vertical Type, Vertical Area Type and Vertical Type on a Path create vertical text (columns right to left, upright CJK glyphs and marks with `vert` alternates, Latin and longer numbers on their side, two- and three-digit numbers set as tate-chu-yoko in one em of the column (kept whole when justified), upright glyphs centred on the column (tracked or justified too), point type's anchor on the first column's centre line); kinsoku (the strict set) applies to horizontal and vertical Japanese, and justified Japanese lines spread their room between characters (not inside Latin words); Paragraph panel › Mojikumi Set (shown with Preferences › Type › Show East Asian Options, `text.setFormat {mojikumi}`): None or Line-end Punctuation Half Width (new type's default, as in Illustrator; older documents and imported text keep None) shares one half-em space between consecutive punctuation, sets a closing mark ending a line half width, and puts a quarter em between Japanese and Latin letters or digits; Paragraph panel menu › Top-to-Top / Bottom-to-Bottom Leading measures leading from em box top to top (area type's first line touches the frame) or from baseline to baseline; Character panel menu › Character Alignment (with the East Asian options; `text.setFormat` or `text.setRangeStyle {charAlign}`) lines characters smaller than the largest on their line up on the Roman baseline or the em box top/right, centre or bottom/left (ICF top and bottom not yet); Type ▸ Type Orientation switches existing text; caret, selection, hit testing and arrow keys follow the writing direction. Vertical text exports to PDF as real text and to SVG as outlines.
 - **Transparency:** opacity masks (clip/invert/disable/link), exported as SVG `<mask>` and PDF soft masks.

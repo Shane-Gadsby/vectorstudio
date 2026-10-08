@@ -99,7 +99,8 @@ in the VM. It does not remove the need for a connected, unlocked RDP session.
 Much of what a parity probe wants is a **file**, and files need no session crossing. The whole
 shortcut surface is the clearest case: Illustrator's keyboard bindings live in `keys.kys`, which
 `read-kys.mjs` simply copies out over sftp. That settled all four disputed shortcut rows without
-COM, ExtendScript or a scheduled task. Reach for a file first, COM second, ExtendScript only when
+COM, ExtendScript or a scheduled task — and `Adobe Illustrator Prefs`, beside it, settled a wrong
+default the same way (`/maximumUndoDepth 100`). Reach for a file first, COM second, ExtendScript only when
 the scripting DOM is the only way in — and note that **shortcuts are not in the scripting DOM at
 all**, so ExtendScript could never have answered those rows.
 

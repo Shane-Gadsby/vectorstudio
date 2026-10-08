@@ -103,7 +103,7 @@ TOOL-0086,Tools/Navigation,tool,Zoom,Shortcut,Z,,key,"Scrubby zoom, animated zoo
 TOOL-0087,Tools/Toolbar controls,tool,Fill / Stroke,Shortcut,X,,key,"Swap Shift+X, default D, Colour `,`, Gradient `.`, None `/`",Adobe Toggle Fill Stroke,,3,in,planned,verified,vectorsuite.md §5.2; docs/parity/shortcuts-30.1.csv (licensed 30.1); command_id recovered 2026-10-08 by matching X against the /Tools section of keys.kys (licensed 30.1.0),,"Keyboard Shortcuts export, licensed Illustrator 30.1.0 (Windows keys)",2026-09-24,
 TOOL-0088,Tools/Toolbar controls,tool,Drawing modes,Shortcut,Shift+D,,key,"Draw Normal, Draw Behind, Draw Inside",Adobe Toggle Drawing Mode,,3,in,planned,verified,vectorsuite.md §5.2; docs/parity/shortcuts-30.1.csv (licensed 30.1); command_id recovered 2026-10-08 by matching Shift+D against the /Tools section of keys.kys (licensed 30.1.0),,"Keyboard Shortcuts export, licensed Illustrator 30.1.0 (Windows keys)",2026-09-24,
 TOOL-0089,Tools/Toolbar controls,tool,Change Screen Mode,Shortcut,F,,key,,Adobe Toggle Screen Mode,,1,in,planned,verified,vectorsuite.md §5.2; docs/parity/shortcuts-30.1.csv (licensed 30.1); command_id recovered 2026-10-08 by matching F against the /Tools section of keys.kys (licensed 30.1.0),,"Keyboard Shortcuts export, licensed Illustrator 30.1.0 (Windows keys)",2026-09-24,
-PANEL-0001,Panels/Actions,panel,Actions,(panel),,,,"Window menu entry, panel menu, docking",,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0001,Panels/Actions,panel,Actions,(panel),,,,"Window menu entry, panel menu, docking",,,11,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0002,Panels/Actions,panel,Actions,Sets and actions,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0003,Panels/Actions,panel,Actions,record,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0004,Panels/Actions,panel,Actions,play,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -116,14 +116,14 @@ PANEL-0010,Panels/Actions,panel,Actions,dialog toggles,,,,,,,11,in,planned,plan-
 PANEL-0011,Panels/Actions,panel,Actions,batch,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0012,Panels/Actions,panel,Actions,load/save `.aia`,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0013,Panels/Actions,panel,Actions,button mode,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0014,Panels/Align,panel,Align,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0014,Panels/Align,panel,Align,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0015,Panels/Align,panel,Align,Align objects,,,,left/centre/right/top/middle/bottom,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0016,Panels/Align,panel,Align,distribute objects,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0017,Panels/Align,panel,Align,distribute spacing,,,,auto / value,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0018,Panels/Align,panel,Align,align to selection / key object / artboard,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0019,Panels/Align,panel,Align,Use Preview Bounds,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0020,Panels/Align,panel,Align,align glyph bounds for text,,,,"24.3, point and area text",,24.3,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0021,Panels/Appearance,panel,Appearance,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0021,Panels/Appearance,panel,Appearance,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0022,Panels/Appearance,panel,Appearance,The appearance stack: add new fill/stroke,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0023,Panels/Appearance,panel,Appearance,add effect,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0024,Panels/Appearance,panel,Appearance,clear appearance,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -133,7 +133,7 @@ PANEL-0027,Panels/Appearance,panel,Appearance,visibility toggles,,,,,,,3,in,plan
 PANEL-0028,Panels/Appearance,panel,Appearance,inline stroke and fill controls,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0029,Panels/Appearance,panel,Appearance,redefine graphic style,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0030,Panels/Appearance,panel,Appearance,"""new art has basic appearance""",,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0031,Panels/Artboards,panel,Artboards,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0031,Panels/Artboards,panel,Artboards,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0032,Panels/Artboards,panel,Artboards,List,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0033,Panels/Artboards,panel,Artboards,reorder,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0034,Panels/Artboards,panel,Artboards,rename,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -142,18 +142,18 @@ PANEL-0036,Panels/Artboards,panel,Artboards,rearrange all,,,,,,,1,in,planned,pla
 PANEL-0037,Panels/Artboards,panel,Artboards,convert to artboards,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0038,Panels/Artboards,panel,Artboards,delete,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0039,Panels/Artboards,panel,Artboards,duplicate,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0040,Panels/Asset Export,panel,Asset Export,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0040,Panels/Asset Export,panel,Asset Export,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0041,Panels/Asset Export,panel,Asset Export,Collect assets,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0042,Panels/Asset Export,panel,Asset Export,export settings,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0043,Panels/Asset Export,panel,Asset Export,iOS/Android presets,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0044,Panels/Attributes,panel,Attributes,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0044,Panels/Attributes,panel,Attributes,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0045,Panels/Attributes,panel,Attributes,Overprint fill and stroke,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0046,Panels/Attributes,panel,Attributes,show/hide centre,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0047,Panels/Attributes,panel,Attributes,path direction reverse,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0048,Panels/Attributes,panel,Attributes,fill rule,,,,non-zero / even-odd,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0049,Panels/Attributes,panel,Attributes,image map,,,,none / rectangle / polygon + URL,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0050,Panels/Attributes,panel,Attributes,note,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0051,Panels/Brushes,panel,Brushes,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0051,Panels/Brushes,panel,Brushes,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0052,Panels/Brushes,panel,Brushes,Brush libraries,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0053,Panels/Brushes,panel,Brushes,view modes,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0054,Panels/Brushes,panel,Brushes,remove brush stroke,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -162,7 +162,7 @@ PANEL-0056,Panels/Brushes,panel,Brushes,new brush,,,,,,,8,in,planned,plan-2020,v
 PANEL-0057,Panels/Brushes,panel,Brushes,duplicate,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0058,Panels/Brushes,panel,Brushes,delete,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0059,Panels/Brushes,panel,Brushes,show/hide by type,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0060,Panels/Character,panel,Character,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0060,Panels/Character,panel,Character,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0061,Panels/Character,panel,Character,Font family,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0062,Panels/Character,panel,Character,style,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0063,Panels/Character,panel,Character,size,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -184,14 +184,14 @@ PANEL-0078,Panels/Character,panel,Character,snap to glyph,,,,,,,5,in,planned,pla
 PANEL-0079,Panels/Character,panel,Character,Touch Type button,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0080,Panels/Character,panel,Character,font height variations,,,,24.3,,24.3,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0081,Panels/Character,panel,Character,OpenType variable font axis sliders,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0082,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0082,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0083,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,New,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0084,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,edit,,,,all attributes,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0085,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,clear overrides,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0086,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,redefine,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0087,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,load from document,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0088,Panels/Character Styles / Paragraph Styles,panel,Character Styles / Paragraph Styles,basic style defaults,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0089,Panels/Color,panel,Color,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0089,Panels/Color,panel,Color,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0090,Panels/Color,panel,Color,Grayscale,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0091,Panels/Color,panel,Color,RGB,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0092,Panels/Color,panel,Color,HSB,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -203,18 +203,18 @@ PANEL-0097,Panels/Color,panel,Color,out-of-gamut and out-of-web warnings,,,,,,,3
 PANEL-0098,Panels/Color,panel,Color,invert,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0099,Panels/Color,panel,Color,complement,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0100,Panels/Color,panel,Color,create new swatch,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0101,Panels/Color Guide,panel,Color Guide,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0101,Panels/Color Guide,panel,Color Guide,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0102,Panels/Color Guide,panel,Color Guide,Harmony rules,,,,"Complementary 1 and 2, Split Complementary, Left Complement, Right Complement, Analogous 1 and 2, Monochromatic, Shades, Triad 1–3, Tetrad 1–3, Compound 1 and 2, High Contrast 1–3, Pentagram",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0103,Panels/Color Guide,panel,Color Guide,tints/shades,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0104,Panels/Color Guide,panel,Color Guide,warm/cool,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0105,Panels/Color Guide,panel,Color Guide,vivid/muted variations,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0106,Panels/Color Guide,panel,Color Guide,limit to swatch library,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0107,Panels/Color Guide,panel,Color Guide,Edit Colours button,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0108,Panels/CSS Properties,panel,CSS Properties,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0108,Panels/CSS Properties,panel,CSS Properties,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0109,Panels/CSS Properties,panel,CSS Properties,CSS for the selection or all,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0110,Panels/CSS Properties,panel,CSS Properties,export options,,,,"units, include vendor prefixes, include absolute position, dimensions, generate CSS for unnamed objects, rasterize unsupported art",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0111,Panels/CSS Properties,panel,CSS Properties,copy and export `.css`,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0112,Panels/Document Info,panel,Document Info,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0112,Panels/Document Info,panel,Document Info,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0113,Panels/Document Info,panel,Document Info,Document,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0114,Panels/Document Info,panel,Document Info,objects,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0115,Panels/Document Info,panel,Document Info,styles,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -226,18 +226,18 @@ PANEL-0120,Panels/Document Info,panel,Document Info,fonts,,,,,,,10,in,planned,pl
 PANEL-0121,Panels/Document Info,panel,Document Info,linked images,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0122,Panels/Document Info,panel,Document Info,embedded images,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0123,Panels/Document Info,panel,Document Info,font details. Selection only. Save as text,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0124,Panels/Flattener Preview,panel,Flattener Preview,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0124,Panels/Flattener Preview,panel,Flattener Preview,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0125,Panels/Flattener Preview,panel,Flattener Preview,Highlight,,,,"rasterized complex regions, transparent objects, outlined strokes/text, …",,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0126,Panels/Flattener Preview,panel,Flattener Preview,overprint handling,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0127,Panels/Flattener Preview,panel,Flattener Preview,preset,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0128,Panels/Flattener Preview,panel,Flattener Preview,refresh,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0129,Panels/Glyphs,panel,Glyphs,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0129,Panels/Glyphs,panel,Glyphs,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0130,Panels/Glyphs,panel,Glyphs,Show entire font or alternates by feature,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0131,Panels/Glyphs,panel,Glyphs,font and style,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0132,Panels/Glyphs,panel,Glyphs,zoom,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0133,Panels/Glyphs,panel,Glyphs,recently used,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0134,Panels/Glyphs,panel,Glyphs,insert,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0135,Panels/Gradient,panel,Gradient,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0135,Panels/Gradient,panel,Gradient,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0136,Panels/Gradient,panel,Gradient,Type,,,,linear / radial / freeform with points / lines,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0137,Panels/Gradient,panel,Gradient,edit,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0138,Panels/Gradient,panel,Gradient,angle,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -247,7 +247,7 @@ PANEL-0141,Panels/Gradient,panel,Gradient,stops,,,,"colour, opacity, location",,
 PANEL-0142,Panels/Gradient,panel,Gradient,midpoints,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0143,Panels/Gradient,panel,Gradient,stroke gradient modes,,,,within / along / across,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0144,Panels/Gradient,panel,Gradient,spread,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0145,Panels/Graphic Styles,panel,Graphic Styles,(panel),,,,"Window menu entry, panel menu, docking",,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0145,Panels/Graphic Styles,panel,Graphic Styles,(panel),,,,"Window menu entry, panel menu, docking",,,11,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0146,Panels/Graphic Styles,panel,Graphic Styles,Libraries,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0147,Panels/Graphic Styles,panel,Graphic Styles,break link,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0148,Panels/Graphic Styles,panel,Graphic Styles,new,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -257,14 +257,14 @@ PANEL-0151,Panels/Graphic Styles,panel,Graphic Styles,merge styles,,,,,,,11,in,p
 PANEL-0152,Panels/Graphic Styles,panel,Graphic Styles,override character colour,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0153,Panels/Graphic Styles,panel,Graphic Styles,use square/text for preview,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0154,Panels/Graphic Styles,panel,Graphic Styles,add to or replace existing styles on click,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0155,Panels/Image Trace,panel,Image Trace,(panel),,,,See §6,,,9,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0156,Panels/Info,panel,Info,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0155,Panels/Image Trace,panel,Image Trace,(panel),,,,See §6,,,9,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
+PANEL-0156,Panels/Info,panel,Info,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0157,Panels/Info,panel,Info,X/Y,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0158,Panels/Info,panel,Info,W/H,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0159,Panels/Info,panel,Info,colour values of fill and stroke,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0160,Panels/Info,panel,Info,distance/angle,,,,Measure,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0161,Panels/Info,panel,Info,transform values,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0162,Panels/Layers,panel,Layers,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0162,Panels/Layers,panel,Layers,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0163,Panels/Layers,panel,Layers,Tree with visibility,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0164,Panels/Layers,panel,Layers,lock,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0165,Panels/Layers,panel,Layers,template,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -284,12 +284,12 @@ PANEL-0178,Panels/Layers,panel,Layers,flatten artwork,,,,,,,1,in,planned,plan-20
 PANEL-0179,Panels/Layers,panel,Layers,paste remembers layers,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0180,Panels/Layers,panel,Layers,options,,,,"name, colour, template, show, preview, lock, print, dim images to %",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0181,Panels/Layers,panel,Layers,panel options,,,,"row size, thumbnails, show layers only",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0182,Panels/Libraries,panel,Libraries,(panel),,,,"Local only (§1.2): colours, character and paragraph styles, graphics, brushes",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0182,Panels/Libraries,panel,Libraries,(panel),,,,"Local only (§1.2): colours, character and paragraph styles, graphics, brushes",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0183,Panels/Libraries,panel,Libraries,Local only (§1.2): colours,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0184,Panels/Libraries,panel,Libraries,character and paragraph styles,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0185,Panels/Libraries,panel,Libraries,graphics,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0186,Panels/Libraries,panel,Libraries,brushes,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0187,Panels/Links,panel,Links,(panel),,,,"Window menu entry, panel menu, docking",,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0187,Panels/Links,panel,Links,(panel),,,,"Window menu entry, panel menu, docking",,,6,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0188,Panels/Links,panel,Links,Relink,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0189,Panels/Links,panel,Links,go to link,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0190,Panels/Links,panel,Links,update link,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -297,15 +297,15 @@ PANEL-0191,Panels/Links,panel,Links,edit original,,,,,,,6,in,planned,plan-2020,v
 PANEL-0192,Panels/Links,panel,Links,embed/unembed,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0193,Panels/Links,panel,Links,link information,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0194,Panels/Links,panel,Links,show missing/modified/embedded,,,,,,,6,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0195,Panels/Magic Wand,panel,Magic Wand,(panel),,,,"Tolerances, as above",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0195,Panels/Magic Wand,panel,Magic Wand,(panel),,,,"Tolerances, as above",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0196,Panels/Magic Wand,panel,Magic Wand,Tolerances,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0197,Panels/Magic Wand,panel,Magic Wand,as above,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0198,Panels/Navigator,panel,Navigator,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0198,Panels/Navigator,panel,Navigator,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0199,Panels/Navigator,panel,Navigator,Proxy view,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0200,Panels/Navigator,panel,Navigator,zoom slider,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0201,Panels/Navigator,panel,Navigator,draw dashed lines as solid,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0202,Panels/Navigator,panel,Navigator,view artboard contents only,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0203,Panels/OpenType,panel,OpenType,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0203,Panels/OpenType,panel,OpenType,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0204,Panels/OpenType,panel,OpenType,Standard/contextual/discretionary ligatures,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0205,Panels/OpenType,panel,OpenType,swash,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0206,Panels/OpenType,panel,OpenType,stylistic alternates,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -315,7 +315,7 @@ PANEL-0209,Panels/OpenType,panel,OpenType,fractions,,,,,,,5,in,planned,plan-2020
 PANEL-0210,Panels/OpenType,panel,OpenType,stylistic sets,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0211,Panels/OpenType,panel,OpenType,figures,,,,tabular/proportional lining/oldstyle,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0212,Panels/OpenType,panel,OpenType,position,,,,superior/inferior/numerator/denominator,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0213,Panels/Paragraph,panel,Paragraph,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0213,Panels/Paragraph,panel,Paragraph,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0214,Panels/Paragraph,panel,Paragraph,Alignment,,,,7,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0215,Panels/Paragraph,panel,Paragraph,indents,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0216,Panels/Paragraph,panel,Paragraph,first-line indent,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -327,12 +327,12 @@ PANEL-0221,Panels/Paragraph,panel,Paragraph,composer,,,,Adobe Every-line / Singl
 PANEL-0222,Panels/Paragraph,panel,Paragraph,roman hanging punctuation,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0223,Panels/Paragraph,panel,Paragraph,CJK options,,,,"kinsoku, mojikumi, burasagari",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0224,Panels/Paragraph,panel,Paragraph,bullets and numbering,,,,,,,5,in,planned,unverified,vectorsuite.md §5.3,,,,
-PANEL-0225,Panels/Pathfinder,panel,Pathfinder,(panel),,,,"Window menu entry, panel menu, docking",,,4,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0225,Panels/Pathfinder,panel,Pathfinder,(panel),,,,"Window menu entry, panel menu, docking",,,4,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0226,Panels/Pathfinder,panel,Pathfinder,Shape modes,,,,"Unite, Minus Front, Intersect, Exclude, with Alt making a compound shape) and Expand. Pathfinders (Divide, Trim, Merge, Crop, Outline, Minus Back). Options: precision (0.028 pt",,,4,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0227,Panels/Pathfinder,panel,Pathfinder,remove redundant points,,,,,,,4,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0228,Panels/Pathfinder,panel,Pathfinder,divide and outline will remove unpainted artwork,,,,,,,4,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0229,Panels/Pathfinder,panel,Pathfinder,make and release compound shapes,,,,,,,4,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0230,Panels/Pattern Options,panel,Pattern Options,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0230,Panels/Pattern Options,panel,Pattern Options,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0231,Panels/Pattern Options,panel,Pattern Options,Name,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0232,Panels/Pattern Options,panel,Pattern Options,tile type,,,,"Grid, Brick by Row, Brick by Column, Hex by Column, Hex by Row",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0233,Panels/Pattern Options,panel,Pattern Options,brick offset,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -345,12 +345,12 @@ PANEL-0239,Panels/Pattern Options,panel,Pattern Options,copies,,,,1×1 … 9×9 
 PANEL-0240,Panels/Pattern Options,panel,Pattern Options,dim copies to %,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0241,Panels/Pattern Options,panel,Pattern Options,show tile edge,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0242,Panels/Pattern Options,panel,Pattern Options,show swatch bounds,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0243,Panels/Properties,panel,Properties,(panel),,,,See §5.1,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0244,Panels/Separations Preview,panel,Separations Preview,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0243,Panels/Properties,panel,Properties,(panel),,,,See §5.1,,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
+PANEL-0244,Panels/Separations Preview,panel,Separations Preview,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0245,Panels/Separations Preview,panel,Separations Preview,Overprint preview,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0246,Panels/Separations Preview,panel,Separations Preview,show used spot colours only,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0247,Panels/Separations Preview,panel,Separations Preview,per-plate toggles,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0248,Panels/Stroke,panel,Stroke,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0248,Panels/Stroke,panel,Stroke,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0249,Panels/Stroke,panel,Stroke,Weight,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0250,Panels/Stroke,panel,Stroke,cap,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0251,Panels/Stroke,panel,Stroke,corner,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -362,7 +362,7 @@ PANEL-0256,Panels/Stroke,panel,Stroke,width profile,,,,"preset and custom, flip"
 PANEL-0257,Panels/SVG Interactivity,panel,SVG Interactivity,(panel),,,,"Window menu entry, panel menu, docking",,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0258,Panels/SVG Interactivity,panel,SVG Interactivity,"Events (onfocusin, onclick, onmouseover, …) with JavaScript",,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0259,Panels/SVG Interactivity,panel,SVG Interactivity,JavaScript files,,,,,,,10,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0260,Panels/Swatches,panel,Swatches,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0260,Panels/Swatches,panel,Swatches,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0261,Panels/Swatches,panel,Swatches,Show kinds,,,,"colour, gradient, pattern, colour groups",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0262,Panels/Swatches,panel,Swatches,libraries,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0263,Panels/Swatches,panel,Swatches,new swatch,,,,"name, type process/spot, global, mode",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -375,7 +375,7 @@ PANEL-0269,Panels/Swatches,panel,Swatches,select all unused,,,,,,,3,in,planned,p
 PANEL-0270,Panels/Swatches,panel,Swatches,merge,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0271,Panels/Swatches,panel,Swatches,persistent swatches,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0272,Panels/Swatches,panel,Swatches,list/thumbnail views,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0273,Panels/Symbols,panel,Symbols,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0273,Panels/Symbols,panel,Symbols,(panel),,,,"Window menu entry, panel menu, docking",,,8,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0274,Panels/Symbols,panel,Symbols,Libraries,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0275,Panels/Symbols,panel,Symbols,place instance,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0276,Panels/Symbols,panel,Symbols,replace,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -383,7 +383,7 @@ PANEL-0277,Panels/Symbols,panel,Symbols,break link,,,,,,,8,in,planned,plan-2020,
 PANEL-0278,Panels/Symbols,panel,Symbols,reset transform,,,,,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0279,Panels/Symbols,panel,Symbols,new symbol,,,,"options dialog: name, export type movie clip / graphic, symbol type dynamic / static, registration, enable 9-slice scaling guides, align to pixel grid",,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0280,Panels/Symbols,panel,Symbols,edit symbol,,,,isolation,,,8,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0281,Panels/Transform,panel,Transform,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0281,Panels/Transform,panel,Transform,(panel),,,,"Window menu entry, panel menu, docking",,,1,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0282,Panels/Transform,panel,Transform,X/Y/W/H with a reference point,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0283,Panels/Transform,panel,Transform,link proportions,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0284,Panels/Transform,panel,Transform,rotate,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -393,7 +393,7 @@ PANEL-0287,Panels/Transform,panel,Transform,scale corners,,,,,,,1,in,planned,pla
 PANEL-0288,Panels/Transform,panel,Transform,scale strokes and effects,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0289,Panels/Transform,panel,Transform,align to pixel grid,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0290,Panels/Transform,panel,Transform,flip,,,,,,,1,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0291,Panels/Transparency,panel,Transparency,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0291,Panels/Transparency,panel,Transparency,(panel),,,,"Window menu entry, panel menu, docking",,,3,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0292,Panels/Transparency,panel,Transparency,Blend mode,,,,the 16 modes,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0293,Panels/Transparency,panel,Transparency,opacity,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0294,Panels/Transparency,panel,Transparency,thumbnails,,,,,,,3,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -410,7 +410,7 @@ PANEL-0304,Panels/Variables,panel,Variables,New variable,,,,"text, linked file, 
 PANEL-0305,Panels/Variables,panel,Variables,bind/unbind,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0306,Panels/Variables,panel,Variables,data sets,,,,"capture, next/previous, rename, delete",,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0307,Panels/Variables,panel,Variables,import and export XML variable library,,,,,,,11,in,planned,plan-2020,vectorsuite.md §5.3,,,,
-PANEL-0308,Panels/Type → Tabs,panel,Type → Tabs,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
+PANEL-0308,Panels/Type → Tabs,panel,Type → Tabs,(panel),,,,"Window menu entry, panel menu, docking",,,5,in,partial,plan-2020,vectorsuite.md §5.3,,,,crates/ui-egui/src/state.rs (all_panels)
 PANEL-0309,Panels/Type → Tabs,panel,Type → Tabs,Tab ruler: left,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0310,Panels/Type → Tabs,panel,Type → Tabs,centre,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
 PANEL-0311,Panels/Type → Tabs,panel,Type → Tabs,right and decimal tabs,,,,,,,5,in,planned,plan-2020,vectorsuite.md §5.3,,,,
@@ -994,36 +994,36 @@ SHELL-0028,Shell/Contextual Task Bar,feature,Contextual Task Bar,Image,,,,"Image
 SHELL-0029,Shell/Contextual Task Bar,feature,Contextual Task Bar,Image and vector,,,,"Clip Mask, Align, Group",,28.3,1,in,planned,doc-30,docs/parity/notes-30.1.md#contextual-task-bar,,,,
 SHELL-0030,Shell/Contextual Task Bar,feature,Contextual Task Bar,Clipping mask,,,,"Edit Mask, Release",,28.3,1,in,planned,doc-30,docs/parity/notes-30.1.md#contextual-task-bar,,,,
 SHELL-0031,Shell/Contextual Task Bar,feature,Contextual Task Bar,"Artboard, Smooth, Free Transform, Dimension, Objects on Path tools",,,,The tool's options,,28.3,1,in,planned,doc-30,docs/parity/notes-30.1.md#contextual-task-bar,,,,
-PANEL-0322,Panels/History,panel,History,(panel),,,,"Click a state to revert; Step Backward/Forward, Set History Limit, Clear History, new document from state; editing after a state drops later states; cleared on close",,26.4,1,in,planned,doc-30,docs/parity/notes-30.1.md#history-panel,,,,
-SHELL-0032,Preferences/Performance,preference,Preferences > Performance,History States,100,,states,,,,1,in,planned,doc-30,docs/parity/notes-30.1.md#history-panel,,,,
-SHELL-0033,Preferences,preference,Preferences,Category: General,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0034,Preferences,preference,Preferences,Category: Selection & Anchor Display,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0035,Preferences,preference,Preferences,Category: Type,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0036,Preferences,preference,Preferences,Category: Units,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0037,Preferences,preference,Preferences,Category: Guides & Grid,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0038,Preferences,preference,Preferences,Category: Smart Guides,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0039,Preferences,preference,Preferences,Category: Slices,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0040,Preferences,preference,Preferences,Category: Hyphenation,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
+PANEL-0322,Panels/History,panel,History,(panel),,,,"Click a state to revert; Step Backward/Forward, Set History Limit, Clear History, new document from state; editing after a state drops later states; cleared on close",,26.4,1,in,partial,doc-30,docs/parity/notes-30.1.md#history-panel,,,,crates/ui-egui/src/state.rs (all_panels)
+SHELL-0032,Preferences/Performance,preference,Preferences > Performance,History States,100,,states,"Resolved 2026-10-08: the install's preferences file holds /maximumUndoDepth 100, so 100 is the default. The app had defaulted to 500; its ceiling (1000) is deliberately higher than Illustrator's, so undo that effectively never runs out stays one preference away.",,,1,in,done,verified,Adobe Illustrator Prefs (/maximumUndoDepth) from the licensed 30.1.0 install,vectorcraft_engine::tests_prefs::history_states_defaults_to_the_reference_app,"the install's own preferences file, read over the research channel",2026-10-08,crates/engine/src/lib.rs (Prefs::default history_states)
+SHELL-0033,Preferences,preference,Preferences,Category: General,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0034,Preferences,preference,Preferences,Category: Selection & Anchor Display,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0035,Preferences,preference,Preferences,Category: Type,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0036,Preferences,preference,Preferences,Category: Units,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0037,Preferences,preference,Preferences,Category: Guides & Grid,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0038,Preferences,preference,Preferences,Category: Smart Guides,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0039,Preferences,preference,Preferences,Category: Slices,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0040,Preferences,preference,Preferences,Category: Hyphenation,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
 SHELL-0041,Preferences,preference,Preferences,Category: Plug-ins & Scratch Disks,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0042,Preferences,preference,Preferences,Category: User Interface,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0043,Preferences,preference,Preferences,Category: Performance,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0044,Preferences,preference,Preferences,Category: File Handling,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0045,Preferences,preference,Preferences,Category: Clipboard Handling,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0046,Preferences,preference,Preferences,Category: Appearance of Black,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
-SHELL-0047,Preferences,preference,Preferences,Category: Devices,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,planned,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,
+SHELL-0042,Preferences,preference,Preferences,Category: User Interface,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0043,Preferences,preference,Preferences,Category: Performance,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0044,Preferences,preference,Preferences,Category: File Handling,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0045,Preferences,preference,Preferences,Category: Clipboard Handling,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0046,Preferences,preference,Preferences,Category: Appearance of Black,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0047,Preferences,preference,Preferences,Category: Devices,,,,Category list from Adobe's Aug 2026 page; confirm it matches 30.1,,,1,in,partial,unverified,docs/parity/notes-30.1.md#preferences-categories,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
 SHELL-0048,Preferences,preference,Preferences,Search Preferences,,,,Ctrl/Cmd+K opens with search focused; Ctrl/Cmd+F returns to it; Enter or See all results,,29.7,1,in,planned,doc-30,docs/parity/notes-30.1.md#preferences-categories,,,,
 SHELL-0049,Preferences/Smart Guides,preference,Preferences > Smart Guides,Object Guides,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
 SHELL-0050,Preferences/Smart Guides,preference,Preferences > Smart Guides,Glyphs Guides,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0051,Preferences/Smart Guides,preference,Preferences > Smart Guides,Alignment Guides,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0052,Preferences/Smart Guides,preference,Preferences > Smart Guides,Anchor/Path Labels,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0053,Preferences/Smart Guides,preference,Preferences > Smart Guides,Object Highlighting,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0054,Preferences/Smart Guides,preference,Preferences > Smart Guides,Measurement Labels,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0055,Preferences/Smart Guides,preference,Preferences > Smart Guides,Transform Tools,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0056,Preferences/Smart Guides,preference,Preferences > Smart Guides,Spacing Guides,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
+SHELL-0051,Preferences/Smart Guides,preference,Preferences > Smart Guides,Alignment Guides,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0052,Preferences/Smart Guides,preference,Preferences > Smart Guides,Anchor/Path Labels,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0053,Preferences/Smart Guides,preference,Preferences > Smart Guides,Object Highlighting,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0054,Preferences/Smart Guides,preference,Preferences > Smart Guides,Measurement Labels,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0055,Preferences/Smart Guides,preference,Preferences > Smart Guides,Transform Tools,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0056,Preferences/Smart Guides,preference,Preferences > Smart Guides,Spacing Guides,,,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
 SHELL-0057,Preferences/Smart Guides,preference,Preferences > Smart Guides,Invoke Distance Guides,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
 SHELL-0058,Preferences/Smart Guides,preference,Preferences > Smart Guides,Snap to Last Location,,,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0059,Preferences/Smart Guides,preference,Preferences > Smart Guides,Construction Guides,,up to 6 angles,,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
-SHELL-0060,Preferences/Smart Guides,preference,Preferences > Smart Guides,Snapping Tolerance,,,pt,,,,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
+SHELL-0059,Preferences/Smart Guides,preference,Preferences > Smart Guides,Construction Guides,,up to 6 angles,,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
+SHELL-0060,Preferences/Smart Guides,preference,Preferences > Smart Guides,Snapping Tolerance,,,pt,,,,2,in,partial,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
 SHELL-0061,Preferences/Smart Guides,preference,Preferences > Smart Guides,Geometric Guides,On,,,Controls snap to tangent and perpendicular,,30.0,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
 OBJECT-0015,Snapping,feature,Snap to tangent,,On,,,"Line/Pen endpoint snaps tangent to a curve, circle or arc; endpoints only",,30.0,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
 OBJECT-0016,Snapping,feature,Snap to perpendicular,,On,,,Line/Pen endpoint snaps at 90° to a straight path; not curves; endpoints only,,30.0,2,in,planned,doc-30,docs/parity/notes-30.1.md#snapping-and-smart-guides,,,,
@@ -1133,7 +1133,7 @@ SAVE-0008,Save and export,dialog,Illustrator Options,Save Each Artboard To A Sep
 SAVE-0009,Save and export,dialog,Illustrator Options,Transparency (versions before 9.0),,"Preserve Paths, Preserve Appearance And Overprints",,,,,6,in,planned,doc-30,docs/parity/notes-30.1.md#save-illustrator-options-and-legacy-versions,,,,
 SAVE-0010,Preferences/File Handling,preference,Preferences > File Handling,Save in Background,On,,,.ai only; not when PDF compatibility is off or with third-party plugin content; in 30.0 also does recovery backups,,,6,in,planned,doc-30,docs/parity/notes-30.1.md#save-illustrator-options-and-legacy-versions,,,,
 SAVE-0011,Preferences/File Handling,preference,Preferences > File Handling,Automatically Save Recovery Data Every,Off (30.0),,,,,,1,in,planned,doc-30,docs/parity/notes-30.1.md#save-illustrator-options-and-legacy-versions,,,,
-SAVE-0012,Preferences/File Handling,preference,Preferences > File Handling,Turn off Data Recovery for complex documents,,,,,,,1,in,planned,doc-30,docs/parity/notes-30.1.md#save-illustrator-options-and-legacy-versions,,,,
+SAVE-0012,Preferences/File Handling,preference,Preferences > File Handling,Turn off Data Recovery for complex documents,,,,,,,1,in,partial,doc-30,docs/parity/notes-30.1.md#save-illustrator-options-and-legacy-versions,,,,crates/engine/src/cmd/prefscmds.rs (prefs.list)
 SAVE-0013,Preferences/File Handling,preference,Preferences > File Handling,Export in Background,On,,,"Export for Screens, PNG and JPG only",,,10,in,planned,doc-30,docs/parity/notes-30.1.md#export,,,,
 SAVE-0014,Save and export/Export As,format,Export As: DWG/DXF,,,,,,,,6,in,planned,doc-30,docs/parity/notes-30.1.md#export,,,,
 SAVE-0015,Save and export/Export As,format,Export As: BMP,,,,,,,,6,in,planned,doc-30,docs/parity/notes-30.1.md#export,,,,
