@@ -3,7 +3,7 @@ name = "vectorcraft-doc"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "VectorCraft document model: artboards, layers, objects, appearance (pure data + serde)"
+description = "VectorStudio document model: artboards, layers, objects, appearance (pure data + serde)"
 
 [lints]
 workspace = true
@@ -13,9 +13,12 @@ vectorcraft-geom = { workspace = true }
 vectorcraft-color = { workspace = true }
 kurbo = { workspace = true }
 image = { workspace = true }
+tiff = { workspace = true }
+zune-jpeg = { workspace = true }
 serde = { workspace = true }
 serde_json = { workspace = true }
 thiserror = { workspace = true }
 
 [dev-dependencies]
+jpeg-encoder = { workspace = true }
 proptest = { workspace = true }

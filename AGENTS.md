@@ -3,7 +3,7 @@
 VectorStudio is a clean-room, open-source, Rust-native vector illustration app whose goal is a **100% 1:1 reimplementation of Adobe Illustrator 30.1** — the same defaults, ranges, units, shortcuts and modifier behaviour, not merely the same feature list. It runs natively on macOS, Windows, Linux and FreeBSD, and on the web via WASM.
 
 **This is a fork of [`storytold/vectorcraft`](https://github.com/storytold/vectorcraft)** (MIT OR Apache-2.0), adopted 2026-10-08 — see [`docs/decisions/0001-fork-from-vectorcraft.md`](docs/decisions/0001-fork-from-vectorcraft.md) for why, and what the archived VectorSuite prototype contributed. Upstream is active, so **we track it**:
-- `git fetch upstream && git merge upstream/main` regularly; upstream's progress is ours for free.
+- `git fetch upstream && git merge upstream/main` regularly; upstream's progress is ours for free. **[`docs/upstream-merge.md`](docs/upstream-merge.md) is the procedure** — what conflicts, how to resolve each shape, and how to re-apply the rebrand without corrupting the docs that name both projects on purpose.
 - **Keep merges cheap: rebrand the surface only.** Crate names (`vectorcraft_*`), module paths and every on-disk and on-the-wire identifier stay as they are. Only display strings change (app name, bundle ids, URLs, packaging, MCP server title).
 - **Format identifiers are not branding.** `%VectorCraft_BeginData` in the EPS writer, the `.vectorcraft`/`.drawcraft` extensions, `"format": "vectorcraft"` and the recovery-store layout are compatibility surfaces: renaming them strands files and recovery copies. They keep their names.
 - **Never push to `upstream`** (its push URL is disabled). Contributing back is a separate, deliberate decision.

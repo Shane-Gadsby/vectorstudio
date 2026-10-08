@@ -13,15 +13,27 @@ repo exists) and [`docs/parity/README.md`](parity/README.md) (how 1:1 is measure
 - **Goal:** a **100% 1:1 reimplementation of Illustrator 30.1** — same defaults, ranges, units,
   shortcuts and modifier keys. Not "the same feature list".
 - **Checks at handoff:** `cargo clippy --workspace --all-targets -- -D warnings` clean;
-  `assets`, `brands`, `layers` and `parity --strict` gates all pass; workspace tests pass except
-  one **pre-existing** failure (below).
+  `assets`, `brands`, `layers` and `parity --strict` gates all pass; **3,732 tests pass across 99
+  targets**, with one expected environmental failure (below).
 
-### The one failing test is not ours
+### Always test with `--no-fail-fast`
+
+```sh
+cargo test --workspace --no-fail-fast
+```
+
+`cargo test --workspace` **stops at the first failing target**, and one target fails on this machine
+for environmental reasons (below). So a plain run reports "1 failed" and never reaches the crates
+after it — which silently hid three real i18n failures during the first upstream merge. A total
+from a fail-fast run is not a pass.
+
+### The one expected failure is not ours
 
 `crates/pdf/tests/system_fonts.rs :: a_fresh_session_resolves_pdf_fonts_to_installed_families`
-fails on this machine. It resolves PDF base fonts against whatever fonts are installed, so it is
+fails here. It resolves PDF base fonts against whatever fonts are installed, so it is
 environment-dependent. **Confirmed failing identically on the untouched upstream tree** (stash and
-run it if you doubt this). Don't chase it; don't count it as a regression.
+run it if you doubt this). Don't chase it; don't count it as a regression — but don't let it mask
+anything either, which is what `--no-fail-fast` is for.
 
 ### Parity, as measured
 
@@ -107,23 +119,23 @@ together, unknown operators are preserved verbatim, every change needs a round-t
 
 ## 4. Merging upstream
 
-Upstream is active and **already 49 commits ahead** (it is at PR #395; we forked at #376). The
-whole surface-only rebrand decision exists to keep this cheap, and **it holds** — a dry run of the
-first merge produced only **6 conflicts**, all mechanical:
+**[`docs/upstream-merge.md`](upstream-merge.md) is the procedure.** Read it before merging; it
+records what conflicts, how to resolve each shape, and how to re-apply the rebrand without
+corrupting the docs that name both projects on purpose.
 
-| File | Why |
-|---|---|
-| `README.md`, `ROADMAP.md` | we rewrote them |
-| `crates/ui-egui/src/i18n/ja.tsv` | our renamed strings vs their new Japanese entries |
-| `crates/ui-egui/src/shortcuts.rs` | our new test sits next to one of theirs |
-| `packaging/macos/Info.plist.in`, `xtask/src/bundle.rs` | rebranded display strings on lines they also touched |
+The first merge landed 2026-10-08, bringing upstream through PR #397 — **79 commits, 193 files,
+~17k lines**: Hebrew/Arabic bidirectional type, CMYK image import, live corners, a freehand
+dialog, Windows 7 support, and Spanish, Simplified Chinese and Brazilian Portuguese translations.
 
-**The first real merge has not been done.** Do it early rather than letting 49 become 200. After
-merging, re-run `cargo xtask parity --audit`: upstream adds menu entries, so coverage moves.
+**The surface-only rebrand decision is holding.** 79 commits produced 7 conflicts, every one
+mechanical — the two docs we rewrote, a translation catalogue, one adjacent test, and rebranded
+display strings on lines upstream also touched. Nothing structural, nothing in the engine.
 
-Keep merges cheap by holding the line in `AGENTS.md`: crate names, module paths, format ids and
-every on-disk/on-the-wire identifier stay at their upstream `vectorcraft` spelling. Only what a
-user reads is rebranded.
+**Merge often.** The cost is roughly linear in the number of commits and the conflicts are nearly
+always the same handful of files, so there is no reason to let it build up. Hold the line in
+`AGENTS.md` and the cost stays flat: crate names, module paths, format ids and every
+on-disk/on-the-wire identifier stay at their upstream `vectorcraft` spelling; only what a user
+reads is rebranded.
 
 ## 5. Rules that bind every session
 
@@ -178,6 +190,7 @@ cargo xtask parity --strict        # also: a `done` row must cite a test
 cargo xtask parity --audit         # what the app's surface says about each row (read-only)
 cargo xtask parity --audit --write # apply the conclusions that need no judgement
 cargo xtask ci                     # fmt, clippy, tests, assets, brands, parity, layers, wasm
+cargo test --workspace --no-fail-fast        # the only trustworthy total (see §1)
 cargo run --release -p vectorcraft # the app
 cargo run -q -p vectorcraft-ui-egui --example dump-surface   # the menu surface as JSON
 
@@ -196,6 +209,8 @@ alive before planning any VM work.
 | `501d126` | Rebrand to VectorStudio; ArtCraft marks removed (a licence obligation, not cosmetics) |
 | `f3e09e6` | Re-baseline the menu rows; the audit, and the matrix's own errors found |
 | `160c7e3` | The Window panel function keys bound; the audit's blind spot fixed |
+| `29d9a34` | This handoff |
+| *(this merge)* | Upstream through PR #397: 79 commits, 193 files; `docs/upstream-merge.md` written |
 
 The archived VectorSuite prototype is at `../vectorsuite`. **Its `CLAUDE.md` and `vectorsuite.md`
 are stale** — they describe the abandoned Tauri + ES-module + PhotoSuite architecture. Nothing

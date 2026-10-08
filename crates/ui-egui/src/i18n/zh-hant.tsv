@@ -49,11 +49,13 @@
 	[Default] is protected: New… starts an editable copy.	[預設] 受到保護：「新增…」會開始一份可編輯的複本。
 	[Unnamed]	[未命名]
 	A File…	一個檔案…
+	A lower value follows the stroke closely; a higher one gives fewer points and smoother curves.	數值較小時會貼近筆畫，較大時則錨點較少、曲線較平滑。
 	A new preset starting from the selected one	以所選預設集為基礎建立新預設集
 	A saved copy of the selected preset	所選預設集的已儲存拷貝
 	About VectorStudio	關於 VectorStudio
 	above	以上
 	Absolute Position	絕對位置
+	Accurate	精確
 	Abutting	相鄰
 	Action {n}	動作 {n}
 	Actions	動作
@@ -253,6 +255,7 @@
 	Blur	模糊
 	Bottom	下
 	Bottom in Front	下方置前
+	Bottom-to-Bottom Leading	基線至基線行距
 	Bottom:	下：
 	Bounds	邊界
 	Bounds (Fill Proportionally)	邊界 (按比例填滿)
@@ -310,6 +313,7 @@
 	Channel	色版
 	Character	字元
 	Character / Paragraph	字元／段落
+	Character Alignment	字元對齊
 	Character Rotation	字元旋轉
 	Character Set:	字元集：
 	Character Style	字元樣式
@@ -359,6 +363,7 @@
 	Close All	全部關閉
 	Close Library	關閉資料庫
 	Close Path	封閉路徑
+	Close paths when ends are within:	端點相距在以下範圍內時封閉路徑：
 	Cmd	Cmd
 	CMYK	CMYK
 	CMYK Color	CMYK 色彩
@@ -478,6 +483,11 @@
 	Corner Radius:	圓角半徑：
 	Corner:	轉角：
 	Corners	轉角
+	Round	圓角
+	Radius:	半徑：
+	Inverted Round	反向圓角
+	Corners…	轉角…
+	Chamfer	倒角
 	Couldn't copy to the system clipboard: {e}	無法複製到系統剪貼簿：{e}
 	Couldn't paste from the clipboard: {e}	無法從剪貼簿貼上：{e}
 	Couldn't save recovery data: {e}	無法儲存復原資料：{e}
@@ -733,6 +743,7 @@
 	Edit Pattern	編輯圖樣
 	Edit PDF Preset	編輯 PDF 預設集
 	Edit Print Preset	編輯列印預設集
+	Edit selected paths within:	在以下範圍內編輯選取的路徑：
 	Edit Selection	編輯選取範圍
 	Edit Selection…	編輯選取範圍…
 	Edit Symbol	編輯符號
@@ -755,6 +766,9 @@
 	Ellipse Tool	橢圓工具
 	Ellipse…	橢圓形…
 	Ellipsis	刪節號
+	Em Box Bottom/Left	全形字框下 / 左
+	Em Box Center	全形字框中央
+	Em Box Top/Right	全形字框上 / 右
 	Em Dash	長破折號
 	Em Space	全形空格
 	Embed	嵌入
@@ -902,6 +916,7 @@
 	Fill (X), double-click for the Color Picker	填色 (X)，按兩下開啟檢色器
 	Fill and Stroke	填色與筆畫
 	Fill Color	填色顏色
+	Fill new strokes	為新筆畫套用填色
 	Fill New Type Objects With Placeholder Text	以預留位置文字填滿新文字物件
 	Fill Rule	填色規則
 	Fill with Placeholder Text	以預留位置文字填滿
@@ -1246,6 +1261,7 @@
 	Left Indent	左縮排
 	Left Plane	左平面
 	Left-Justified Tab	靠左定位點
+	Left-to-Right Paragraph Direction	從左至右段落方向
 	Left:	左：
 	Legacy Macintosh RGB (Gamma 1.8)	舊版 Macintosh RGB (Gamma 1.8)
 	Legacy vector clipboard	舊版向量剪貼簿
@@ -1415,7 +1431,7 @@
 	Modified since it was read: {path}	讀取後已被修改：{path}
 	Modified:	修改時間：
 	Modify	修改
-	Mojikumi	標點間距
+	Mojikumi Set	標點間距
 	Monitor RGB	顯示器 RGB
 	Mono	單色
 	Monochrome images	單色影像
@@ -2081,8 +2097,10 @@
 	Right Indent	右縮排
 	Right Plane	右側平面
 	Right-Justified Tab	靠右定位點
+	Right-to-Left Paragraph Direction	從右至左段落方向
 	Right:	右：
 	Rise…	上升…
+	Roman Baseline	羅馬基線
 	Roman Hanging Punctuation	羅馬懸掛標點
 	Rotate	旋轉
 	Rotate 90° CW	順時針旋轉 90°
@@ -2641,6 +2659,7 @@
 	Tools	工具
 	Top	上
 	Top in Front	上方在前
+	Top-to-Top Leading	上緣至上緣行距
 	Top:	上：
 	Total Width:	總寬度：
 	Touch Type Tool	觸控文字工具

@@ -211,7 +211,9 @@ pub fn handle(app: &mut VectorcraftApp, ctx: &egui::Context) {
             // A key the tool claims (Esc with a loaded place cursor) is only the tool's.
             let claimed = app.session.tool_claims_key(tk, view);
             let r = app.session.tool_key(tk, Mods::default(), view);
-            if claimed {
+            // Enter also takes what the tool asks of the UI: Rotate, Scale, Reflect and Shear open
+            // their dialog with it.
+            if claimed || (k == Key::Enter && !busy) {
                 crate::canvas::apply_requests(app, r);
             }
             if k == Key::Escape && !busy && !claimed {
@@ -223,10 +225,29 @@ pub fn handle(app: &mut VectorcraftApp, ctx: &egui::Context) {
                     app.ui.flyout = None;
                 }
             }
+            if k == Key::Enter && !busy && !claimed {
+                // Enter with a selection tool opens the Move dialog, as a double-click on its button
+                // does.
+                let tool = app.session.tool_id();
+                if app.ui.dialog.is_none() && crate::canvas::is_selection_tool(tool) {
+                    // Nothing selected: it fails and nothing opens (the menu item is disabled then too).
+                    let _ = crate::toolbar::open_options(app, tool);
+                }
+                // The Enter that opened a dialog isn't also its OK: dialogs take Enter, this frame too.
+                if app.ui.dialog.is_some() {
+                    ctx.input_mut(|i| i.consume_key(Modifiers::NONE, Key::Enter));
+                }
+            }
         }
     }
     if typing {
         return;
+    }
+    // Tab is ours when no field has the keyboard (it shows and hides the panels, or goes to the
+    // Type tool): left to egui, it would also move the focus on to a field, and every key after it
+    // would count as typing.
+    if ctx.input(|i| i.key_pressed(Key::Tab)) {
+        ctx.memory_mut(|m| m.move_focus(egui::FocusDirection::None));
     }
     // Type tool editing: text, IME composition and editing keys go to the tool.
     if app.session.tool_wants_text() {
@@ -240,7 +261,7 @@ pub fn handle(app: &mut VectorcraftApp, ctx: &egui::Context) {
             });
             return;
         }
-        // Editing keys with modifiers, clipboard and Cmd+A.
+        // Editing keys with modifiers and the clipboard (Cmd+A is Select All's, below: the text).
         crate::panels::character::route_type_input(app, ctx);
         // Enter was already delivered above as ToolKey::Enter (newline).
         let fire = all_shortcuts().into_iter().filter(|(sc, ..)| sc.modifiers.command).find(|(sc, ..)| ctx.input_mut(|i| consume(i, sc, false)));
@@ -471,6 +492,48 @@ mod tests {
         assert_eq!(app.ui.open_panel.as_deref(), Some("layers"), "F7 should pop Layers out of a collapsed dock");
     }
 
+    /// Tab shows and hides the panels, and in the Type tool it types a tab, without moving the
+    /// keyboard focus on to a field: the keys after it (a tool letter, the next letter typed) still
+    /// work.
+    #[test]
+    fn tab_leaves_the_keyboard_to_the_shortcuts_and_the_type_tool() {
+        let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 200, "height": 200})).unwrap();
+        let ctx = egui::Context::default();
+        let screen = egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(1600.0, 850.0));
+        let run = |app: &mut VectorcraftApp, events: Vec<egui::Event>| {
+            let mut out = ctx.run_ui(egui::RawInput { events, screen_rect: Some(screen), ..Default::default() }, |ui| {
+                app.logic(ui.ctx());
+                app.ui(ui);
+            });
+            out.textures_delta.clear();
+        };
+        let press = |key| egui::Event::Key { key, physical_key: None, pressed: true, repeat: false, modifiers: Modifiers::NONE };
+        for _ in 0..3 {
+            run(&mut app, vec![]);
+        }
+        assert!(app.ui.dock && app.ui.toolbar);
+        run(&mut app, vec![press(Key::Tab)]);
+        run(&mut app, vec![]);
+        assert!(!app.ui.dock && !app.ui.toolbar, "Tab hid the panels");
+        run(&mut app, vec![press(Key::Tab)]);
+        run(&mut app, vec![]);
+        assert!(app.ui.dock && app.ui.toolbar, "a second Tab shows them again");
+        run(&mut app, vec![press(Key::P), egui::Event::Text("p".into())]);
+        assert_eq!(app.session.tool_id(), "pen", "and a tool letter after it works");
+        // The Type tool: a, Tab, b is one text.
+        app.select_tool("type");
+        let view = app.view_info();
+        for kind in [vectorcraft_tools::PointerKind::Down, vectorcraft_tools::PointerKind::Up] {
+            app.session.pointer(&vectorcraft_tools::PointerEvent::new(kind, 50.0, 50.0), view).unwrap();
+        }
+        run(&mut app, vec![egui::Event::Text("a".into())]);
+        run(&mut app, vec![press(Key::Tab)]);
+        run(&mut app, vec![egui::Event::Text("b".into())]);
+        let doc = app.session.execute("document.inspect", &json!({})).unwrap();
+        assert_eq!(doc["layers"][0]["children"][0]["name"], "a\tb");
+    }
+
     #[test]
     fn copy_and_paste_events_use_the_system_clipboard() {
         let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Default::default());
@@ -522,6 +585,54 @@ mod tests {
         let (rows, columns) = grid(&mut app, &[]);
         assert_eq!(grid(&mut app, &[Key::ArrowRight, Key::ArrowRight, Key::ArrowUp]), (rows + 1, columns + 2));
         assert_eq!(grid(&mut app, &[Key::ArrowLeft, Key::ArrowDown]), (rows, columns + 1));
+    }
+
+    /// Enter opens the tool's dialog: the Move dialog for the selection tools, the tool's own for
+    /// Rotate, Scale, Reflect and Shear. The Enter that opens it isn't also its OK.
+    #[test]
+    fn enter_opens_the_tools_dialog_and_leaves_it_open() {
+        let mut app = VectorcraftApp::new(vectorcraft_engine::Session::new(), Default::default());
+        app.session.execute("file.new", &json!({"width": 400, "height": 300})).unwrap();
+        let ctx = egui::Context::default();
+        let enter = || egui::Event::Key { key: Key::Enter, physical_key: None, pressed: true, repeat: false, modifiers: Modifiers::NONE };
+        // A whole app frame: the shortcuts first, then the UI, where a dialog takes its Enter.
+        let frame = |app: &mut VectorcraftApp, events: Vec<egui::Event>| {
+            let screen_rect = Some(egui::Rect::from_min_size(egui::Pos2::ZERO, egui::vec2(1280.0, 800.0)));
+            let mut out = ctx.run_ui(egui::RawInput { events, screen_rect, ..Default::default() }, |ui| {
+                app.logic(ui.ctx());
+                app.ui(ui);
+            });
+            out.textures_delta.clear();
+        };
+        let kind = |app: &VectorcraftApp| app.ui.dialog.as_ref().map(|d| d.kind.clone());
+        let steps = |app: &VectorcraftApp| app.session.active().unwrap().history.undo.len();
+        app.select_tool("selection");
+        frame(&mut app, vec![enter()]);
+        assert_eq!(kind(&app), None, "nothing is selected");
+        app.session.execute("shape.rectangle", &json!({"x": 10, "y": 10, "width": 50, "height": 30})).unwrap();
+        for (tool, dialog) in [
+            ("selection", "move"),
+            ("directSelection", "move"),
+            ("groupSelection", "move"),
+            ("rotate", "rotate"),
+            ("scale", "scale"),
+            ("reflect", "reflect"),
+            ("shear", "shear"),
+        ] {
+            app.select_tool(tool);
+            let before = steps(&app);
+            frame(&mut app, vec![enter()]);
+            assert_eq!(kind(&app).as_deref(), Some(dialog), "{tool}: Enter opens it");
+            frame(&mut app, vec![]);
+            assert_eq!(kind(&app).as_deref(), Some(dialog), "{tool}: and it stays open");
+            assert_eq!(steps(&app), before, "{tool}: the Enter that opened it didn't confirm it");
+            // The next Enter is its OK.
+            frame(&mut app, vec![enter()]);
+            assert_eq!((kind(&app), steps(&app)), (None, before + 1), "{tool}: Enter confirms");
+        }
+        app.select_tool("rectangle");
+        frame(&mut app, vec![enter()]);
+        assert_eq!(kind(&app), None, "another tool has its own Enter");
     }
 
     #[test]

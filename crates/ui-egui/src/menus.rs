@@ -54,7 +54,7 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "app.language",
         "Interface Language",
         "",
-        "{lang: auto|<code>} the interface language, persisted as the `interfaceLanguage` preference (`auto` follows the system locale; codes: prefs.list › interfaceLanguage, e.g. en, ja, cs, zh-hant)",
+        "{lang: auto|<code>} the interface language, persisted as the `interfaceLanguage` preference (`auto` follows the system locale; codes: prefs.list › interfaceLanguage, e.g. en, ja, cs, es, zh-hant)",
     ),
     ("file.open", "Open…", "Cmd+O", "{path?}"),
     (
@@ -276,7 +276,7 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "tool.options",
         "Tool Options…",
         "",
-        "{tool: id} what double-clicking a tool button opens: hand → fits the artboard in the window (view.fitArtboard), zoom → 100% (view.actualSize), rotate|scale|reflect|shear → that Object › Transform dialog (dialog `rotate`, `scale`, `reflect` or `shear`; error `nothing selected` without a selection), gradient → the Gradient panel (window.panel), eyedropper → Eyedropper Options (dialog `eyedropperOptions`, fields sampleSize, pickUp, apply; OK runs eyedropper.setOptions), printTiling → resets the print tiling (print.tiling.set {reset: true}), warp|twirl|pucker|bloat|scallop|crystallize|wrinkle → that tool's Tool Options (dialog `liquifyOptions`, fields tool, width, height, angle, intensity %, usePressure, detail, simplify, simplifyOn, rate, complexity, horizontal %, vertical %, affectAnchors, affectIn, affectOut, showBrush; OK runs tool.setOption {tool, values})",
+        "{tool: id} what double-clicking a tool button opens: hand → fits the artboard in the window (view.fitArtboard), zoom → 100% (view.actualSize), rotate|scale|reflect|shear → that Object › Transform dialog (dialog `rotate`, `scale`, `reflect` or `shear`; error `nothing selected` without a selection), selection|directSelection|groupSelection → the Move dialog (dialog `move`; the same error), gradient → the Gradient panel (window.panel), eyedropper → Eyedropper Options (dialog `eyedropperOptions`, fields sampleSize, pickUp, apply; OK runs eyedropper.setOptions), printTiling → resets the print tiling (print.tiling.set {reset: true}), warp|twirl|pucker|bloat|scallop|crystallize|wrinkle → that tool's Tool Options (dialog `liquifyOptions`, fields tool, width, height, angle, intensity %, usePressure, detail, simplify, simplifyOn, rate, complexity, horizontal %, vertical %, affectAnchors, affectIn, affectOut, showBrush; OK runs tool.setOption {tool, values}), pencil|paintbrush|smooth|blobBrush|eraser → that tool's Tool Options (dialog `freehandOptions`, fields tool and the options the tool keeps: fidelity (pt), fill, closeWithin and editWithin (px, 0 is off), size (pt); OK runs tool.setOption {tool, values})",
     ),
     (
         "ui.colorGuideOptions",
@@ -440,6 +440,12 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
         "Width Point Edit…",
         "",
         "{id, index} open Width Point Edit for width point `index` of path `id` (dialog `widthPoint`: side1, side2 (pt), linked, adjustAdjoining; double-clicking a width point with the Width tool opens it too): OK runs stroke.widthPoint.set, discard: true (the Delete button) stroke.widthPoint.remove",
+    ),
+    (
+        "ui.corners",
+        "Corners…",
+        "",
+        "{id?, corners?: [0..3…]} open Corners for live rectangle `id` (default: the selected one) and its corners (0 top-left, 1 top-right, 2 bottom-right, 3 bottom-left; default: the Direct-Selected corners, else all four) (dialog `corners`: kind (round|invertedRound|chamfer), radius (pt); double-clicking a corner widget opens it too): OK runs object.setLiveShape",
     ),
     (
         "ui.colorGuideLimit",
@@ -736,26 +742,14 @@ pub const UI_COMMANDS: &[(&str, &str, &str, &str)] = &[
     ),
 ];
 
-/// Canonical panel id for `window.panel`: the dock tabs (`properties`, `layers`, `libraries`)
-/// and every `ICON_PANELS` id, matched case-insensitively. Each icon panel's display label
-/// is accepted too, so `"Layers"` and `"Swatches"` work the way agents write them.
+/// Canonical panel id for `window.panel`: a dock tab's or an icon panel's id or display label,
+/// matched case-insensitively (`"Layers"`, `"swatches"`, `"Color Guide"`).
 fn normalize_panel(input: &str) -> Option<&'static str> {
     let name = input.trim();
-    if name.eq_ignore_ascii_case("properties") {
-        return Some("properties");
-    }
-    if name.eq_ignore_ascii_case("layers") {
-        return Some("layers");
-    }
-    if name.eq_ignore_ascii_case("libraries") {
-        return Some("libraries");
-    }
-    for &(id, label, _) in ICON_PANELS.iter() {
-        if name.eq_ignore_ascii_case(id) || name.eq_ignore_ascii_case(label) {
-            return Some(id);
-        }
-    }
-    None
+    let tabs = DockTab::ALL.into_iter().map(|t| (t.info().0, t.info().1));
+    tabs.chain(ICON_PANELS.iter().map(|&(id, label, _)| (id, label)))
+        .find(|(id, label)| name.eq_ignore_ascii_case(id) || name.eq_ignore_ascii_case(label))
+        .map(|(id, _)| id)
 }
 
 /// Handle a UI command. `None` = not a UI command (the engine handles it).
@@ -1138,6 +1132,7 @@ pub fn run_ui_command(app: &mut VectorcraftApp, id: &str, p: &Value) -> Option<R
             },
         },
         "ui.widthPointEdit" => crate::dialogs::width_point::open(app, p),
+        "ui.corners" => crate::dialogs::corners::open(app, p),
         "ui.colorGuideLimit" => crate::panels::color_guide::set_limit(app, p),
         "ui.savePdfDialog" => crate::dialogs::open_save_pdf(app, p),
         "file.exportAs" if s("path").is_none() => {
@@ -1562,7 +1557,7 @@ const PERSPECTIVE_SLOTS: [[&str; crate::dialogs::perspective_presets::SLOTS]; 3]
 ];
 
 /// Select → saved selections: the n-th saved selection of the active document.
-const SAVED_SELECTION_IDS: [&str; 25] = [
+const SAVED_SELECTION_IDS: [&str; vectorcraft_engine::doc::SavedSelection::MAX] = [
     "select.recall1",
     "select.recall2",
     "select.recall3",
@@ -2589,14 +2584,20 @@ fn render_items(app: &VectorcraftApp, ui: &mut egui::Ui, items: &[Item], checks:
                     Some(false) => format!("     {label}"),
                     None => label,
                 };
-                let r = ui.add_enabled(en, egui::Button::new(text).shortcut_text(sc));
-                // Type → Font: each family's sample beside its name (Enable in-menu font previews).
-                if *id == "text.setStyle"
-                    && app.session.prefs.font_preview
-                    && let Some(family) = p.get("font").and_then(Value::as_str)
-                {
-                    crate::font_menu::menu_item_sample(ui, r.rect, family);
-                }
+                // Type → Font: each family's sample after its name (Enable in-menu font previews).
+                let sampled = p.get("font").and_then(Value::as_str).filter(|_| *id == "text.setStyle" && app.session.prefs.font_preview);
+                let r = match sampled {
+                    Some(family) => {
+                        let slot = ui.id().with(("font-sample", family));
+                        let button = egui::Button::new(text).right_text(egui::Atom::custom(slot, crate::font_menu::MENU_SAMPLE_SIZE));
+                        let out = ui.add_enabled_ui(en, |ui| button.atom_ui(ui)).inner;
+                        if let Some(rect) = out.rect(slot) {
+                            crate::font_menu::menu_item_sample(ui, rect, family);
+                        }
+                        out.response
+                    }
+                    None => ui.add_enabled(en, egui::Button::new(text).shortcut_text(sc)),
+                };
                 if r.clicked() {
                     *clicked = Some(click_target(label_of(it), id, p));
                     ui.close();
@@ -2647,6 +2648,32 @@ fn menu_dialog(id: &str) -> Option<(&'static str, Value)> {
         "object.vectorHalftone" => (crate::dialogs::halftone::KIND, crate::dialogs::halftone::fields()),
         _ => return None,
     })
+}
+
+/// The event a focused text field takes for Edit-menu command `id` (Select All, Cut, Copy,
+/// Paste), as the same keys would send it.
+fn field_event(app: &mut VectorcraftApp, id: &str) -> Option<egui::Event> {
+    Some(match id {
+        "select.all" => egui::Event::Key { key: egui::Key::A, physical_key: None, pressed: true, repeat: false, modifiers: egui::Modifiers::COMMAND },
+        "edit.copy" => egui::Event::Copy,
+        "edit.cut" => egui::Event::Cut,
+        "edit.paste" | "edit.pasteWithoutFormatting" => egui::Event::Paste(app.system_clipboard_text()?),
+        _ => return None,
+    })
+}
+
+/// Invoke an item of the system menu bar (macOS), chosen by a click or by its key equivalent: the
+/// system takes those keys before the window sees them. While a text field has the keyboard,
+/// Select All, Cut, Copy and Paste act on the field's text, as their keys do in the window;
+/// everything else (and those commands with no field focused) goes to [`invoke`].
+pub fn invoke_from_system_menu(app: &mut VectorcraftApp, ctx: &egui::Context, id: &str, p: Value) {
+    if ctx.text_edit_focused()
+        && let Some(e) = field_event(app, id)
+    {
+        ctx.input_mut(|i| i.events.push(e));
+        return;
+    }
+    invoke(app, id, p);
 }
 
 /// Invoke a menu/command id with UI side effects (dialogs for "…" commands that need input).
@@ -2715,9 +2742,7 @@ pub fn invoke(app: &mut VectorcraftApp, id: &str, p: Value) {
     }
     // Save Selection…: a name dialog, starting from the first free "Selection N".
     if id == "select.save" && p.as_object().is_none_or(|o| o.is_empty()) {
-        let taken = app.session.execute("select.savedList", &json!({})).ok().unwrap_or_default();
-        let taken: Vec<&str> = taken.as_array().map(|a| a.iter().filter_map(Value::as_str).collect()).unwrap_or_default();
-        let name = (1..).map(|i| format!("Selection {i}")).find(|n| !taken.contains(&n.as_str())).unwrap_or_default();
+        let name = app.session.active().map(|d| vectorcraft_engine::doc::SavedSelection::default_name(&d.doc.saved_selections)).unwrap_or_default();
         let _ = app.run("ui.paramDialog", json!({"command": id, "label": "Save Selection", "params": {"name": name}}));
         return;
     }

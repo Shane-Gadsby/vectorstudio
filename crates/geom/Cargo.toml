@@ -3,7 +3,7 @@ name = "vectorcraft-geom"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
-description = "VectorCraft geom"
+description = "VectorStudio geom"
 
 [lints]
 workspace = true

@@ -75,12 +75,17 @@ is thousands of lines an agent pays for again on every change.
 
 | `uriTemplate` | Reads |
 |---|---|
-| `vectorcraft://object/{id}` | One layer or object with its children, bounds and paint |
+| `vectorcraft://object/{id}` | One layer or object with its children, bounds and paint: `document.node {id, summary: true}`, the node as `document.inspect` lists it |
 | `vectorcraft://command/{id}` | One command: label, menu path, shortcut, parameter description, enablement |
 | `vectorcraft://effect/{id}` | One live effect with its parameters and defaults |
 | `vectorcraft://swatch/{name}` | One swatch, colour, gradient or pattern swatch (percent-encode spaces) |
 
 An unknown URI is `-32002`; a template with no value, or a value that names nothing, is `-32602`.
+
+The same reads work as query commands through `run_command`: `document.node {id}` returns the object's full model
+JSON (geometry, appearance, every attribute) and `document.node {id, summary: true}` the compact summary
+`document.inspect` gives for it (id, name, kind, bounds, paint labels, children), without summarizing the whole
+document.
 
 ### Completions
 
@@ -157,7 +162,7 @@ objects' fills or strokes differ (`fillMixed` / `strokeMixed`, drawn as a "?" pr
 | `press_key` | `{key, mods?}` | Remote: a real key event. Headless: runs the command or tool bound to that shortcut, or sends the key to the busy tool (digits too: `5` while dragging with the Perspective Selection tool). |
 | `type_text` | `{text}` | Remote only. |
 | `invoke_menu` | `{command, params?}` | Invokes a menu item by command id. Includes UI commands such as `view.*` and `window.*` in remote mode. |
-| `open_panel` | `{panel}` | Remote only. |
+| `open_panel` | `{panel}` | Remote only. `panel` is a panel id (`layers`, `swatches`, `colorGuide`, …, as `window.panel` takes) or its display label (`"Color Guide"`), in any case. |
 | `screenshot` | `{path?, scale?, artboard?, window?}` | Returns MCP image content (`image/png`, base64) plus a text block. Renders the artboard; `window:true` captures the app window (remote only). |
 | `open_file` | `{path}` | Opens any readable file as a new active document: `.vectorcraft`/`.drawcraft`, `.vctemplate`, `.svg`/`.svgz`, `.pdf`/`.ai`, `.ait`, `.eps`, `.dxf`, `.emf`, `.wmf`, PNG, JPEG, GIF, WebP, TIFF, BMP (an image opens as a document of its pixel size). Templates (`.vctemplate`, `.ait`) open as a new untitled document. PDF, `.ai` and SVG files saved with Preserve Editing reopen as the document they carry. `run_command document.formats` lists the formats. |
 | `save_file` | `{path?}` | Runs `document.save`: the document's own file in its own format (native `.vectorcraft` unless it was opened from or saved as SVG, PDF or a restorable `.ai`; then `warnings` say what that format loses). A path's extension picks the format (`.vectorcraft`, `.vctemplate`, `.pdf`, `.svg`, `.svgz`, `.ai`: a PDF carrying the native document, which reopens editable). |
@@ -328,6 +333,10 @@ Images follow the `compression` settings of their kind (`color`, `gray`, or `mon
 `abovePpi` as placed they are resampled (`downsample`: `average`, `subsample` or `bicubic`) to `ppi`, and compressed
 with `zip`, `jpeg` (at `quality`; images with transparency stay lossless) or `auto` (JPEGs stay JPEG, the others
 lossless). `none`, `jpeg2000`, CCITT and `runLength` are written as ZIP, with a warning when an image needs them.
+CMYK images stay CMYK (DeviceCMYK, or ICC-based with the CMYK profile when colours are tagged, as in PDF/X-3 and
+PDF/X-4): a CMYK JPEG neither resampled nor recompressed is written unchanged, and the others' ink amounts are
+resampled and compressed again (CMYK JPEG or ZIP). `output.conversion` converts them like CMYK colours: `destination`
+to another CMYK profile or to RGB, `preserveNumbers` (and PDF/X-1a) keeps their numbers in a CMYK destination.
 `document.pdfSettings` lists the options that differ from the preset and the warnings without writing a file.
 `thumbnails: true` embeds each page drawn small (106 px on its long side, without the layers the page leaves out) as
 its `/Thumb` image. `fastWebView: true` writes a linearised file (the linearization dictionary first, then the first
@@ -343,7 +352,10 @@ Opening a PDF (or `.ai`) imports every page as an artboard and layer; `document.
 and `password` for an encrypted file. `document.pdfInfo` reads a file without opening it: the page count, each page's
 size and boxes, `needsPassword`, and with `thumbnail: n` a PNG of page n. Imported colours keep their model:
 DeviceCMYK and CMYK ICC colours stay CMYK (a file painted mostly in CMYK opens as a CMYK document), DeviceGray is Gray,
-and Separation and DeviceN inks become spot swatches the art links to at its tint (gradient stops too).
+and Separation and DeviceN inks become spot swatches the art links to at its tint (gradient stops too). CMYK images
+(DeviceCMYK, or ICC-based with four components) keep their ink amounts: a CMYK JPEG as it is, any other as a CMYK TIFF
+(masked CMYK images, and ones with 1, 2 or 4 bits per sample, open in RGB with a warning). Placing a CMYK TIFF keeps it
+CMYK too.
 `colorMode: "rgb" | "cmyk"` opens any file in that mode instead, its colours converted as `file.documentColorMode` does:
 
 ```json
@@ -358,10 +370,15 @@ What a PDF holds comes in as editable art: soft masks become opacity masks (an a
 the backdrop colour gives Clip, an inverting transfer function Invert), transparency groups keep isolation and knockout,
 tiling patterns become pattern swatches, patch and triangle mesh shadings become gradient meshes, and gradients keep
 their stop opacity and stop where the shading doesn't extend. Text becomes point type, one object per run of a line in
-the file's font (by name; fonts that aren't available are listed in `warnings` and show in the fallback font) —
-`textAs: "outlines"` keeps glyph outlines instead. Optional content groups (the layers of PDF and PDF-compatible `.ai`
-files) become layers with their name, visibility, print state and lock, art that is off coming in as a hidden layer;
-art outside them goes to a layer per page. `layers: false` gives one layer per page of only what shows:
+the file's font (by name; fonts that aren't available are listed in `warnings` and show in the fallback font, and
+every export that draws that type — PDF, EPS, EMF/WMF, raster images, SVG with outlined or embedded fonts — says in
+its `warnings` that it wrote the fallback font) — `textAs: "outlines"` keeps the glyph outlines the file draws instead
+(its embedded fonts, installed or not). Strokes stay live strokes (width, cap, join, miter limit, dash and paint), and
+an object written as a fill and then a stroke of the same outline is one path with both. Optional content groups (the
+layers of PDF and PDF-compatible `.ai` files) become layers with their name, visibility (the default configuration's,
+or a view state that is off), print state and lock, nested as sublayers the way the file's layer order nests them; art
+that is off comes in as a hidden layer. Art outside them goes to a layer per page (except the opaque white page a `.ai`
+paints under its layers, which isn't art). `layers: false` gives one layer per page of only what shows:
 
 ```json
 {"name":"run_command","arguments":{"command":"document.open","params":{"path":"/tmp/map.pdf","textAs":"outlines","layers":false}}}
@@ -515,6 +532,18 @@ paints behind the clipped art and its stroke over it, not clipped, on screen and
 the one highlighted layer or group row, else the one selected group, else the current layer) becomes its clipping path (unpainted, moved to the bottom of the layer,
 so art added later is clipped too); called again it releases the mask. It returns `{clip}`, and the Layers panel
 underlines clipping-path names.
+
+## Saved selections
+
+Select → Save Selection… keeps the selected objects under a name, in the document: `select.save {name?}` (default
+the first free "Selection N"; an existing name is replaced with the current selection; at most 25 per document,
+names up to 255 characters) → `{name}`, one undo step. `select.savedList` lists the names in menu order, and
+`select.recall {name}` selects those objects again (ones deleted since are left out) → `{count}`. Edit Selection…
+renames and deletes: `select.editSaved {name, newName?, delete?}`, or several at once as
+`{edits: [{name, newName?, delete?}…]}` in one undo step, where every `name` is the name before the edit and the
+names must stay unique. In the desktop app the saved selections are listed at the bottom of the Select menu
+(`select.recall1` … `select.recall25`). A file's saved selections are checked when it opens: past 25, blank or
+repeated names, and ids the document doesn't have are dropped.
 
 ## Graphic styles
 
@@ -1008,6 +1037,22 @@ size. The journal entry of a scaling command records the `strokes` and `corners`
 ```json
 {"name":"run_command","arguments":{"command":"object.scale","params":{"sx":200,"strokes":true}}}
 {"name":"run_command","arguments":{"command":"object.transformEach","params":{"scaleH":50,"scaleV":50,"strokes":false}}}
+```
+
+## Live Corners
+
+`object.setLiveShape {id?, ids?, radius?, kind?, corners?}` sets the corners of live rectangles (one undo step):
+`radius` (pt) and `kind` (`round`, `invertedRound` or `chamfer`) go to the `corners` given (0 top-left, 1 top-right,
+2 bottom-right, 3 bottom-left), else to the corners holding a Direct-Selected anchor (`select.anchors`), else to all
+four. Each corner keeps its own radius and kind (the shape's `live` in queries has `radii` and, when a corner isn't
+round, `kinds`); a corner with no radius is one anchor, a cut one two, and Direct-Selected corners stay selected as
+that changes. With the Selection or Direct Selection tool, dragging a corner widget rounds the corners whose widgets
+show (all four, or the Direct-Selected ones), Alt-clicking one cycles their kind and double-clicking one opens Corners
+(`ui.corners {id?, corners?}`, dialog `corners`: `kind`, `radius`; OK runs `object.setLiveShape`).
+
+```json
+{"name":"run_command","arguments":{"command":"object.setLiveShape","params":{"id":12,"corners":[1],"radius":16}}}
+{"name":"run_command","arguments":{"command":"object.setLiveShape","params":{"id":12,"corners":[0,3],"radius":8,"kind":"chamfer"}}}
 ```
 
 ## Use Preview Bounds
@@ -1528,9 +1573,12 @@ The copies live in the `recoveryFolder` preference's folder (default: `Data Reco
 none when the app runs with `VECTORCRAFT_NO_PREFS`) or, on the web, in browser storage.
 
 Each running app (each browser tab) keeps its copies in an area of its own (`<area>/<name>`): a sub-folder whose
-`.lock` file it keeps locked while it runs, or on the web an area with a heartbeat it refreshes every minute. Only
-areas nobody holds are offered: their lock is free, or their heartbeat is older than three intervals (at least three
-minutes). Several apps running at once (agents' instances included) never see each other's copies as crash leftovers,
+`.lock` file it keeps locked while it runs, or on the web an area with a heartbeat it refreshes every minute and a Web
+Lock the browser holds until the tab is gone (where the browser has Web Locks: secure pages). Only areas nobody holds
+are offered: their lock is free, or no tab holds their Web Lock and their heartbeat is older than three intervals (at
+least three minutes). A background tab whose timers are paused therefore keeps its copies. Without Web Locks another
+tab can take such a tab for gone; when it resumes, its next heartbeat or recovery save writes its missing copies
+again. Several apps running at once (agents' instances included) never see each other's copies as crash leftovers,
 and an area being restored or discarded is held, so two apps launched together never both take it.
 
 `file.recovery.list` → `{copies: [{file, title, path, format, saved, open, running}], location}` (`open`: the copy of a
@@ -1840,6 +1888,18 @@ square to the page. `object.resetBoundingBox` squares the box again without movi
 
 ```json
 {"name":"run_command","arguments":{"command":"object.rotate","params":{"angle":45,"absolute":true}}}
+```
+
+## Select All while editing type
+
+While the Type tool edits text (a click into type, `pointer_gesture` with `"tool":"type"`), `select.all` (Cmd+A,
+`press_key {key: "A", mods: {cmd: true}}`) selects all of that text instead of the art, as in the reference app, and
+returns `{editing, start, end}` (the text's id and the selected byte range, which `text.getRange` and
+`text.setRangeStyle` take); the art selection stays as it is. Without text being edited it selects every object and
+returns `{count}`. Text in threaded frames is selected one frame at a time.
+
+```json
+{"name":"press_key","arguments":{"key":"A","mods":{"cmd":true}}}
 ```
 
 ## Empty point type

@@ -522,3 +522,66 @@ fn justified_japanese_lines_spread_between_characters() {
     assert!(solid(at) && solid(at + 1), "A–B–C set solid");
     assert!(g[at].origin.x - g[at - 1].origin.x > a + 0.1, "二–A takes its share");
 }
+
+/// Leading measured from em box top to em box top (Japanese layout's model): area type's first line
+/// touches the frame's top; lines of one size are as far apart as with baseline-to-baseline leading;
+/// with sizes mixed, a line's leading is the space below it (baseline leading: above it).
+#[test]
+fn em_box_top_leading_hangs_lines_from_the_line_above() {
+    use vectorcraft_doc::{LeadingModel, TextRun};
+    let st = |size: f64| CharStyle { size, leading: Some(size * 1.5), ..style(size) };
+    let lay = |t: &TextObject, m: LeadingModel| {
+        let mut t = t.clone();
+        t.para.leading_model = m;
+        layout(db(), &t)
+    };
+    // The em box top: 0.88 em above the baseline (fonts without vertical metrics).
+    let top = |size: f64| 0.88 * size;
+    let one_size = area("一行目\n二行目\n三行目", st(20.0), Rect::new(0.0, 0.0, 300.0, 300.0), Justify::Left);
+    let (roman, em) = (lay(&one_size, LeadingModel::RomanBaseline), lay(&one_size, LeadingModel::EmBoxTop));
+    assert!((em.lines[0].baseline - top(20.0)).abs() < 0.01, "the first line's em box touches the top: {}", em.lines[0].baseline);
+    assert!((roman.lines[0].baseline - em.lines[0].baseline).abs() > 0.5, "baseline leading keeps Area Type Options' first baseline");
+    for l in [&roman, &em] {
+        assert!((l.lines[1].baseline - l.lines[0].baseline - 30.0).abs() < 0.01 && (l.lines[2].baseline - l.lines[1].baseline - 30.0).abs() < 0.01);
+    }
+    // 40 pt over 20 pt (leading 60 and 30).
+    let mut mixed = point("", st(40.0));
+    mixed.runs = vec![TextRun { text: "大\n".into(), style: st(40.0) }, TextRun { text: "小".into(), style: st(20.0) }];
+    let roman = lay(&mixed, LeadingModel::RomanBaseline);
+    assert!((roman.lines[1].baseline - roman.lines[0].baseline - 30.0).abs() < 0.01, "the small line's leading, above it");
+    let em = lay(&mixed, LeadingModel::EmBoxTop);
+    let want = -top(40.0) + 60.0 + top(20.0);
+    assert!(
+        (em.lines[1].baseline - em.lines[0].baseline - want).abs() < 0.01,
+        "the big line's leading, below it: {} vs {want}",
+        em.lines[1].baseline - em.lines[0].baseline
+    );
+}
+
+/// Character Alignment: a 20 pt character next to a 40 pt one lines its em box top, centre or
+/// bottom up with the big one's (the em box from 0.12 em below the baseline to 0.88 em above it,
+/// in fonts without vertical metrics), or stays on the baseline; in vertical type the same across
+/// the column (top → right).
+#[test]
+fn character_alignment_lines_small_characters_up_with_the_largest_em_box() {
+    use vectorcraft_doc::{CharAlign, TextRun};
+    for vertical_type in [false, true] {
+        let place = |a: CharAlign| {
+            let mut t = point("", style(40.0));
+            t.vertical = vertical_type;
+            t.runs = vec![
+                TextRun { text: "大".into(), style: style(40.0) },
+                TextRun { text: "小".into(), style: CharStyle { char_align: a, ..style(20.0) } },
+            ];
+            let l = layout(db(), &t);
+            // How far the small character's origin sits above the big one's (to the right, vertical).
+            let (big, small) = (l.glyphs[0].origin, l.glyphs[1].origin);
+            if vertical_type { small.x - big.x } else { big.y - small.y }
+        };
+        let near = |a: f64, b: f64| (a - b).abs() < 0.01;
+        assert!(near(place(CharAlign::RomanBaseline), 0.0), "vertical {vertical_type}");
+        assert!(near(place(CharAlign::EmBoxTop), 0.88 * 20.0), "top: {}", place(CharAlign::EmBoxTop));
+        assert!(near(place(CharAlign::EmBoxCenter), 0.38 * 20.0), "centre: {}", place(CharAlign::EmBoxCenter));
+        assert!(near(place(CharAlign::EmBoxBottom), -0.12 * 20.0), "bottom: {}", place(CharAlign::EmBoxBottom));
+    }
+}

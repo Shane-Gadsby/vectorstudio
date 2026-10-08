@@ -952,6 +952,7 @@ dependencies = [
  "egui-wgpu",
  "egui-winit",
  "egui_glow",
+ "glow",
  "glutin",
  "glutin-winit",
  "image",
@@ -4251,6 +4252,7 @@ name = "vectorcraft"
 version = "0.4.0"
 dependencies = [
  "arboard",
+ "block2 0.6.2",
  "clipboard-win",
  "eframe",
  "egui",
@@ -4259,6 +4261,7 @@ dependencies = [
  "muda",
  "objc2 0.6.4",
  "objc2-app-kit 0.3.2",
+ "objc2-foundation 0.3.2",
  "rfd",
  "serde_json",
  "vectorcraft-engine",
@@ -4329,13 +4332,16 @@ name = "vectorcraft-doc"
 version = "0.4.0"
 dependencies = [
  "image",
+ "jpeg-encoder",
  "kurbo 0.13.1",
  "proptest",
  "serde",
  "serde_json",
  "thiserror 2.0.21",
+ "tiff",
  "vectorcraft-color",
  "vectorcraft-geom",
+ "zune-jpeg",
 ]
 
 [[package]]
@@ -4481,6 +4487,7 @@ dependencies = [
  "hayro-interpret",
  "hayro-syntax",
  "image",
+ "jpeg-encoder",
  "krilla",
  "kurbo 0.13.1",
  "log",
@@ -4589,6 +4596,9 @@ dependencies = [
  "log",
  "skrifa 0.47.0",
  "subsetter",
+ "unicode-bidi",
+ "unicode-general-category",
+ "unicode-script",
  "vectorcraft-doc",
  "vectorcraft-geom",
  "write-fonts",

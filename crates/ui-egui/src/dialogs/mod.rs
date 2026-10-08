@@ -15,6 +15,7 @@ pub mod color_guide_options;
 mod color_picker;
 mod command;
 pub mod confirm;
+pub mod corners;
 mod document_setup;
 pub mod dxf_import;
 pub mod dxf_options;
@@ -30,6 +31,7 @@ pub mod file_info;
 pub mod flatten;
 pub mod flattener_presets;
 mod form;
+pub mod freehand;
 mod gradient_stop;
 pub mod graphic_style_options;
 pub mod halftone;
@@ -230,6 +232,7 @@ registry! {
     SpotColors: [spot_colors::KIND] => spot_colors::SPEC,
     TransformEach: [transform_each::KIND] => transform_each::SPEC,
     WidthPoint: [width_point::KIND] => width_point::SPEC,
+    Corners: [corners::KIND] => corners::SPEC,
     SavePdf: [save_pdf::KIND] => save_pdf::SPEC,
     SvgOptions: [svg_options::KIND] => svg_options::SPEC,
     NewDocumentMore: [new_document::MORE] => new_document::MORE_SPEC,
@@ -266,6 +269,7 @@ registry! {
     PerspectiveGrid: [perspective_grid::KIND] => perspective_grid::SPEC,
     Envelope: [envelope::WARP, envelope::MESH, envelope::OPTIONS] => envelope::SPEC,
     LiquifyOptions: [liquify::KIND] => liquify::SPEC,
+    FreehandOptions: [freehand::KIND] => freehand::SPEC,
     PerspectiveGridPresets: [perspective_presets::KIND] => perspective_presets::SPEC,
     PerspectiveGridOptions: [perspective_options::KIND] => perspective_options::SPEC,
     BlendOptions: [blend_options::KIND] => blend_options::SPEC,

@@ -62,6 +62,10 @@ linesweeper = "0.4"
 flate2 = { version = "1", default-features = false, features = ["rust_backend"] }
 jpeg-encoder = { version = "0.6", default-features = false, features = ["std"] }
 gif = { version = "0.14", default-features = false, features = ["std", "raii_no_panic"] }
+# CMYK image samples (vectorcraft-doc's cmyk module): the image crate's own TIFF and JPEG
+# decoders, read directly (the image crate converts CMYK to RGB).
+tiff = "0.11"
+zune-jpeg = "0.5"
 
 # ui
 egui = "0.36"
@@ -78,7 +82,7 @@ unsafe_code = "deny"
 
 [workspace.lints.clippy]
 dbg_macro = "warn"
-# VectorCraft never crashes: shipped code returns `Result`/`Option` instead of panicking (see
+# VectorStudio never crashes: shipped code returns `Result`/`Option` instead of panicking (see
 # AGENTS.md › Robustness). Tests may unwrap (clippy.toml).
 unwrap_used = "deny"
 expect_used = "deny"

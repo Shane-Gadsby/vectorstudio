@@ -89,9 +89,9 @@ cargo xtask ci                                              # fmt, clippy, tests
 Crate and package names keep their upstream `vectorcraft` spelling on purpose, so that
 `git merge upstream/main` stays cheap. Only what a user reads is rebranded.
 
-Japanese fonts come from [storytold/craft-fonts](https://github.com/storytold/craft-fonts), an
-optional build input: `CRAFT_FONTS_DIR="$PWD/../craft-fonts" cargo run --release -p vectorcraft`
-(an absolute path). Without it, Japanese text uses the installed system fonts. See
+Japanese, Simplified Chinese and Arabic fonts come from
+[storytold/craft-fonts](https://github.com/storytold/craft-fonts), an optional build input: `CRAFT_FONTS_DIR="$PWD/../craft-fonts" cargo run --release -p vectorcraft`
+(an absolute path). Without it, those scripts use the installed system fonts. See
 [`docs/development.md`](docs/development.md#fonts-craft-fonts-optional-build-input).
 
 On laptops with two graphics processors, the power-saving (integrated) one is used by default. For
@@ -108,6 +108,8 @@ claude mcp add vectorstudio -- /path/to/vectorcraft-cli mcp
 Every command, gesture and dialog is drivable over MCP, the CLI and the control channel. Details in
 [`docs/mcp.md`](docs/mcp.md) and [`docs/control-protocol.md`](docs/control-protocol.md).
 
+For the experimental, unsupported 64-bit Windows 7 build, see [Windows 7 instructions](docs/windows7.md).
+
 ## Status
 
 [**ROADMAP.md**](ROADMAP.md) covers what ships today, the milestones and time-to-parity estimates;
@@ -117,8 +119,10 @@ surface**, and about **40â€“55%** on "a power user can't tell the difference" â€
 upper bounds.
 
 Everyday vector illustration works: drawing and path tools, Pathfinder and Shape Builder, paint,
-gradients, appearance and transparency, type with styles and threading, and files (SVG, PDF and
-PDF-compatible `.ai` with PDF/X, EPS, DXF, EMF/WMF, raster formats, PSD, Print, Package).
+gradients, appearance and transparency, type with styles, threading and Hebrew/Arabic bidirectional
+layout, and files (SVG, PDF and PDF-compatible `.ai` with PDF/X, EPS, DXF, EMF/WMF, raster formats,
+PSD, Print, Package). The interface speaks English, Japanese, Traditional and Simplified Chinese and
+Spanish, with Czech and Brazilian Portuguese in the menus.
 
 **Missing:** 3D and Materials; the Photoshop-style raster effects; CJK composition for vertical
 type; Variables and scripting; an interaction-fidelity pass covering every tool's modifiers; and
@@ -155,7 +159,9 @@ ArtCraft name, wordmark and logos are ArtCraft trademarks and were removed when 
 as that project's brand licence requires.
 
 Bundled fonts, icons, images and other assets keep their own open licences; each is listed with its
-author, source and licence in [ASSETS.md](ASSETS.md).
+author, source and licence in [ASSETS.md](ASSETS.md). Release builds also embed the fonts of
+[craft-fonts](https://github.com/storytold/craft-fonts/blob/main/ATTRIBUTION.md) (Japanese,
+Simplified Chinese and Arabic faces; SIL Open Font License 1.1).
 
 <sub>Adobe, Photoshop, Illustrator, Acrobat and InDesign are trademarks or registered trademarks of
 Adobe Inc. in the United States and/or other countries. VectorStudio is an independent, open-source

@@ -75,7 +75,7 @@ pub fn specs() -> Vec<CommandSpec> {
             "Character",
             [],
             None,
-            "{ids?|id?, font?, style?, size?: pt, leading?: pt|\"auto\", tracking?: 1/1000 em, justify?: \"left\"|\"center\"|\"right\"|\"justifyAll\", fill?: colour, features?: [\"dlig\", \"-liga\", …] OpenType}",
+            "{ids?|id?, font?, style?, size?: pt, leading?: pt|\"auto\", tracking?: 1/1000 em, justify?: \"auto\" (the start of each paragraph's direction)|\"left\"|\"center\"|\"right\"|\"justifyAll\", fill?: colour, features?: [\"dlig\", \"-liga\", …] OpenType}",
             has_doc,
             set_style
         ),
@@ -190,6 +190,7 @@ fn set_text(s: &mut Session, p: &Value) -> Result<Value> {
 
 fn justify_param(v: &str) -> Option<Justify> {
     Some(match v.to_ascii_lowercase().as_str() {
+        "auto" => Justify::Auto,
         "left" => Justify::Left,
         "center" => Justify::Center,
         "right" => Justify::Right,
@@ -216,7 +217,7 @@ fn set_style(s: &mut Session, p: &Value) -> Result<Value> {
     };
     let tracking = num_param(p, "tracking");
     let justify = match str_param(p, "justify") {
-        Some(j) => Some(justify_param(j).ok_or_else(|| bad(C, "justify must be left|center|right|justifyAll"))?),
+        Some(j) => Some(justify_param(j).ok_or_else(|| bad(C, "justify must be auto|left|center|right|justifyAll"))?),
         None => None,
     };
     let fill = match p.get("fill") {
@@ -406,6 +407,57 @@ fn reshape_area(s: &mut Session, p: &Value) -> Result<Value> {
 #[cfg(test)]
 mod area_tests {
     use super::*;
+
+    #[test]
+    fn leading_model_is_set_per_paragraph_and_saved_only_when_top_to_top() {
+        use vectorcraft_doc::LeadingModel;
+        let mut s = Session::new();
+        s.execute("file.new", &json!({"width": 400, "height": 400})).unwrap();
+        let id = s.execute("text.create", &json!({"x": 10, "y": 10, "text": "一\n二", "area": {"width": 200, "height": 100}})).unwrap()["id"]
+            .as_u64()
+            .unwrap();
+        let text = |s: &Session| match &s.doc().unwrap().doc.node(NodeId(id)).unwrap().kind {
+            NodeKind::Text(t) => (**t).clone(),
+            _ => panic!("text"),
+        };
+        assert_eq!(text(&s).para.leading_model, LeadingModel::RomanBaseline);
+        s.execute("select.set", &json!({"ids": [id]})).unwrap();
+        assert!(s.execute("text.setFormat", &json!({"leadingModel": "middle"})).is_err());
+        let before = text(&s).cached_bounds;
+        s.execute("text.setFormat", &json!({"leadingModel": "emBoxTop"})).unwrap();
+        let t = text(&s);
+        assert_eq!(t.para.leading_model, LeadingModel::EmBoxTop);
+        assert_ne!(t.cached_bounds, before, "the first line moves up to the frame's top");
+        assert_eq!(serde_json::to_value(&t.para).unwrap()["leading_model"], "emBoxTop");
+        s.execute("edit.undo", &json!({})).unwrap();
+        assert!(serde_json::to_value(&text(&s).para).unwrap().get("leading_model").is_none());
+    }
+
+    #[test]
+    fn character_alignment_is_a_character_attribute_saved_only_when_set() {
+        use vectorcraft_doc::CharAlign;
+        let mut s = Session::new();
+        s.execute("file.new", &json!({"width": 400, "height": 400})).unwrap();
+        let id = s.execute("text.create", &json!({"x": 10, "y": 50, "text": "雅楽"})).unwrap()["id"].as_u64().unwrap();
+        let runs = |s: &Session| match &s.doc().unwrap().doc.node(NodeId(id)).unwrap().kind {
+            NodeKind::Text(t) => t.runs.clone(),
+            _ => panic!("text"),
+        };
+        assert_eq!(runs(&s)[0].style.char_align, CharAlign::RomanBaseline);
+        assert!(serde_json::to_value(&runs(&s)[0].style).unwrap().get("charAlign").is_none());
+        s.execute("select.set", &json!({"ids": [id]})).unwrap();
+        assert!(s.execute("text.setFormat", &json!({"charAlign": "middle"})).is_err());
+        s.execute("text.setFormat", &json!({"charAlign": "emBoxCenter"})).unwrap();
+        assert!(runs(&s).iter().all(|r| r.style.char_align == CharAlign::EmBoxCenter));
+        assert_eq!(serde_json::to_value(&runs(&s)[0].style).unwrap()["charAlign"], "emBoxCenter");
+        s.execute("edit.undo", &json!({})).unwrap();
+        assert_eq!(runs(&s)[0].style.char_align, CharAlign::RomanBaseline);
+        // Characters selected with the Type tool: only the range takes it (雅 is 3 bytes).
+        assert!(s.execute("text.setRangeStyle", &json!({"id": id, "start": 3, "end": 6, "charAlign": "top"})).is_err());
+        s.execute("text.setRangeStyle", &json!({"id": id, "start": 3, "end": 6, "charAlign": "emBoxTop"})).unwrap();
+        let aligns: Vec<_> = runs(&s).iter().map(|r| (r.text.clone(), r.style.char_align)).collect();
+        assert_eq!(aligns, [("雅".to_string(), CharAlign::RomanBaseline), ("楽".to_string(), CharAlign::EmBoxTop)]);
+    }
 
     #[test]
     fn new_type_is_composed_with_line_end_half_width_punctuation() {

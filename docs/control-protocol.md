@@ -89,8 +89,11 @@ for `eyedropper` it opens Eyedropper Options, an `eyedropperOptions` dialog (fie
 `apply`, the attribute trees of `eyedropper.setOptions`) whose `ui.dialog.confirm` runs `eyedropper.setOptions` (what
 `appearance.copyFrom` copies). For `hand` it fits the artboard in the window (`view.fitArtboard`) and for `zoom` it
 shows 100% (`view.actualSize`). For `rotate`, `scale`, `reflect` and `shear` it opens the same dialog as Object ›
-Transform (dialog kind = the tool id), or fails with `nothing selected`. Gradient tool handles snap to
-anchors, edges and smart guides; Shift constrains them to 45° steps from the `constrainAngle` preference.
+Transform (dialog kind = the tool id), or fails with `nothing selected`. For `selection`, `directSelection` and
+`groupSelection` it opens the Move dialog (kind `move`), with the same failure. `ui.key` Enter with one of those seven
+tools opens its dialog too (nothing happens without a selection), with the transform tools' `origin` at their reference
+point. Gradient tool handles snap to anchors, edges and smart guides; Shift constrains them to 45° steps from the
+`constrainAngle` preference.
 
 Effect dialogs: `engine.execute {command: "effect.dialog", params: {effect, index?, item?}}` opens the `effect` dialog
 (fields: the effect's parameters, `preview`). With `index` it edits that applied effect of `item` (null: the object's
@@ -179,6 +182,7 @@ forward (`paint.toggleActive {fill}`) and open a popover with the Swatches panel
 a swatch clicked there runs `paint.setFill` / `paint.setStroke`. Panel keys (Color F6, Color Guide Shift+F3,
 Appearance Shift+F6, Graphic Styles Shift+F5, Stroke Cmd+F10, Gradient Cmd+F9, Transparency Cmd+Shift+F10) run
 `window.panel {panel}` and can be pressed with `ui.key`; `ui.menu.list` shows them on the Window menu's items.
+`window.panel` takes a panel id in any case or the panel's display label (`"Layers"`, `"Color Guide"`).
 
 Collapsing the dock: `window.collapseDock {collapsed?}` (the » at the top of the dock; omitted toggles) hides the
 Properties | Layers | Libraries group and puts its three panels as icons at the top of the icon column, under a «
@@ -248,6 +252,11 @@ Width Point Edit: double-clicking a width point with the Width tool, or `ui.widt
 `widthPoint` dialog (fields `id`, `index`, `t`, `side1` and `side2`: the left and right widths in points, `linked`,
 `adjustAdjoining`). `ui.dialog.confirm` runs `stroke.widthPoint.set` with them; `ui.dialog.set {field: "discard",
 value: true}` then confirm (the Delete button) removes the point with `stroke.widthPoint.remove`.
+
+Corners: double-clicking a Live Corners widget with the Selection or Direct Selection tool, or `ui.corners {id?,
+corners?}`, opens the `corners` dialog for a live rectangle's corners (the Direct-Selected ones, else all four; fields
+`id`, `corners`: indices 0–3 clockwise from the top-left, `kind`: round, invertedRound or chamfer, `radius` in points;
+`kind` or `radius` is absent while the corners differ). `ui.dialog.confirm` runs `object.setLiveShape` with them.
 
 Perspective plane options: double-clicking a plane widget of the perspective grid, or `ui.perspectivePlane {plane}`,
 opens the `perspectivePlane` dialog (fields `plane`: left, right or ground; `location`: points along the plane's
@@ -513,6 +522,12 @@ then the tool's options `detail`, `simplify` and `simplifyOn` (Warp, Twirl, Puck
 `complexity`, `affectAnchors`, `affectIn` and `affectOut` (Scallop, Crystallize, Wrinkle), `horizontal` and
 `vertical` (Wrinkle, %), and `showBrush`. `ui.dialog.confirm` runs `tool.setOption {tool, values}`. `ui.pointer`
 events take `pressure` (0..1, default 1): it is the Liquify intensity while Use Pressure Pen is on.
+
+Freehand Tool Options: double-clicking the Pencil, Paintbrush, Smooth, Blob Brush or Eraser tool
+(`tool.options {tool: "pencil"}`) opens a `freehandOptions` dialog. Its fields are `tool` and the options the tool
+keeps: `fidelity` (pt; Pencil, Paintbrush, Smooth), `fill` (Pencil, Paintbrush), `closeWithin` and `editWithin` (screen
+pixels, 0 turns it off; Pencil, Paintbrush) and `size` (pt; Blob Brush, Eraser). `ui.dialog.confirm` runs
+`tool.setOption {tool, values}`.
 
 `ui.pointer` events also take `holdMs` (0..60000): the pointer then holds still that long, button down, before the
 next event. Twirl, Pucker and Bloat keep applying while held (a repeat of the last point every 0.1 s), exactly as
