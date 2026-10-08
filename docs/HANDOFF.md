@@ -185,6 +185,7 @@ Two things it deliberately cannot do:
 ## 7. Useful commands
 
 ```sh
+node research/illustrator/ssh-run.mjs ping   # is the licensed VM reachable?
 cargo xtask parity                 # the gate and the coverage report
 cargo xtask parity --strict        # also: a `done` row must cite a test
 cargo xtask parity --audit         # what the app's surface says about each row (read-only)
@@ -194,12 +195,14 @@ cargo test --workspace --no-fail-fast        # the only trustworthy total (see Â
 cargo run --release -p vectorcraft # the app
 cargo run -q -p vectorcraft-ui-egui --example dump-surface   # the menu surface as JSON
 
-# research (Node 25+; the VM must be running vs-bridge.ps1)
-node research/illustrator/run-job.mjs <script.jsx> --args '<json>'
+# research (Node 25+; see docs/vm-channel.md for the one-time setup)
+node research/illustrator/ssh-run.mjs stage
+node research/illustrator/ssh-run.mjs eval <script.jsx> --args '<json>'
 ```
 
-Jobs reach the VM through `~/Downloads/temp/jobs` (`Z:\temp\jobs` inside it). Check the agent is
-alive before planning any VM work.
+The VM is driven over SSH; [`vm-channel.md`](vm-channel.md) covers the setup, why no port
+forwarding is needed, and how a modal dialog is handled. `ssh-run.mjs ping` says whether the
+channel is up before you plan any VM work.
 
 ## 8. History
 
