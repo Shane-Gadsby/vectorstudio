@@ -65,6 +65,44 @@ Check it from here:
 node research/illustrator/ssh-run.mjs ping
 ```
 
+## What SSH can and cannot reach
+
+**SSH lands in session 0; Illustrator runs in the interactive RDP session (2).** Measured:
+
+```
+sshSession=0 illustratorSession=2
+GetActiveObject('Illustrator.Application') → 0x800401E3 MK_E_UNAVAILABLE
+```
+
+COM's running-object table is **per session**, so an SSH session cannot see Illustrator's COM
+object at all — and neither can it SendKeys to it or screenshot it. The staged script was never
+the obstacle; the session boundary is. So driving COM "as if running on the VM" does not work from
+SSH, however the command is delivered.
+
+Anything touching Illustrator therefore has to execute **inside session 2**, and the way across is
+a scheduled task registered to run as the logged-on user with `-LogonType Interactive`. Triggered
+from SSH, it starts in that user's session:
+
+```
+registered with UserId=schme16
+RESULT: session=2 com=30.1.0
+```
+
+`-UserId "$env:USERDOMAIN\$env:USERNAME"` fails from session 0 with *"No mapping between account
+names and security IDs was done"*; the bare username resolves.
+
+So SSH's value is that it can now *start* the session-2 work unattended, instead of someone typing
+in the VM. It does not remove the need for a connected, unlocked RDP session.
+
+### Not everything needs session 2
+
+Much of what a parity probe wants is a **file**, and files need no session crossing. The whole
+shortcut surface is the clearest case: Illustrator's keyboard bindings live in `keys.kys`, which
+`read-kys.mjs` simply copies out over sftp. That settled all four disputed shortcut rows without
+COM, ExtendScript or a scheduled task. Reach for a file first, COM second, ExtendScript only when
+the scripting DOM is the only way in — and note that **shortcuts are not in the scripting DOM at
+all**, so ExtendScript could never have answered those rows.
+
 ## Driving Illustrator
 
 ```sh

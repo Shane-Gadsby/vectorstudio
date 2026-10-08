@@ -30,8 +30,14 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const CONTAINER = process.env.VS_VM_CONTAINER ?? "WinBoat";
 export const SSH_USER = process.env.VS_VM_USER ?? os.userInfo().username;
 export const SSH_KEY = process.env.VS_VM_KEY ?? path.join(os.homedir(), ".ssh", "id_vectorstudio");
-/** Where `vs-run.ps1` and the .jsx files live in the guest, via the redirected drive. */
-export const GUEST_SCRIPTS = process.env.VS_VM_SCRIPTS ?? String.raw`\\tsclient\temp`;
+// Where `vs-run.ps1` and the .jsx files live, on the guest's OWN disk.
+//
+// Not the RDP share: `\\tsclient\temp` belongs to the interactive RDP logon session and an SSH
+// session cannot see it at all ("Access is denied"). `stage` copies the scripts in over sftp
+// instead, which is shell-independent and needs no share.
+export const GUEST_SCRIPTS = process.env.VS_VM_SCRIPTS ?? String.raw`C:\vectorstudio`;
+/** The same path as sftp addresses it. */
+export const GUEST_SCRIPTS_POSIX = `/${GUEST_SCRIPTS.replace(/\\/g, "/")}`;
 export const POLL_MS = 400;
 
 /** The guest's address: the container's IP, which DNATs every port to the VM. */
@@ -102,16 +108,32 @@ export async function evalScript(scriptFile, { args = {}, timeoutS = 600, onWait
   }
 }
 
-/** Copy the scripts the guest needs onto the redirected share. */
-export function stageScripts(shareDir = path.join(os.homedir(), "Downloads", "temp")) {
-  fs.mkdirSync(path.join(shareDir, "jobs"), { recursive: true });
-  const staged = [];
-  for (const name of fs.readdirSync(HERE)) {
-    if (!/\.(jsx|ps1)$/.test(name)) continue;
-    fs.copyFileSync(path.join(HERE, name), path.join(shareDir, name));
-    staged.push(name);
+/** Push the scripts the guest needs onto its own disk, over sftp. */
+export async function stageScripts() {
+  const host = await vmHost();
+  const names = fs.readdirSync(HERE).filter((n) => /\.(jsx|ps1)$/.test(n));
+  await exec("ssh", [
+    "-i", SSH_KEY, "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=accept-new",
+    `${SSH_USER}@${host}`,
+    `New-Item -ItemType Directory -Force -Path '${GUEST_SCRIPTS}' | Out-Null`,
+  ]);
+  // One sftp session for the lot: a connection per file is slow and noisy. The batch goes in a
+  // file rather than on stdin, because execFile cannot write a child's stdin — passing `input`
+  // leaves `sftp -b -` waiting on it for ever.
+  const batch = [`cd ${GUEST_SCRIPTS_POSIX}`, ...names.map((n) => `put "${path.join(HERE, n)}"`), "bye"].join("\n");
+  const dir = fs.mkdtempSync(path.join(os.tmpdir(), "vs-stage-"));
+  const batchFile = path.join(dir, "batch.sftp");
+  fs.writeFileSync(batchFile, `${batch}\n`);
+  try {
+    await exec(
+      "sftp",
+      ["-b", batchFile, "-i", SSH_KEY, "-o", "BatchMode=yes", "-o", "StrictHostKeyChecking=accept-new", `${SSH_USER}@${host}`],
+      { timeout: 120_000 },
+    );
+  } finally {
+    fs.rmSync(dir, { recursive: true, force: true });
   }
-  return staged;
+  return names;
 }
 
 async function main(argv) {
@@ -128,8 +150,8 @@ async function main(argv) {
     return 0;
   }
   if (command === "stage") {
-    const staged = stageScripts();
-    process.stdout.write(`staged ${staged.length} file(s) onto the share:\n  ${staged.join("\n  ")}\n`);
+    const staged = await stageScripts();
+    process.stdout.write(`staged ${staged.length} file(s) into ${GUEST_SCRIPTS}:\n  ${staged.join("\n  ")}\n`);
     return 0;
   }
   if (command === "eval") {

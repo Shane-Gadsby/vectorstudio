@@ -127,9 +127,16 @@ their own joins: the panel registry, the tool list, the effect registry, the pre
 
 Every row with `field: Shortcut` was verified against a licensed 30.1, so the audit compares it
 with the keys the app actually binds, folding `Cmd`→`Ctrl` and `Opt`→`Alt` and ignoring modifier
-order. Currently: **96 agree, 1 disagrees, 2 unbound.**
+order. Currently: **97 agree, 0 disagree** — every disagreement found so far turned out to be our
+data, and all four were settled against Illustrator's own shortcut set file (below).
 
-It compares each menu *item's* key, via `menus::item_shortcut`, not its command's — the Window menu
+**The authority for a shortcut is `keys.kys`, the install's own set file.**
+`research/illustrator/read-kys.mjs check` reads it out of the licensed VM and compares every row
+with a `command_id` — 174 agree, 0 differ. It records unbound commands explicitly (`/Key 0`), so it
+also settles whether a command has a default shortcut at all. Prefer it to Adobe's published table
+and to a hand-made export; run it after any shortcut work.
+
+The audit compares each menu *item's* key, via `menus::item_shortcut`, not its command's — the Window menu
 runs one parameterised `window.panel {panel}` behind every entry, and each panel binds its own key,
 so reading the command's shortcut makes bound panels look unbound. The first run did exactly that
 and over-reported the gap; see [`open-questions.md`](open-questions.md#a-correction-to-the-first-runs-figures).

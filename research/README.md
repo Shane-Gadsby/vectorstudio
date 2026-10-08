@@ -44,6 +44,20 @@ rather than a plain `ssh host "…DoJavaScript…"`.
 `../illustrator/` on the development machine is an unlicensed repack — never read its presets,
 shortcuts, resources, binaries or outputs, and never use it to make fixtures or reference outputs.
 
+## Shortcut verification — `read-kys.mjs`
+
+The authority for every `field: Shortcut` row is Illustrator's own set file, `keys.kys`, which
+lists each command with the keys bound to it or `/Key 0` when nothing is:
+
+```sh
+node research/illustrator/read-kys.mjs fetch   # copy it out of the VM (into the gitignored ~/.research)
+node research/illustrator/read-kys.mjs check   # cross-check the matrix: 174 agree, 0 differ
+node research/illustrator/read-kys.mjs dump --bound
+```
+
+No COM, no ExtendScript, no session crossing — it is a file read. Shortcuts are not in
+Illustrator's scripting DOM, so this is the only way to get them right.
+
 ## `.ai` format probes
 
 Run against the reference fixtures in `fixtures/ai/` (gitignored — see

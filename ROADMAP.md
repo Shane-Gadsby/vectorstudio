@@ -22,12 +22,13 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 The fork's own work, in order. Each item says what finishing it buys, because the ordering is by
 how much each one unblocks rather than by size.
 
-**1. Resolve the matrix's own errors.** *Mostly done 2026-10-08.* 35 duplicated row pairs merged
-(the in-scope denominator was overstated ~2 %: 1,826 → 1,791) and one of the four disputed
-shortcut rows corrected from Adobe's published table. **Three rows still need the licensed VM** —
-`MENU-0089`, `MENU-0309`, `MENU-0310`, now `unverified` with their evidence recorded. In every
-case resolved so far the app was right and our extraction was wrong, which is worth remembering
-before "fixing" the app to match a row.
+**1. Resolve the matrix's own errors.** ✅ *Done 2026-10-08.* 35 duplicated row pairs merged (the
+in-scope denominator had been overstated ~2 %: 1,826 → 1,791) and all four disputed shortcut rows
+settled against Illustrator's own set file, `keys.kys`, read out of the licensed install
+(`research/illustrator/read-kys.mjs`). **The app was right every time and our extraction was wrong
+every time** — worth remembering before "fixing" the app to match a row. The shortcut surface is
+now machine-checkable: 174 rows agree, 0 differ, and the audit reports 97 of 97 matched shortcuts
+agreeing. 75 rows still carry no `command_id` and so cannot be joined yet.
 
 **2. Bind the shortcuts the audit finds missing.** ✅ *Done 2026-10-08 for the 15
 `Window → <panel>` function keys* — seven were unbound, all 15 now `done` with a test

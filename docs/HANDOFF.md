@@ -74,20 +74,12 @@ working app on macOS and the web, SVG/PDF/EPS/DXF/EMF/PSD interop, an MCP automa
 The full programme with rationale is in `ROADMAP.md` → "The parity programme (VectorStudio)". In
 short:
 
-### 1. Resolve the matrix's own errors — **blocks every coverage figure**
+### 1. ~~Resolve the matrix's own errors~~ — done 2026-10-08
 
-`docs/parity/open-questions.md` items 1–4. **Needs the licensed VM.** Nothing else here is
-blocked on it, but every percentage above carries known errors until it lands.
-
-- **39 duplicated row pairs (78 rows).** Two sources merged without de-duplication, so the
-  in-scope denominator is overstated ~2 %. `cargo xtask parity --audit` lists them under "claimed
-  by more than one row". Resolve by keeping the row with the full menu path and setting its twin
-  to `scope: out` with a pointer — **never delete a row**, ids are cited in commit messages.
-- **Four `verified` rows the app contradicts**, all looking like mis-extraction rather than app
-  defects: `MENU-0089` (Hide > Selection claims `Ctrl+2`, which `MENU-0084` Lock > Selection also
-  claims), `MENU-0316` (Show Grid claims `Shift+Ctrl+I`, which Adobe's table gives to perspective
-  grid), and `MENU-0309`/`MENU-0310` (the perspective-grid pair). Check whether a single off-by-one
-  in the source explains several of them.
+35 duplicated row pairs merged (in scope: 1,826 → 1,791) and all four disputed shortcut rows
+settled against `keys.kys`, Illustrator's own set file, read out of the licensed install with
+`research/illustrator/read-kys.mjs`. The app was right every time. `read-kys.mjs check` now keeps
+the shortcut surface honest: 174 rows agree, 0 differ. See `docs/parity/open-questions.md`.
 
 ### 2. Bind shortcuts the audit finds missing — *done for the panels*
 

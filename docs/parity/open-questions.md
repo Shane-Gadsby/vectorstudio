@@ -21,58 +21,57 @@ the seven were bound, 95/2/2 after, and **96/1/2** once `MENU-0316` was correcte
 The lesson is worth keeping: a parity audit that reads the wrong field invents work. When a number
 here looks surprising, check what the audit actually measured before believing it.
 
-## 1. ~~39 duplicated row pairs~~ — resolved 2026-10-08
+## 1. ~~35 duplicated row pairs~~ — resolved 2026-10-08
 
-**35 pairs, not 39.** The other four were never duplicates: they were two different commands
-claiming one key, which is item 2. Matching candidates on the leaf label alone had conflated them
-(`View > Show Grid` and `View > Perspective Grid > Show Grid` share a leaf), so the rule now
-compares the whole element with the two sources' cosmetic differences removed.
+The matrix merged two sources without de-duplicating, so 35 commands held two rows each. The twins
+were not redundant — the row from `shortcuts-30.1.csv` carried `behaviour` and a readable
+`element`, the one from `menu-commands-30.1.csv` carried Illustrator's own `command_id` — so each
+pair's evidence was folded into the first and the second set to `scope: out` naming the survivor.
+No row was deleted; ids are cited in commit messages. In scope: **1,826 → 1,791**.
 
-The twins were not redundant, which is why this needed care rather than a delete: the row from
-`shortcuts-30.1.csv` carried `behaviour` and a readable `element`, the row from
-`menu-commands-30.1.csv` carried Illustrator's own `command_id`. Each pair's evidence was merged
-into the first and the second set to `scope: out` with a note naming the survivor — **no row was
-deleted**, because ids are cited in commit messages.
+`research/dedupe-matrix.py` is the script, for the next time two sources are merged.
 
-In-scope rows went from 1,826 to **1,791**, so every coverage figure before this date was about
-2 % flattering.
+## 2. ~~Four rows where the app and the matrix disagree~~ — resolved 2026-10-08
 
-## 2. Four rows where the app and the matrix disagree — **one resolved, three need the VM**
+Settled against the authority rather than by inference: **Illustrator's own shortcut set file**,
+`keys.kys`, read out of the licensed install
+([`read-kys.mjs`](../../research/illustrator/read-kys.mjs)). It lists every command with the keys
+bound to it, or `/Key 0` when nothing is, so it answers both "what is the shortcut" and "is there
+one at all".
 
-The collision check turned out to explain the mechanism: in each case the row had absorbed a
-*neighbouring* row's shortcut, and the neighbour's own row holds the same key.
-
-### Resolved: `MENU-0316 View > Show Grid`
-
-Claimed `Shift+Ctrl+I`. Adobe's published table gives that to **Show/hide perspective grid**,
-which is `MENU-0689`'s key, and gives Show grid **`Ctrl + '`** — which is what the app binds. Two
-independent sources against one mis-extraction, so the row now reads `Ctrl+'` at `doc-30`
-confidence, with `verified_by` cleared: it is documented, no longer verified against the install.
-**The app was right.** Re-confirm on the VM to restore `verified`.
-
-### Still open — probe these three
-
-| Row | Claims | Who really owns that key | What the app does |
+| Row | Claimed | 30.1 actually | Why the row was wrong |
 |---|---|---|---|
-| `MENU-0089` `Object > Hide > Selection` | `Ctrl+2` | `MENU-0084` `Object > Lock > Selection` claims it too | binds `Cmd+3` |
-| `MENU-0309` `View > Perspective Grid > Show Rulers` | `Ctrl+R` | `MENU-0681` `View > Rulers > Show Rulers`, per the published table | binds nothing |
-| `MENU-0310` `View > Perspective Grid > Snap to Grid` | `Shift+Ctrl+'` | `MENU-0317` `View > Snap to Grid`, per the published table | binds nothing |
+| `MENU-0089` `Object > Hide > Selection` | `Ctrl+2` | **`Ctrl+3`** | `Ctrl+2` is `lock` (`MENU-0084`) — exactly what the collision had shown |
+| `MENU-0309` `Perspective Grid > Show Rulers` | `Ctrl+R` | **nothing** (`/Key 0`) | `Ctrl+R` is `ruler` (`MENU-0681`) |
+| `MENU-0310` `Perspective Grid > Snap to Grid` | `Shift+Ctrl+'` | **nothing** (`/Key 0`) | `Shift+Ctrl+'` is `snapgrid` (`MENU-0317`) |
+| `MENU-0316` `View > Show Grid` | `Shift+Ctrl+I` | **`Ctrl+'`** | `Shift+Ctrl+I` is `Show Perspective Grid` (`MENU-0689`), which really does hold it |
 
-All three are now `confidence: unverified` with the evidence in their `behaviour`, and they keep
-their claimed value **on purpose** so `cargo xtask parity --audit` goes on reporting them until
-the VM settles it. For `MENU-0089` the Unlock All / Show All pair (`Alt+Ctrl+2` / `Alt+Ctrl+3`)
-suggests `Ctrl+3`; for the other two the real answer is probably *no default shortcut*. Neither is
-documented, so neither was written in.
+**The app was right every time; our extraction was wrong every time.** All four rows are now
+`verified` against `keys.kys`, and the audit reports **97 of 97** matched shortcuts agreeing.
 
-**Do not bind a disputed row.** It would take the key from whatever really owns it and make the
-matrix wrong twice.
+The whole shortcut surface is now machine-checkable: `read-kys.mjs check` compares every row with
+a `command_id` against the set — **174 agree, 0 differ**. Run it after any shortcut work.
+
+### Two parser traps, since they cost real time
+
+- **Command names escape their spaces** in `.kys` (`/Live\ Pathfinder\ Outline {`), 501 of them. An
+  id pattern of `[^\s]+` misses those entries and reports a *bound* command as absent — which it
+  did, and nearly produced the wrong conclusion about the perspective-grid rows.
+- **F1–F12 are encoded 14–25**, not as characters, so `/Key 20` is F7 and not a control code.
+  Without that, thirteen correct rows look like mismatches.
 
 ## 3. ~~`View > Show Grid`~~ — see item 2
 
 ## 4. ~~Panel shortcuts the app does not bind~~ — resolved 2026-10-08
 
-The 15 `Window → <panel>` function keys are `done` with tests; seven had been unbound. The two
-remaining candidates are the perspective-grid pair above, held behind item 2.
+The 15 `Window → <panel>` function keys are `done` with tests; seven had been unbound.
+
+## 4b. 75 shortcut rows cannot be checked yet
+
+They carry no `command_id`, so `read-kys.mjs` cannot join them to the set — mostly the
+`Keyboard/Other: *` families, whose ids were never recorded. Recovering the ids (from
+`menu-commands-30.1.csv`, or by matching chords in the set) would put the rest of the shortcut
+surface under machine check too.
 
 ## 5. 175 rows with no menu path
 
