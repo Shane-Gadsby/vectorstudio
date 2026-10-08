@@ -178,6 +178,18 @@ fn surface(root: &Path) -> Result<Value, String> {
 /// The matrix records what a licensed 30.1 reports on Windows (`Shift+Ctrl+N`); the app records the
 /// Mac spelling (`Cmd+Shift+N`) and the UI maps it per platform. So `Cmd` folds to `Ctrl` and `Opt`
 /// to `Alt`, and the modifier order is ignored.
+/// As [`shortcut`], but keeping `+` and `=` apart.
+///
+/// Illustrator stores them as different key codes (43 and 61), so two commands on `Ctrl+=` and
+/// `Ctrl++` are not in conflict — `View > Zoom In` and its `(Secondary)` binding are exactly that.
+/// Folding them is right when asking "does the app bind what the reference app binds", because the
+/// app's parser accepts either; it is wrong when asking "do two rows claim one chord".
+pub fn shortcut_strict(text: &str) -> Option<(Vec<String>, String)> {
+    let (mods, key) = shortcut(text)?;
+    let last = text.trim().rsplit('+').next().unwrap_or("");
+    Some((mods, if last.is_empty() { "+".to_owned() } else { key }))
+}
+
 pub fn shortcut(text: &str) -> Option<(Vec<String>, String)> {
     let text = text.trim();
     if text.is_empty() {
@@ -198,7 +210,14 @@ pub fn shortcut(text: &str) -> Option<(Vec<String>, String)> {
         match folded {
             Some(m) if i + 1 < parts.len() => mods.push(m.to_owned()),
             _ => {
-                key = if p.is_empty() { "+".to_owned() } else { p.to_ascii_uppercase() };
+                // `+` and `=` are one key: `+` is Shift+`=` on most layouts, and the app's own
+                // parser folds them (`"=" | "+" => Key::Equals` in ui-egui's shortcuts.rs), so a
+                // row written `=` and a catalogue entry written `+` are the same chord. Comparing
+                // them literally reports a difference where the app behaves correctly.
+                key = match p {
+                    "" | "+" | "=" => "=".to_owned(),
+                    other => other.to_ascii_uppercase(),
+                };
             }
         }
     }
@@ -225,6 +244,21 @@ pub fn compare_shortcut(want: &str, got: Option<&str>) -> Option<Shortcut> {
         Some(got) if got == want => Some(Shortcut::Same),
         Some(_) => Some(Shortcut::Differs),
     }
+}
+
+/// Tool label (without the trailing "Tool") → the single-key shortcut the app binds.
+///
+/// Tools are not menu entries and carry their own shortcuts, so they need their own join. The
+/// matrix writes the bare name (`Selection`) where the catalogue writes `Selection Tool`.
+pub fn tools(surface: &Value) -> BTreeMap<String, Option<String>> {
+    let mut out = BTreeMap::new();
+    for t in surface.get("tools").and_then(Value::as_array).into_iter().flatten() {
+        let Some(label) = t.get("label").and_then(Value::as_str) else { continue };
+        let name = label.strip_suffix(" Tool").unwrap_or(label).to_owned();
+        let sc = t.get("shortcut").and_then(Value::as_str).filter(|s| !s.is_empty()).map(str::to_owned);
+        out.insert(name, sc);
+    }
+    out
 }
 
 /// Command id → the shortcut the app binds to it.
@@ -325,26 +359,70 @@ pub fn run(root: &Path, write: bool) -> Result<(), String> {
     for (k, n) in &counts {
         println!("  {k:<9} {n:>4}  ({:.0} %)", if total == 0 { 0.0 } else { *n as f64 * 100.0 / total as f64 });
     }
-    // Matrix-internal, so no inference is needed: two commands cannot share one binding, which
-    // makes a collision proof that at least one of the two rows was mis-extracted.
+    // Matrix-internal, so no inference is needed. Two rows claiming one chord is usually a
+    // mis-extraction — but not always: Illustrator binds per *context*, so `Shift+Ctrl+I` is
+    // `~textItalic` while editing type (`/Context 1` in keys.kys) and `Show Perspective Grid`
+    // otherwise (`/Context 0`), and both are right. Check the context before calling a row wrong;
+    // `research/illustrator/read-kys.mjs dump` shows what the install actually binds.
     let mut claimed: BTreeMap<(Vec<String>, String), Vec<String>> = BTreeMap::new();
     for row in &rows {
         if row.get("scope") != "in" || row.get("field") != "Shortcut" {
             continue;
         }
-        if let Some(keys) = shortcut(row.get("default")) {
+        if let Some(keys) = shortcut_strict(row.get("default")) {
             claimed.entry(keys).or_default().push(format!("{} {}", row.get("id"), row.get("element")));
         }
     }
     let collisions: Vec<_> = claimed.iter().filter(|(_, rs)| rs.len() > 1).collect();
     if !collisions.is_empty() {
-        println!("\n{} shortcut(s) claimed by more than one row — at least one row is wrong:", collisions.len());
+        println!("\n{} shortcut(s) claimed by more than one row (a mis-extraction, or two commands in different contexts):", collisions.len());
         for ((mods, key), rs) in collisions.iter().take(20) {
             let keys = if mods.is_empty() { (*key).clone() } else { format!("{}+{key}", mods.join("+")) };
             println!("  {keys:<22} {}", rs.join("  |  "));
         }
         if collisions.len() > 20 {
             println!("  … and {} more", collisions.len() - 20);
+        }
+    }
+
+    // Tool rows: the matrix names the tool, the catalogue carries its key.
+    let catalogue = tools(&surface);
+    let mut tool_counts: BTreeMap<&str, usize> = BTreeMap::new();
+    let mut tool_bad: Vec<String> = Vec::new();
+    for row in &rows {
+        if row.get("scope") != "in" || row.get("field") != "Shortcut" || !row.get("id").starts_with("TOOL-") {
+            continue;
+        }
+        let Some(got) = catalogue.get(row.get("element")) else {
+            *tool_counts.entry("not in the catalogue").or_default() += 1;
+            continue;
+        };
+        match compare_shortcut(row.get("default"), got.as_deref()) {
+            Some(Shortcut::Same) => *tool_counts.entry("same").or_default() += 1,
+            Some(verdict) => {
+                *tool_counts.entry(if verdict == Shortcut::Unbound { "unbound" } else { "differs" }).or_default() += 1;
+                tool_bad.push(format!(
+                    "{:<10} {:<34} reference {:<12} app {}",
+                    row.get("id"),
+                    row.get("element"),
+                    row.get("default"),
+                    got.as_deref().unwrap_or("(none)")
+                ));
+            }
+            None => {}
+        }
+    }
+    let tool_total: usize = tool_counts.values().sum();
+    if tool_total > 0 {
+        println!("\ntool shortcuts ({tool_total} rows, against vectorcraft_tools::catalog):");
+        for (k, n) in &tool_counts {
+            println!("  {k:<11} {n:>4}");
+        }
+        for line in tool_bad.iter().take(30) {
+            println!("  {line}");
+        }
+        if tool_bad.len() > 30 {
+            println!("  … and {} more", tool_bad.len() - 30);
         }
     }
 
@@ -447,9 +525,28 @@ mod tests {
         assert_eq!(shortcut("Alt+Ctrl+S"), shortcut("Cmd+Opt+S"));
         assert_eq!(shortcut("ctrl+n"), Some((vec!["Ctrl".into()], "N".into())));
         assert_eq!(shortcut("F1"), Some((vec![], "F1".into())));
-        assert_eq!(shortcut("Ctrl++"), Some((vec!["Ctrl".into()], "+".into())));
+        // A trailing `+` is the key, and it normalises to `=` (see plus_and_equals_are_one_key).
+        assert_eq!(shortcut("Ctrl++"), Some((vec!["Ctrl".into()], "=".into())));
         assert_eq!(shortcut(""), None);
         assert_ne!(shortcut("Ctrl+N"), shortcut("Ctrl+Shift+N"));
+    }
+
+    #[test]
+    fn the_strict_form_keeps_plus_and_equals_apart() {
+        // Illustrator stores them as different key codes, so these are two chords, not a clash.
+        assert_ne!(shortcut_strict("Ctrl++"), shortcut_strict("Ctrl+="));
+        assert_eq!(shortcut_strict("Ctrl++"), Some((vec!["Ctrl".into()], "+".into())));
+        assert_eq!(shortcut_strict("Ctrl+="), Some((vec!["Ctrl".into()], "=".into())));
+        assert_eq!(shortcut_strict("Shift+F7"), shortcut("Shift+F7"));
+    }
+
+    #[test]
+    fn plus_and_equals_are_one_key() {
+        // The app's parser folds them, so the audit must too, or correct code looks wrong.
+        assert_eq!(shortcut("+"), shortcut("="));
+        assert_eq!(shortcut("Ctrl++"), shortcut("Ctrl+="));
+        assert_eq!(compare_shortcut("=", Some("+")), Some(Shortcut::Same));
+        assert_ne!(shortcut("+"), shortcut("-"));
     }
 
     #[test]

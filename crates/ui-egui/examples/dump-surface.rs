@@ -13,6 +13,9 @@
 //!   for them;
 //! * `todo` — in the menu, not implemented (upstream's own stub marker);
 //! * `header` — a disabled section label, nothing to implement.
+//!
+//! `tools` is a separate list, because a tool is not a menu entry: it carries its own single-key
+//! shortcut from `vectorcraft_tools::catalog`.
 
 use serde_json::{Value, json};
 use vectorcraft_ui_egui::menus::{Item, UI_COMMANDS, item_shortcut, menu_tree};
@@ -57,7 +60,10 @@ fn main() {
         .iter()
         .map(|c| json!({ "id": c.id, "label": c.label, "menu": c.menu, "shortcut": c.shortcut }))
         .collect();
-    let out = json!({ "menu": menu, "ui_commands": ui, "engine_commands": engine });
+    // Tools are their own surface: they carry single-key shortcuts and never appear in the menus.
+    let tools: Vec<Value> =
+        vectorcraft_tools::catalog::all_tools().map(|t| json!({ "id": t.id, "label": t.label, "shortcut": t.shortcut })).collect();
+    let out = json!({ "menu": menu, "ui_commands": ui, "engine_commands": engine, "tools": tools });
     match serde_json::to_string_pretty(&out) {
         Ok(text) => println!("{text}"),
         Err(e) => {

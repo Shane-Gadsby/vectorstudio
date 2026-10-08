@@ -40,8 +40,8 @@ anything either, which is what `--no-fail-fast` is for.
 `cargo xtask parity` is the source of truth. At handoff:
 
 ```
-1857 rows, 1826 in scope
-done 15 (0.8 %), partial 319 (17.5 %), n/a 90, planned 1433
+1857 rows, 1773 in scope
+done 57 (3.2 %), partial 319 (18.0 %), n/a 143, planned 1338
 confidence: verified 1016, plan-2020 564, doc-30 200, unverified 77
 ```
 
@@ -49,10 +49,12 @@ confidence: verified 1016, plan-2020 564, doc-30 200, unverified 77
 (~69–75 % of the feature surface, 40–55 % on "a power user can't tell the difference"), graded by
 the agents that wrote the features, and the whole point of the matrix is to replace them.
 
-- `done` = implemented, matching 30.1, with a test. Only the 15 Window panel function keys so far.
+- `done` = implemented, matching 30.1, with a test. So far the 15 Window panel function keys and
+  the 42 tool shortcuts.
 - `partial` = the command exists and is wired to the right menu path. **Nothing more** — it says
   nothing about fields, defaults, ranges or units.
-- 1,016 rows were verified against a **licensed** Illustrator 30.1. Those are the valuable ones.
+- 1,016 rows were verified against a **licensed** Illustrator 30.1. Those are the valuable ones,
+  and every shortcut among them is re-checkable by machine: `read-kys.mjs check` (229 agree, 0 differ).
 
 ## 2. What exists that did not before the fork
 
@@ -76,10 +78,10 @@ short:
 
 ### 1. ~~Resolve the matrix's own errors~~ — done 2026-10-08
 
-35 duplicated row pairs merged (in scope: 1,826 → 1,791) and all four disputed shortcut rows
+53 duplicated row pairs merged (in scope: 1,826 → 1,773) and all four disputed shortcut rows
 settled against `keys.kys`, Illustrator's own set file, read out of the licensed install with
 `research/illustrator/read-kys.mjs`. The app was right every time. `read-kys.mjs check` now keeps
-the shortcut surface honest: 174 rows agree, 0 differ. See `docs/parity/open-questions.md`.
+the shortcut surface honest: 229 rows agree, 0 differ, 2 unjoinable. See `docs/parity/open-questions.md`.
 
 ### 2. Bind shortcuts the audit finds missing — *done for the panels*
 

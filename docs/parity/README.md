@@ -112,16 +112,33 @@ into the right menu path* — nothing more. It says nothing about whether the di
 defaults, ranges and units match 30.1, which is what 1:1 actually requires. Promoting a row to
 `done` is hand work: verify the field against the reference app, write a test, cite both.
 
-As of 2026-10-08: of 873 in-scope menu rows, **15 are `done`** (the `Window → <panel>` function
+As of 2026-10-08: of 855 in-scope menu rows, **15 are `done`** (the `Window → <panel>` function
 keys — implemented, matching 30.1, with a test), **319 are `partial`**, 90 are `n/a`, 20 are in the
 menus as stubs, and 495 found no match. The 495 are the honest backlog, and
 they are concentrated where upstream says they are — Effect (86), View (49), Type (50) — plus 175
 rows in `Menus/(path unknown)` whose source gave no menu path, which need their paths researched
 before they can be joined at all.
 
-Rows outside `element_type: menu` — panels (372), features (174), tools (136), effects (117),
-dialogs (61), preferences (39), presets (29), formats (21) — are **not yet audited**. They need
-their own joins: the panel registry, the tool list, the effect registry, the preference keys.
+### Tools
+
+Tools are a separate surface — not menu entries, and carrying their own single-key shortcuts — so
+they get their own join, against `vectorcraft_tools::catalog`. **42 of 42 agree** with the keys
+30.1 binds, pinned by `catalog::parity::tool_shortcuts_match_the_reference_app`, and those rows are
+`done`.
+
+One apparent difference was not one: the catalogue writes `+` for Add Anchor Point where the
+install records `=`. They are the same physical key, and the app's own parser folds them
+(`"=" | "+" => Key::Equals`), so the audit folds them too. A comparator stricter than the app's
+own key handling reports working code as broken.
+
+The other 59 `TOOL-` rows are not tools: they are toolbar controls and paint buttons (`Default`,
+`Swap Fill/Stroke`, `Increase Diameter`), which need their own surface.
+
+### Still unaudited
+
+Panels (372 rows), features (174), effects (117), dialogs (61), preferences (39), presets (29) and
+formats (21) have no join yet. Each needs its own ground truth: `state::all_panels`, the effect
+registry, `prefs.list`.
 
 ### What the audit also checks
 
@@ -132,7 +149,8 @@ data, and all four were settled against Illustrator's own shortcut set file (bel
 
 **The authority for a shortcut is `keys.kys`, the install's own set file.**
 `research/illustrator/read-kys.mjs check` reads it out of the licensed VM and compares every row
-with a `command_id` — 174 agree, 0 differ. It records unbound commands explicitly (`/Key 0`), so it
+with a `command_id` — **229 agree, 0 differ**, only 2 unjoinable (`Tab` and `Shift+Tab`, which
+30.1 does not keep in the set). It records unbound commands explicitly (`/Key 0`), so it
 also settles whether a command has a default shortcut at all. Prefer it to Adobe's published table
 and to a hand-made export; run it after any shortcut work.
 
@@ -141,10 +159,19 @@ runs one parameterised `window.panel {panel}` behind every entry, and each panel
 so reading the command's shortcut makes bound panels look unbound. The first run did exactly that
 and over-reported the gap; see [`open-questions.md`](open-questions.md#a-correction-to-the-first-runs-figures).
 
+**A shared chord is usually fine.** Illustrator binds per context, so `Shift+Ctrl+I` is
+`~textItalic` while editing type and `Show Perspective Grid` otherwise. `read-kys.mjs check`
+adjudicates every shared chord from the set's `/Context` field — currently **7 shared, 7 explained,
+0 unexplained**. And `+` and `=` are *different* key codes in the set (43 and 61), so `Ctrl+=` and
+`Ctrl++` are two chords: `View > Zoom In` and its `(Secondary)` binding, not a clash. The audit
+therefore folds `+`/`=` when comparing a row against the app (whose parser accepts either) but
+keeps them apart when grouping collisions. Asking "does the app match?" and "do two rows clash?"
+need different normalisations.
+
 A disagreement does **not** mean the app is wrong. It means one of the two is — and so far it has
 been *our data* every time. The audit also checks the matrix against itself, since two rows cannot
-claim one binding; that found 35 duplicated row pairs (merged 2026-10-08, which cut the in-scope
-denominator from 1,826 to 1,791) and, in the four remaining collisions, showed that each disputed
+claim one binding; that found 53 duplicated row pairs (merged 2026-10-08, which cut the in-scope
+denominator from 1,826 to 1,773) and, in the four remaining collisions, showed that each disputed
 row had absorbed a neighbouring row's shortcut.
 
 Everything the first run raised is written up in [`open-questions.md`](open-questions.md), with

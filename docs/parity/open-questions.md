@@ -23,13 +23,21 @@ here looks surprising, check what the audit actually measured before believing i
 
 ## 1. ~~35 duplicated row pairs~~ — resolved 2026-10-08
 
-The matrix merged two sources without de-duplicating, so 35 commands held two rows each. The twins
+The matrix merged two sources without de-duplicating, so commands held two rows each. The twins
 were not redundant — the row from `shortcuts-30.1.csv` carried `behaviour` and a readable
 `element`, the one from `menu-commands-30.1.csv` carried Illustrator's own `command_id` — so each
 pair's evidence was folded into the first and the second set to `scope: out` naming the survivor.
-No row was deleted; ids are cited in commit messages. In scope: **1,826 → 1,791**.
+No row was deleted; ids are cited in commit messages.
 
-`research/dedupe-matrix.py` is the script, for the next time two sources are merged.
+**53 pairs in two passes.** 35 were found by matching elements. The other 18 only showed up once
+`command_id`s had been recovered (item 4b) — a shared `command_id` is a far better signal, because
+matching element text misses a pair written with different labels (`View > Rulers > Show` against
+`View > Rulers > Show Rulers`). In scope: **1,826 → 1,773**, so coverage figures before this were
+~3 % flattering.
+
+`research/dedupe-matrix.py` runs both passes. Prefer the `command_id` one; it needs no judgement
+about which label is right, only about which to keep (a path beats a bare id, no elision beats an
+elision, then the longer label).
 
 ## 2. ~~Four rows where the app and the matrix disagree~~ — resolved 2026-10-08
 
@@ -66,12 +74,29 @@ a `command_id` against the set — **174 agree, 0 differ**. Run it after any sho
 
 The 15 `Window → <panel>` function keys are `done` with tests; seven had been unbound.
 
-## 4b. 75 shortcut rows cannot be checked yet
+## 4b. ~~75 shortcut rows cannot be checked~~ — resolved 2026-10-08
 
-They carry no `command_id`, so `read-kys.mjs` cannot join them to the set — mostly the
-`Keyboard/Other: *` families, whose ids were never recorded. Recovering the ids (from
-`menu-commands-30.1.csv`, or by matching chords in the set) would put the rest of the shortcut
-surface under machine check too.
+**73 of 75 recovered**, by matching each row's chord against the set
+(`research/recover-command-ids.py`). Most were tools, whose ids are Illustrator's internal plugin
+names and nothing a human would guess: `Selection` is `Adobe Select Tool`, `Hand` is
+`Adobe Scroll Tool`, `Artboard` is `Adobe Crop Tool`. A tool shortcut is a unique single key, so
+55 of them matched outright.
+
+The two left are `Tab` and `Shift+Tab` (Show/Hide All Palettes), which 30.1 does not keep in the
+set at all — presumably hardcoded. They stay unjoinable.
+
+The shortcut surface is now effectively fully machine-checked: **229 rows agree, 0 differ, 2
+unjoinable.**
+
+### One chord can legitimately bind two commands
+
+Eight rows matched two candidates each, and that is not a conflict: the set binds per **context**.
+`/Context 1` is the text/type context and `/Context 0` is global, so `Shift+Ctrl+I` really is both
+`~textItalic` (while editing type) and `Show Perspective Grid` (otherwise). The row's own name
+resolves which it wants.
+
+This matters for reading the audit: a chord held by two rows is *usually* a mis-extraction, but
+check the context before calling either wrong.
 
 ## 5. 175 rows with no menu path
 

@@ -180,3 +180,94 @@ mod tests {
         assert_eq!(group_of("star"), group_of("rectangle"));
     }
 }
+
+#[cfg(test)]
+mod parity {
+    use super::*;
+
+    /// Parity: every tool's shortcut, as Illustrator 30.1 binds it.
+    ///
+    /// (tool id, the key the reference app uses, matrix row). The values come from `keys.kys`, the
+    /// licensed install's own shortcut set, cross-checked by
+    /// `research/illustrator/read-kys.mjs`. `=` and `+` are one key -- `+` is Shift+`=` on most
+    /// layouts and the UI's parser folds them -- so either spelling passes.
+    const TOOL_PARITY: &[(&str, &str, &str)] = &[
+        ("addAnchor", "=", "TOOL-0007"),
+        ("anchorPoint", "Shift+C", "TOOL-0009"),
+        ("artboard", "Shift+O", "TOOL-0078"),
+        ("blend", "W", "TOOL-0042"),
+        ("blobBrush", "Shift+B", "TOOL-0028"),
+        ("columnGraph", "J", "TOOL-0069"),
+        ("curvature", "Shift+~", "TOOL-0010"),
+        ("deleteAnchor", "-", "TOOL-0008"),
+        ("directSelection", "A", "TOOL-0002"),
+        ("ellipse", "L", "TOOL-0018"),
+        ("eraser", "Shift+E", "TOOL-0081"),
+        ("eyedropper", "I", "TOOL-0038"),
+        ("freeTransform", "E", "TOOL-0048"),
+        ("gradient", "G", "TOOL-0037"),
+        ("hand", "H", "TOOL-0084"),
+        ("lasso", "Q", "TOOL-0005"),
+        ("lineSegment", "\\", "TOOL-0011"),
+        ("livePaintBucket", "K", "TOOL-0040"),
+        ("livePaintSelection", "Shift+L", "TOOL-0041"),
+        ("magicWand", "Y", "TOOL-0004"),
+        ("mesh", "U", "TOOL-0036"),
+        ("paintbrush", "B", "TOOL-0027"),
+        ("pen", "P", "TOOL-0006"),
+        ("pencil", "N", "TOOL-0023"),
+        ("perspectiveGrid", "Shift+P", "TOOL-0059"),
+        ("perspectiveSelection", "Shift+V", "TOOL-0060"),
+        ("rectangle", "M", "TOOL-0016"),
+        ("reflect", "O", "TOOL-0044"),
+        ("rotate", "R", "TOOL-0043"),
+        ("rotateView", "Shift+H", "TOOL-0090"),
+        ("scale", "S", "TOOL-0045"),
+        ("scissors", "C", "TOOL-0082"),
+        ("selection", "V", "TOOL-0001"),
+        ("shapeBuilder", "Shift+M", "TOOL-0058"),
+        ("shaper", "Shift+N", "TOOL-0022"),
+        ("slice", "Shift+K", "TOOL-0079"),
+        ("symbolSprayer", "Shift+S", "TOOL-0061"),
+        ("touchType", "Shift+T", "TOOL-0035"),
+        ("type", "T", "TOOL-0029"),
+        ("warp", "Shift+R", "TOOL-0051"),
+        ("width", "Shift+W", "TOOL-0050"),
+        ("zoom", "Z", "TOOL-0086"),
+    ];
+
+    /// Do two shortcut spellings name the same chord?
+    fn same_key(a: &str, b: &str) -> bool {
+        let split = |s: &str| {
+            let mut parts: Vec<String> = s.split('+').map(str::to_ascii_uppercase).collect();
+            let last = parts.pop().unwrap_or_default();
+            // A bare "+" splits to ["", ""], which would leave an empty modifier behind.
+            parts.retain(|p| !p.is_empty());
+            parts.sort();
+            (parts, if last.is_empty() || last == "+" { "=".to_owned() } else { last })
+        };
+        split(a) == split(b)
+    }
+
+    #[test]
+    fn tool_shortcuts_match_the_reference_app() {
+        for (id, want, row) in TOOL_PARITY {
+            let tool = tool_info(id).unwrap_or_else(|| panic!("{row}: no tool {id}"));
+            let got = tool.shortcut.unwrap_or_else(|| panic!("{row}: {id} has no shortcut"));
+            assert!(same_key(got, want), "{row}: {id} binds {got}, the reference app uses {want}");
+        }
+        assert_eq!(TOOL_PARITY.len(), 42, "every tool row the audit matches should be pinned here");
+    }
+
+    #[test]
+    fn no_two_tools_claim_the_same_key() {
+        let mut seen: std::collections::HashMap<String, &str> = std::collections::HashMap::new();
+        for t in all_tools() {
+            if let Some(sc) = t.shortcut
+                && let Some(other) = seen.insert(sc.to_ascii_uppercase(), t.id)
+            {
+                panic!("{} and {other} both claim {sc}", t.id);
+            }
+        }
+    }
+}

@@ -10,10 +10,10 @@ _Last updated: 2026-10-08 (after M4.14–M4.98, M8.1–M8.20, M14.4–M14.7, the
 
 > **Parity re-baseline in progress.** The scores below are upstream's self-assessment, inherited at
 > the fork. `docs/parity/matrix.csv` is replacing them with a row-level audit against a licensed
-> Illustrator 30.1. As of 2026-10-08: **1,791 rows in scope** (down from 1,826 once 35 duplicated
-> pairs were merged), of which **15 are `done`** (implemented, matching the reference app, with a
+> Illustrator 30.1. As of 2026-10-08: **1,773 rows in scope** (down from 1,826 once 53 duplicated
+> pairs were merged), of which **57 are `done`** (implemented, matching the reference app, with a
 > test), **319 `partial`** (the command exists and is wired to the right menu path, fields
-> unverified), 125 need no code and 1,398 are still `planned`. Panels, tools, effects, dialogs and
+> unverified), 143 need no code and 1,338 are still `planned`. Panels, tools, effects, dialogs and
 > preferences are not audited yet. Run `cargo xtask parity` for the current figure, and prefer it
 > to any number in this table.
 
@@ -23,12 +23,12 @@ The fork's own work, in order. Each item says what finishing it buys, because th
 how much each one unblocks rather than by size.
 
 **1. Resolve the matrix's own errors.** ✅ *Done 2026-10-08.* 35 duplicated row pairs merged (the
-in-scope denominator had been overstated ~2 %: 1,826 → 1,791) and all four disputed shortcut rows
+in-scope denominator had been overstated ~3 %: 1,826 → 1,773) and all four disputed shortcut rows
 settled against Illustrator's own set file, `keys.kys`, read out of the licensed install
 (`research/illustrator/read-kys.mjs`). **The app was right every time and our extraction was wrong
 every time** — worth remembering before "fixing" the app to match a row. The shortcut surface is
-now machine-checkable: 174 rows agree, 0 differ, and the audit reports 97 of 97 matched shortcuts
-agreeing. 75 rows still carry no `command_id` and so cannot be joined yet.
+now machine-checkable: 229 rows agree, 0 differ, and the audit reports 97 of 97 matched shortcuts
+agreeing. Only `Tab` and `Shift+Tab` cannot be joined, because 30.1 does not keep them in the set.
 
 **2. Bind the shortcuts the audit finds missing.** ✅ *Done 2026-10-08 for the 15
 `Window → <panel>` function keys* — seven were unbound, all 15 now `done` with a test
@@ -36,12 +36,12 @@ agreeing. 75 rows still carry no `command_id` and so cannot be joined yet.
 are blocked on item 1. This is the cheapest class of fidelity win: the feature already exists and
 only its binding is wrong, and a power user notices immediately.
 
-**3. Extend the audit past the menus.** 918 in-scope rows are not `element_type: menu` — panels
-(372), features (174), tools (136), effects (117), dialogs (61), preferences (39), presets (29),
-formats (21) — and no join covers them, so they are invisible to every coverage figure. Each needs
-its own ground truth: `state::all_panels`, `vectorcraft_tools::catalog`, the effect registry,
-`prefs.list`. Panels and tools first; they are the largest blocks and both have a real registry to
-join against.
+**3. Extend the audit past the menus.** *Tools done 2026-10-08:* they have their own join against
+`vectorcraft_tools::catalog`, 42 of 42 shortcuts agree with 30.1, and those rows are `done` with a
+test. **Still unjoined:** panels (372 rows), features (174), effects (117), dialogs (61),
+preferences (39), presets (29), formats (21) — invisible to every coverage figure until each gets
+its ground truth (`state::all_panels`, the effect registry, `prefs.list`). Panels next: the largest
+block, and `state::all_panels` already exists.
 
 **4. Research the 175 path-less rows.** Everything in `area: Menus/(path unknown)` came from a
 source with no menu path, so the audit cannot join it at all.

@@ -143,6 +143,34 @@ export function check(entries, rows) {
   return out;
 }
 
+/**
+ * Adjudicate rows that share a chord.
+ *
+ * Two rows claiming one chord is usually a mis-extraction, but the set binds per **context**:
+ * `/Context 1` is the text/type context and `/Context 0` is global, so `Shift+Ctrl+I` is both
+ * `~textItalic` (while editing type) and `Show Perspective Grid` (otherwise) and both are right.
+ * Only a pair sharing a chord *and* a context is a real problem.
+ */
+export function collisions(entries, rows) {
+    const byChord = new Map();
+    for (const row of rows) {
+        if (row.field !== "Shortcut" || row.scope !== "in" || !row.default.trim()) continue;
+        const chord = formatChord(parseChord(row.default));
+        if (!byChord.has(chord)) byChord.set(chord, []);
+        byChord.get(chord).push(row);
+    }
+    const explained = [];
+    const problems = [];
+    for (const [chord, group] of byChord) {
+        if (group.length < 2) continue;
+        const contexts = group.map((r) => entries.get(r.command_id.trim())?.Context ?? null);
+        const known = contexts.filter((c) => c !== null);
+        const distinct = new Set(known).size === known.length && known.length === group.length;
+        (distinct ? explained : problems).push({ chord, group, contexts });
+    }
+    return { explained, problems };
+}
+
 function readMatrix(repo) {
   const text = fs.readFileSync(path.join(repo, "docs/parity/matrix.csv"), "utf8");
   const records = [];
@@ -194,7 +222,8 @@ async function main(argv) {
     return 0;
   }
   if (command !== "check") throw new Error(`unknown command: ${command}`);
-  const r = check(entries, readMatrix(repo));
+  const rows = readMatrix(repo);
+  const r = check(entries, rows);
   const bound = [...entries.values()].filter((f) => f.Key).length;
   process.stdout.write(
     `keys.kys: ${entries.size} commands, ${bound} bound, ${entries.size - bound} explicitly unbound\n\n` +
@@ -217,7 +246,17 @@ async function main(argv) {
   show("Unbound in 30.1 — the row should have no shortcut:", r.unbound, (row) =>
     `${row.id.padEnd(10)} ${row.element.slice(0, 44).padEnd(46)} matrix claims ${row.default}`,
   );
-  return r.differ.length || r.unbound.length ? 1 : 0;
+
+  // Adjudicate the shared chords the xtask audit reports but cannot explain without the set.
+  const c = collisions(entries, rows);
+  process.stdout.write(
+    `\nshared chords: ${c.explained.length} explained by context, ${c.problems.length} unexplained\n`,
+  );
+  const line = ({ chord, group, contexts }) =>
+    `${chord.padEnd(22)} ${group.map((g, i) => `${g.id} (Context ${contexts[i] ?? "?"})`).join("  |  ")}`;
+  show("Different contexts, so both are correct:", c.explained, line);
+  show("Same context — one of these rows is wrong:", c.problems, line);
+  return r.differ.length || r.unbound.length || c.problems.length ? 1 : 0;
 }
 
 if (process.argv[1] && fileURLToPath(import.meta.url) === path.resolve(process.argv[1])) {

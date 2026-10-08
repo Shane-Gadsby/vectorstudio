@@ -31,6 +31,61 @@ def same_command(element):
     return " > ".join(p for p in parts if p)
 
 
+def better_element(a, b):
+    """Which of two elements describes the command better.
+
+    A bare command id (`~emSpace`) is not a description, so any menu path beats one. A row written
+    with an elision (`Other: Text > ... > Clear Tracking`) says less than the plain path. Between
+    two plain paths the longer leaf is the real menu label (`View > Rulers > Show Rulers` rather
+    than `View > Rulers > Show`).
+    """
+    def elided(e):
+        return "\u2026" in e or "..." in e
+
+    # A bare command id is not a description at all, so any path beats one.
+    for x, y in ((a, b), (b, a)):
+        if ">" in x and ">" not in y:
+            return x
+    for x, y in ((a, b), (b, a)):
+        if elided(y) and not elided(x):
+            return x
+    return a if len(a) >= len(b) else b
+
+
+def by_command_id(data, ix):
+    """Pairs that share a `command_id`: the same command, two rows.
+
+    A better signal than matching element text, which misses a pair written with different labels.
+    Only `Shortcut` rows are considered, because that is where both sources overlap.
+    """
+    groups = collections.defaultdict(list)
+    for r in data:
+        cid = r[ix["command_id"]].strip()
+        if cid and r[ix["scope"]] == "in" and r[ix["field"]] == "Shortcut":
+            groups[cid].append(r)
+    merged = []
+    for cid, pair in sorted(groups.items()):
+        if len(pair) != 2:
+            continue
+        keep_el = better_element(pair[0][ix["element"]], pair[1][ix["element"]])
+        keep = next(r for r in pair if r[ix["element"]] == keep_el)
+        drop = next(r for r in pair if r is not keep)
+        for col in ("behaviour", "source", "verified_by", "command_id"):
+            a, b = keep[ix[col]], drop[ix[col]]
+            if b and b not in a:
+                keep[ix[col]] = f"{a}; {b}" if a else b
+        drop[ix["scope"]] = "out"
+        drop[ix["status"]] = "n/a"
+        drop[ix["behaviour"]] = (
+            f"Duplicate of {keep[ix['id']]} ({keep[ix['element']]}): both rows carry command_id "
+            f"`{cid}`, so they are one command entered twice. Its evidence moved to "
+            f"{keep[ix['id']]}; kept out of scope rather than deleted because ids are cited in "
+            f"commits. {drop[ix['behaviour']]}"
+        ).strip()
+        merged.append((keep[ix["id"]], drop[ix["id"]], cid, keep[ix["element"]]))
+    return merged
+
+
 def main(root, write):
     path = root / "docs/parity/matrix.csv"
     rows = list(csv.reader(io.StringIO(path.read_text())))
@@ -71,7 +126,13 @@ def main(root, write):
         drop[ix["behaviour"]] = f"{note} {drop[ix['behaviour']]}".strip()
         merged.append((keep[ix["id"]], drop[ix["id"]], keep[ix["element"]]))
 
-    print(f"{len(merged)} duplicate pairs merged, {len(collisions)} genuine collisions left\n")
+    # Second pass, on the stronger signal now that command_ids have been recovered.
+    by_id = by_command_id(data, ix)
+
+    print(f"{len(merged)} duplicate pairs merged by element, {len(by_id)} by command_id, "
+          f"{len(collisions)} genuine collisions left\n")
+    for k, d, cid, el in by_id:
+        print(f"  keep {k}  retire {d}   [{cid}] {el}")
     for k, d, el in merged:
         print(f"  keep {k}  retire {d}   {el}")
     print()
